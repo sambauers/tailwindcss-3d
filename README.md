@@ -78,3 +78,36 @@ Available animations:
 
 Default modifiers and values for utilities and animations can be changed in your
 `tailwind.config.js` file by extending the relevant theme defaults.
+
+## Development
+
+Requirements:
+
+* NodeJS 18+
+* PNPM 7+
+
+### Build the plugin
+
+After cloning the repository, to compile a build:
+
+```sh
+pnpm build
+pnpm build:types
+```
+
+This will create a compiled version of the plugin in the `./dist` directory.
+
+To have the build automatically compiled, run:
+
+```sh
+pnpm dev
+```
+
+This also compiles both code and types to `./dist`.
+
+### Testing and linting
+
+```sh
+pnpm lint
+pnpm test
+```
