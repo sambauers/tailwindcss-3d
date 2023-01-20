@@ -63,3 +63,16 @@ Available utilities:
 * backface
 * transform-box
 * transform-style
+
+### Animations
+
+Available animations:
+
+* bounce (x, y, z)
+* spin (x, y, z)
+* bounce-and-spin (x, y, z)
+
+## Configuration
+
+Default modifiers and values for utilities and animations can be changed in your
+`tailwind.config.js` file by extending the relevant theme defaults.
