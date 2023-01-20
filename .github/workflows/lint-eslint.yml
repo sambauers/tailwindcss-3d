@@ -1,0 +1,25 @@
+name: Lint (ESLInt)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 7.25.1
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
+    - run: pnpm install --frozen-lockfile
+    - run: pnpm lint
