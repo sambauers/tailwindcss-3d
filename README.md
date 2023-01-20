@@ -1,6 +1,7 @@
 # TailwindCSS 3D
 
-[![Test (Jest)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml) [![Lint (ESLInt)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml)
+[![Test (Jest)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml)
+[![Lint (ESLInt)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml)
 
 Add 3D transforms to your TailwindCSS project.
 
