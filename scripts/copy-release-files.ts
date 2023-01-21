@@ -16,8 +16,8 @@ delete distPackageJson.files
 delete distPackageJson.scripts
 distPackageJson.main = 'index.js'
 distPackageJson.types = 'types/index.d.ts'
-
-writeFileSync(distPackageURL, JSON.stringify(distPackageJson, null, '  '))
+const distPackageContents = JSON.stringify(distPackageJson, null, '  ')
+writeFileSync(distPackageURL, distPackageContents.concat('\n'))
 
 // Copy README and LICENSE
 const docFiles = ['README.md', 'LICENSE.md']
