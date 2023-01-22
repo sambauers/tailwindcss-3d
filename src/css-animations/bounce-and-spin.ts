@@ -102,12 +102,40 @@ class BounceAndSpin {
       sign: string
     }
 
+    interface RotateProperty {
+      rotate: string
+    }
+
+    interface TransformProperties {
+      '-webkit-transform': string
+      transform?: string
+    }
+
+    const rotateProperties = (
+      axis: string,
+      value: string
+    ): RotateProperty | TransformProperties => {
+      const rotateProperty = `rotate${axis.toUpperCase()}`
+
+      if (axis === 'z') {
+        return { rotate: value }
+      }
+
+      const transformProperty = transform.normaliseFunctionValues({
+        [rotateProperty]: value,
+      })
+
+      return {
+        '-webkit-transform': transformProperty,
+        transform: transformProperty,
+      }
+    }
+
     return _.chain(values)
       .transform(axesModifier())
       .transform(nameModifier('bounce-and-spin'))
       .transform(signModifier())
       .mapValues(({ value: [_duration, distance], axis, sign }: Keyframe) => {
-        const rotateProperty = `rotate${axis.toUpperCase()}`
         const translateProperty = `translate${axis.toUpperCase()}`
         const oppositeSign = axis === 'y' && sign === '' ? '-' : ''
 
@@ -119,12 +147,7 @@ class BounceAndSpin {
             animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
           },
           '0%, 5%': {
-            '-webkit-transform': transform.normaliseFunctionValues({
-              [rotateProperty]: '0deg',
-            }),
-            transform: transform.normaliseFunctionValues({
-              [rotateProperty]: '0deg',
-            }),
+            ...rotateProperties(axis, '0deg'),
             animationTimingFunction: 'ease-in',
           },
           '50%': {
@@ -134,18 +157,11 @@ class BounceAndSpin {
             animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
           },
           '50.1%': {
-            '-webkit-transform': transform.normaliseFunctionValues({
-              [rotateProperty]: `${sign}180deg`,
-            }),
+            ...rotateProperties(axis, `${sign}180deg`),
             animationTimingFunction: 'linear',
           },
           '95%, 100%': {
-            '-webkit-transform': transform.normaliseFunctionValues({
-              [rotateProperty]: `${sign}360deg`,
-            }),
-            transform: transform.normaliseFunctionValues({
-              [rotateProperty]: `${sign}360deg`,
-            }),
+            ...rotateProperties(axis, `${sign}360deg`),
             animationTimingFunction: 'ease-out',
           },
         }

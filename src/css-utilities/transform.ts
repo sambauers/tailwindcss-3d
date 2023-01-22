@@ -108,7 +108,7 @@ class Transform {
       {
         rotate: (value) => ({
           '@defaults transform': {},
-          '--tw-rotate': value,
+          '--tw-rotate-z': value,
           rotate: 'var(--tw-rotate-z)',
         }),
         'rotate-x': (value) => ({
@@ -123,7 +123,7 @@ class Transform {
         }),
         'rotate-z': (value) => ({
           '@defaults transform': {},
-          '--tw-rotate': value,
+          '--tw-rotate-z': value,
           rotate: 'var(--tw-rotate-z)',
         }),
       },
