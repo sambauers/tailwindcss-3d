@@ -1,13 +1,14 @@
-import type { Dimension } from '../utils/dimension'
-import type { UnsafeCSSValue } from '../utils/css-value'
-import type { LocalPluginAPI } from '../common'
-import { generateGuard } from '../utils/generate-guard'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
+import type { Dimension } from '@/utils/dimension'
+import type { UnsafeCSSValue } from '@/utils/css-value'
+import { generateGuard } from '@/utils/generate-guard'
 import _ from 'lodash'
 import {
   normaliseLengthPercentageValue,
   normaliseLengthValue,
-} from '../utils/css-value'
-import { normaliseDimension } from '../utils/dimension'
+} from '@/utils/css-value'
+import { normaliseDimension } from '@/utils/dimension'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
@@ -21,12 +22,7 @@ interface NormaliseFunctionValuesOptions {
   translateZ?: UnsafeCSSValue
 }
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class Translate {
+class Translate implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     _.isString,
     _.isUndefined
@@ -63,11 +59,6 @@ class Translate {
     translateZ: 'var(--tw-translate-z)',
   }
 
-  // private translateValues2d = normaliseTranslateValues({
-  //   dimension: '2d',
-  //   ...this.translateValues,
-  // })
-
   public normaliseFunctionValues = ({
     dimension,
     translateX,
@@ -94,7 +85,7 @@ class Translate {
     return safeValues.join(' ')
   }
 
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     const functionValues = this.normaliseFunctionValues()
     const values = this.normaliseValues(theme('translate'))
 

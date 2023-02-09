@@ -1,10 +1,11 @@
-import type { LocalPluginAPI } from '../common'
-import type { Dimension } from '../utils/dimension'
-import type { UnsafeCSSValue } from '../utils/css-value'
-import { normaliseDimension } from '../utils/dimension'
-import { normaliseAngleValue } from '../utils/css-value'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
+import type { Dimension } from '@/utils/dimension'
+import type { UnsafeCSSValue } from '@/utils/css-value'
+import { normaliseDimension } from '@/utils/dimension'
+import { normaliseAngleValue } from '@/utils/css-value'
 import _ from 'lodash'
-import { generateGuard } from '../utils/generate-guard'
+import { generateGuard } from '@/utils/generate-guard'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
@@ -19,12 +20,7 @@ interface NormaliseFunctionValuesOptions {
   skewY?: UnsafeCSSValue
 }
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class Transform {
+class Transform implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     _.isString,
     _.isUndefined
@@ -90,16 +86,7 @@ class Transform {
       .join(' ')
   }
 
-  // export const transformValues3d = normaliseFunctionValues(
-  //   TRANSFORM_DEFAULT_CSS_VALUES
-  // )
-
-  // export const transformValues2d = normaliseFunctionValues({
-  //   dimension: '2d',
-  //   ...TRANSFORM_DEFAULT_CSS_VALUES,
-  // })
-
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     const functionValues = this.normaliseFunctionValues()
     const rotateValues = this.normaliseValues(theme('rotate'))
     const skewValues = this.normaliseValues(theme('skew'))

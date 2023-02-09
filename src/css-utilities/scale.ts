@@ -1,10 +1,11 @@
-import type { LocalPluginAPI } from '../common'
-import type { Dimension } from '../utils/dimension'
-import type { UnsafeCSSValue } from '../utils/css-value'
-import { generateGuard } from '../utils/generate-guard'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
+import type { Dimension } from '@/utils/dimension'
+import type { UnsafeCSSValue } from '@/utils/css-value'
+import { generateGuard } from '@/utils/generate-guard'
 import _ from 'lodash'
-import { normaliseNumberPercentageValue } from '../utils/css-value'
-import { normaliseDimension } from '../utils/dimension'
+import { normaliseNumberPercentageValue } from '@/utils/css-value'
+import { normaliseDimension } from '@/utils/dimension'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
@@ -18,12 +19,7 @@ interface NormaliseFunctionValuesOptions {
   scaleZ?: UnsafeCSSValue
 }
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class Scale {
+class Scale implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     [_.isString],
     [_.isUndefined]
@@ -94,7 +90,7 @@ class Scale {
     return safeValues.join(' ')
   }
 
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     const functionValues = this.normaliseFunctionValues()
     const values = this.normaliseValues(theme('scale'))
 

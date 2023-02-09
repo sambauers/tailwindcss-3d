@@ -1,14 +1,10 @@
-import type { LocalPluginAPI } from '../common'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class Backface {
+class Backface implements CSSUtility {
   public defaultTheme = { visible: 'visible', hidden: 'hidden' }
 
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     matchUtilities(
       { backface: (value) => ({ 'backface-visibility': value }) },
       { values: theme('backface') }

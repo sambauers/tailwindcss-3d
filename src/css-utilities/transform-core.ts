@@ -1,14 +1,11 @@
-import type { LocalPluginAPI } from '../common'
-import { translate } from './translate'
-import { scale } from './scale'
-import { transform } from './transform'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
+import { translate } from '@/css-utilities/translate'
+import { scale } from '@/css-utilities/scale'
+import { transform } from '@/css-utilities/transform'
 
-interface UtilitiesOptions {
-  addUtilities: LocalPluginAPI['addUtilities']
-}
-
-class TransformCore {
-  public utilities = ({ addUtilities }: UtilitiesOptions) => {
+class TransformCore implements CSSUtility {
+  public utilities = ({ addUtilities }: LocalPluginAPI) => {
     addUtilities({
       '.transform': {
         transform: transform.normaliseFunctionValues({ dimension: '2d' }),

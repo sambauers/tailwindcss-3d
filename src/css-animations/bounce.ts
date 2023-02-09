@@ -1,19 +1,20 @@
+import type { CSSAnimation } from '@/css-animations'
+import type { PluginUtils } from 'tailwindcss/types/config'
 import _ from 'lodash'
-import { generateGuard } from '../utils/generate-guard'
+import { generateGuard } from '@/utils/generate-guard'
 import {
   normaliseLengthPercentageValue,
   normaliseNumberValue,
   normaliseTimeValue,
-} from '../utils/css-value'
+} from '@/utils/css-value'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import type { PluginUtils } from 'tailwindcss/types/config'
 import {
   addDurationWithGravity,
   axesModifier,
   nameModifier,
   signModifier,
-} from '../utils/lodash-transformers'
-import { translate } from '../css-utilities/translate'
+} from '@/utils/lodash-transformers'
+import { translate } from '@/css-utilities/translate'
 
 type ProcessablePrimitive = string | undefined
 type ProcessableValue = [ProcessablePrimitive, ProcessablePrimitive]
@@ -21,15 +22,7 @@ type ProcessableValues = Record<string, ProcessableValue>
 type Value = [string, string]
 type Values = Record<string, Value>
 
-interface KeyframesOptions {
-  theme: PluginUtils['theme']
-}
-
-interface AnimationsOptions {
-  theme: PluginUtils['theme']
-}
-
-class Bounce {
+class Bounce implements CSSAnimation {
   private isProcessablePrimitive = generateGuard<ProcessablePrimitive>(
     _.isString,
     _.isUndefined
@@ -92,7 +85,7 @@ class Bounce {
       .value()
   )
 
-  public keyframes = ({ theme }: KeyframesOptions) => {
+  public keyframes = ({ theme }: PluginUtils) => {
     const values = this.normaliseValues(theme('bounce'))
 
     if (!this.isValues(values)) {
@@ -130,7 +123,7 @@ class Bounce {
       .value()
   }
 
-  public animations = ({ theme }: AnimationsOptions) => {
+  public animation = ({ theme }: PluginUtils) => {
     const values = this.normaliseValues(theme('bounce'))
 
     interface Animation {

@@ -1,11 +1,7 @@
-import { LocalPluginAPI } from '../common'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class TransformBox {
+class TransformBox implements CSSUtility {
   public defaultTheme = {
     content: 'content-box',
     border: 'border-box',
@@ -14,7 +10,7 @@ class TransformBox {
     view: 'view-box',
   }
 
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     matchUtilities(
       { 'transform-box': (value) => ({ 'transform-box': value }) },
       { values: theme('transformBox') }

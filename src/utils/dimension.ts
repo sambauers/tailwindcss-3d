@@ -1,4 +1,4 @@
-import { generateGuard } from './generate-guard'
+import { generateGuard } from '@/utils/generate-guard'
 import _ from 'lodash'
 
 export type Dimension = '3d' | '2d'

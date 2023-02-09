@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { generateGuard } from './generate-guard'
+import { generateGuard } from '@/utils/generate-guard'
 
 export const VALID_LENGTH_UNITS = [
   'ch',

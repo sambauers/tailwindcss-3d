@@ -1,25 +1,22 @@
-import _ from 'lodash'
-import { generateGuard } from '../utils/generate-guard'
-import { normaliseNumberValue, normaliseTimeValue } from '../utils/css-value'
-import defaultTheme from 'tailwindcss/defaultTheme'
+import type { CSSAnimation } from '@/css-animations'
 import type { PluginUtils } from 'tailwindcss/types/config'
-import { transform } from '../css-utilities/transform'
+import _ from 'lodash'
+import { generateGuard } from '@/utils/generate-guard'
+import { normaliseNumberValue, normaliseTimeValue } from '@/utils/css-value'
+import defaultTheme from 'tailwindcss/defaultTheme'
+import { transform } from '@/css-utilities/transform'
 import {
   axesModifier,
   nameModifier,
   signModifier,
-} from '../utils/lodash-transformers'
+} from '@/utils/lodash-transformers'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-interface AnimationsOptions {
-  theme: PluginUtils['theme']
-}
-
-class Spin {
+class Spin implements CSSAnimation {
   private isProcessableValue = generateGuard<ProcessableValue>(
     _.isString,
     _.isUndefined
@@ -107,7 +104,7 @@ class Spin {
     ...this.zKeyframes(),
   })
 
-  public animations = ({ theme }: AnimationsOptions) => {
+  public animation = ({ theme }: PluginUtils) => {
     const values = this.normaliseValues(theme('spin'))
 
     interface SpinAnimation {

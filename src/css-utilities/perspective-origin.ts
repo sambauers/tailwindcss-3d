@@ -1,15 +1,11 @@
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import type { LocalPluginAPI } from '../common'
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class PerspectiveOrigin {
+class PerspectiveOrigin implements CSSUtility {
   public defaultTheme = defaultTheme.transformOrigin
 
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     matchUtilities(
       { 'perspective-origin': (value) => ({ 'perspective-origin': value }) },
       { values: theme('perspectiveOrigin') }

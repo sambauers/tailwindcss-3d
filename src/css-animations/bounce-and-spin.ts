@@ -1,20 +1,21 @@
-import { generateGuard } from '../utils/generate-guard'
+import type { CSSAnimation } from '@/css-animations'
+import type { PluginUtils } from 'tailwindcss/types/config'
+import { generateGuard } from '@/utils/generate-guard'
 import _ from 'lodash'
 import {
   normaliseLengthPercentageValue,
   normaliseNumberValue,
   normaliseTimeValue,
-} from '../utils/css-value'
+} from '@/utils/css-value'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import { translate } from '../css-utilities/translate'
-import { transform } from '../css-utilities/transform'
-import type { PluginUtils } from 'tailwindcss/types/config'
+import { translate } from '@/css-utilities/translate'
+import { transform } from '@/css-utilities/transform'
 import {
   addDurationWithGravity,
   axesModifier,
   nameModifier,
   signModifier,
-} from '../utils/lodash-transformers'
+} from '@/utils/lodash-transformers'
 
 type ProcessablePrimitive = string | undefined
 type ProcessableValue = [ProcessablePrimitive, ProcessablePrimitive]
@@ -22,15 +23,7 @@ type ProcessableValues = Record<string, ProcessableValue>
 type Value = [string, string]
 type Values = Record<string, Value>
 
-interface KeyframesOptions {
-  theme: PluginUtils['theme']
-}
-
-interface AnimationsOptions {
-  theme: PluginUtils['theme']
-}
-
-class BounceAndSpin {
+class BounceAndSpin implements CSSAnimation {
   private isProcessablePrimitive = generateGuard<ProcessablePrimitive>(
     _.isString,
     _.isUndefined
@@ -93,7 +86,7 @@ class BounceAndSpin {
       .value()
   )
 
-  public keyframes = ({ theme }: KeyframesOptions) => {
+  public keyframes = ({ theme }: PluginUtils) => {
     const values = this.normaliseValues(theme('bounceAndSpin'))
 
     interface Keyframe {
@@ -169,7 +162,7 @@ class BounceAndSpin {
       .value()
   }
 
-  public animations = ({ theme }: AnimationsOptions) => {
+  public animation = ({ theme }: PluginUtils) => {
     const values = this.normaliseValues(theme('bounceAndSpin'))
 
     if (!this.isValues(values)) {

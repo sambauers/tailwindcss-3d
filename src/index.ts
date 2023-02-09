@@ -1,5 +1,5 @@
 import plugin from 'tailwindcss/plugin'
-import type { LocalPluginAPI } from './common'
+import type { LocalPluginAPI } from '@/common'
 
 // css-utilities
 import { perspective } from './css-utilities/perspective'
@@ -35,22 +35,21 @@ const DEFAULT_VARIABLE_VALUES: Record<string, string> = {
 
 const tailwind3d = plugin(
   (api) => {
-    const { addDefaults, matchUtilities, addUtilities, theme } =
-      api as LocalPluginAPI
+    const localAPI = api as LocalPluginAPI
 
     // Replace the transform core plugin defaults and add some new ones
-    addDefaults('transform', DEFAULT_VARIABLE_VALUES)
+    localAPI.addDefaults('transform', DEFAULT_VARIABLE_VALUES)
 
     // New CSS Utilities
-    perspective.utilities({ matchUtilities, theme })
-    transformStyle.utilities({ matchUtilities, theme })
-    translate.utilities({ matchUtilities, theme })
-    transform.utilities({ matchUtilities, theme })
-    scale.utilities({ matchUtilities, theme })
-    backface.utilities({ matchUtilities, theme })
-    perspectiveOrigin.utilities({ matchUtilities, theme })
-    transformBox.utilities({ matchUtilities, theme })
-    transformCore.utilities({ addUtilities })
+    perspective.utilities(localAPI)
+    transformStyle.utilities(localAPI)
+    translate.utilities(localAPI)
+    transform.utilities(localAPI)
+    scale.utilities(localAPI)
+    backface.utilities(localAPI)
+    perspectiveOrigin.utilities(localAPI)
+    transformBox.utilities(localAPI)
+    transformCore.utilities(localAPI)
   },
   {
     theme: {
@@ -72,15 +71,15 @@ const tailwind3d = plugin(
         },
 
         // New CSS keyframes and animations
-        keyframes: ({ theme }) => ({
+        keyframes: (pluginUtilities) => ({
           ...spin.keyframes(),
-          ...bounce.keyframes({ theme }),
-          ...bounceAndSpin.keyframes({ theme }),
+          ...bounce.keyframes(pluginUtilities),
+          ...bounceAndSpin.keyframes(pluginUtilities),
         }),
-        animation: ({ theme }) => ({
-          ...spin.animations({ theme }),
-          ...bounce.animations({ theme }),
-          ...bounceAndSpin.animations({ theme }),
+        animation: (pluginUtilities) => ({
+          ...spin.animation(pluginUtilities),
+          ...bounce.animation(pluginUtilities),
+          ...bounceAndSpin.animation(pluginUtilities),
         }),
       },
     },

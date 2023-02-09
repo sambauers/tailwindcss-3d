@@ -1,11 +1,7 @@
-import type { LocalPluginAPI } from '../common'
+import type { CSSUtility } from '@/css-utilities'
+import type { LocalPluginAPI } from '@/common'
 
-interface UtilitiesOptions {
-  matchUtilities: LocalPluginAPI['matchUtilities']
-  theme: LocalPluginAPI['theme']
-}
-
-class Perspective {
+class Perspective implements CSSUtility {
   public defaultTheme = {
     none: 'none',
     250: '250px',
@@ -14,7 +10,7 @@ class Perspective {
     1000: '1000px',
   }
 
-  public utilities = ({ matchUtilities, theme }: UtilitiesOptions) => {
+  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
     matchUtilities(
       {
         perspective: (value) => ({
