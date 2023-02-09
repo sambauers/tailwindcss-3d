@@ -1,7 +1,7 @@
 import { normalisePercentageValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normalisePercentageValue()', () => {
       it('normalises a valid percentage', () => {
         expect(normalisePercentageValue('50%')).toBe('50%')

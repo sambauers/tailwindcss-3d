@@ -1,7 +1,7 @@
 import { toNumericValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('toNumericValue()', () => {
       it('does not change numbers', () => {
         expect(toNumericValue(1234)).toBe(1234)

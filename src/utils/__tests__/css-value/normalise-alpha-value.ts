@@ -1,7 +1,7 @@
-import { normaliseAlphaValue } from '../../css-value'
+import { normaliseAlphaValue } from '@/utils/css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseAlphaValue()', () => {
       it('normalises a valid percentage', () => {
         expect(normaliseAlphaValue('50%', '0')).toBe('50%')

@@ -1,7 +1,7 @@
 import { toNumericValueAndUnit } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('toNumericValueAndUnit()', () => {
       it('handles numbers', () => {
         expect(toNumericValueAndUnit(12)).toStrictEqual({

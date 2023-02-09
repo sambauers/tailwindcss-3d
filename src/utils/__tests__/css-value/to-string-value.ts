@@ -1,7 +1,7 @@
 import { toStringValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('toStringValue()', () => {
       it('does not change trimmed strings', () => {
         expect(toStringValue('testing')).toBe('testing')

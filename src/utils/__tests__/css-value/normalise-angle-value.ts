@@ -1,7 +1,7 @@
 import { VALID_ANGLE_UNITS, normaliseAngleValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseAngleValue()', () => {
       it('normalises a valid angle', () => {
         VALID_ANGLE_UNITS.forEach((unit) => {

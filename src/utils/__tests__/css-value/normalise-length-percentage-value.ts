@@ -4,7 +4,7 @@ import {
 } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseLengthPercentageValue()', () => {
       it('normalises a valid length', () => {
         VALID_LENGTH_UNITS.forEach((unit) => {

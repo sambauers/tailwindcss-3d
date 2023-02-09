@@ -1,7 +1,7 @@
 import { normaliseUnitValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseUnitValue()', () => {
       it('normalises a number by default', () => {
         expect(normaliseUnitValue('123')).toBe('123')

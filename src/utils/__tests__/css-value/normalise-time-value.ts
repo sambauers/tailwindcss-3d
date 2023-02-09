@@ -1,7 +1,7 @@
 import { VALID_TIME_UNITS, normaliseTimeValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseTimeValue()', () => {
       it('normalises a valid time', () => {
         VALID_TIME_UNITS.forEach((unit) => {

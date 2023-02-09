@@ -1,7 +1,7 @@
 import { normaliseNumberValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseNumberValue()', () => {
       it('normalises a valid number', () => {
         expect(normaliseNumberValue(50)).toBe('50')

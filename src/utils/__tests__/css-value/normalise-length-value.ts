@@ -1,7 +1,7 @@
 import { VALID_LENGTH_UNITS, normaliseLengthValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseLengthValue()', () => {
       it('normalises a valid length', () => {
         VALID_LENGTH_UNITS.forEach((unit) => {

@@ -1,7 +1,7 @@
 import { normaliseUnionValue } from '../../css-value'
 
 describe('utilities', () => {
-  describe('css-values', () => {
+  describe('css-value', () => {
     describe('normaliseUnionValue()', () => {
       it('returns the default', () => {
         expect(normaliseUnionValue('foo', 'foo', ['foo', 'bar', 'baz'])).toBe(
