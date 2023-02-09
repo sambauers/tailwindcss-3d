@@ -12,6 +12,9 @@ const swcConfig = {
     parser: {
       syntax: 'typescript',
     },
+    paths: {
+      '@/*': ['./src/*'],
+    },
   },
   envName: 'test',
   swcrc: false,
@@ -27,6 +30,9 @@ const jestConfig = {
       // @ts-expect-error swc options are not assignable
       swcConfig,
     ],
+  },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
 }
 
