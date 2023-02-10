@@ -7,7 +7,7 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/cache@v3
+    - uses: actions/cache/restore@v3
       with:
         path: .
         key: cache-${{ github.ref_name }}
@@ -22,3 +22,7 @@ jobs:
         cache: 'pnpm'
         registry-url: 'https://registry.npmjs.org'
     - run: pnpm install --frozen-lockfile
+    - uses: actions/cache/save@v3
+      with:
+        path: .
+        key: cache-${{ github.ref_name }}
