@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # checkout
-    - uses: actions/checkout@v3
+    - name: Checkout repository code
+      uses: actions/checkout@v3
     # install
     - name: Setup PNPM
       uses: pnpm/action-setup@v2
@@ -22,6 +23,8 @@ jobs:
       with:
         node-version-file: '.nvmrc'
         cache: 'pnpm'
-    - run: pnpm install --frozen-lockfile
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
     # test
-    - run: pnpm test
+    - name: Run tests
+      run: pnpm test
