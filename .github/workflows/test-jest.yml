@@ -23,5 +23,5 @@ jobs:
     - uses: actions/cache/restore@v3
       with:
         path: .
-        key: cache-${{ github.ref_name }}
+        key: cache-${{ github.job }}-${{ github.ref_name }}
     - run: pnpm test

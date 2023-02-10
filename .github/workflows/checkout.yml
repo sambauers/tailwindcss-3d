@@ -11,4 +11,4 @@ jobs:
     - uses: actions/cache/save@v3
       with:
         path: .
-        key: cache-${{ github.ref_name }}
+        key: cache-${{ github.job }}-${{ github.ref_name }}
