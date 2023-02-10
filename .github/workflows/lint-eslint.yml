@@ -8,7 +8,9 @@ on:
 
 jobs:
   checkout:
-    uses: ./.github/workflows/checkout.yml
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
   install:
     needs: checkout
     uses: ./.github/workflows/install.yml
