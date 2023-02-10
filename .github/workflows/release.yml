@@ -7,7 +7,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-
+    steps:
     # checkout
     - name: Checkout repository code
       uses: actions/checkout@v3
