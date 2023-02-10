@@ -46,7 +46,7 @@ jobs:
             .map((release) => release.published_at)
             .sort()
           console.log('versionDates', versionDates)
-          const latestVersionDate = versionDates[versionDate.length - 1]
+          const latestVersionDate = versionDates[versionDates.length - 1]
           console.log('latestVersionDate', latestVersionDate)
           const latestVersionRecord = releases.data
             .find((release) => release.published_at === latestVersionDate)
@@ -55,6 +55,14 @@ jobs:
             ? 'v0.0.0'
             : latestVersionRecord.tag_name
           console.log('latestVersion', latestVersion)
+
+          const main = await github.rest.repos.getBranch({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            branch: 'main'
+          })
+          console.log(main)
+
           return latestVersion
 
     # get checkout version number
