@@ -12,9 +12,25 @@ jobs:
     - name: Checkout repository code
       uses: actions/checkout@v3
 
+    # install
+    - name: Setup PNPM
+      if: 
+      uses: pnpm/action-setup@v2
+      with:
+        version: 7.27.0
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
     # get latest version number
     - name: Get latest release version
       id: latest-version
+      run: pnpm install semver
       uses: actions/github-script@v6
       with:
         result-encoding: string
@@ -56,21 +72,6 @@ jobs:
     #     echo '::notice::The version committed to main is not newer than the current release'
     #     stopMarker=$(uuidgen)
     #     echo "::stop-commands::$stopMarker"
-
-    # # install
-    # - name: Setup PNPM
-    #   if: 
-    #   uses: pnpm/action-setup@v2
-    #   with:
-    #     version: 7.27.0
-    # - name: Setup Node.js
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version-file: '.nvmrc'
-    #     cache: 'pnpm'
-    #     registry-url: 'https://registry.npmjs.org'
-    # - name: Install dependencies
-    #   run: pnpm install --frozen-lockfile
 
     # # release to npm
     # - name: Release to NPM
