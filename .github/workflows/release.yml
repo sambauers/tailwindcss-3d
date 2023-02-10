@@ -42,18 +42,26 @@ jobs:
             repo: context.repo.repo
           })
           console.log('latestRelease', latestRelease)
-          const latestVersion = typeof latestRelease === 'undefined'
-            ? 'v0.0.0'
-            : latestRelease.tag_name
+          const latestVersion =
+            typeof latestRelease === 'undefined' ||
+            typeof latestRelease.data === 'undefined'
+              ? 'v0.0.0'
+              : latestRelease.data.tag_name
           console.log('latestVersion', latestVersion)
 
-          const packageJson = await github.rest.repos.getContent({
+          const packageJsonRecord = await github.rest.repos.getContent({
             owner: context.repo.owner,
             repo: context.repo.repo,
             path: 'package.json',
             ref: 'main'
           })
-          console.log(packageJson)
+          const packageJsonContent =
+            typeof packageJsonRecord === 'undefined' ||
+            typeof packageJsonRecord.data === 'undefined'
+              ? '{}'
+              : packageJsonRecord.data.content
+          const packageJson = JSON.parse(atob(packageJsonContent))
+          console.log(packageJson.version)
 
           return latestVersion
 
