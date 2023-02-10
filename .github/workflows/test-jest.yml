@@ -8,13 +8,7 @@ on:
 
 jobs:
   checkout:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/cache@v3
-      with:
-        path: .
-        key: cache-${{ github.ref_name }}
+    uses: ./.github/workflows/checkout.yml
   install:
     needs: checkout
     uses: ./.github/workflows/install.yml
@@ -26,4 +20,8 @@ jobs:
       with:
         path: .
         key: cache-${{ github.ref_name }}
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 7.27.0
     - run: pnpm test
