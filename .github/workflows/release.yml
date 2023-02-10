@@ -37,32 +37,33 @@ jobs:
         result-encoding: string
         script: |
           const semver = require('semver')
+          
+          // get latest version
           const latestRelease = await github.rest.repos.getLatestRelease({
             owner: context.repo.owner,
             repo: context.repo.repo
           })
-          console.log('latestRelease', latestRelease)
           const latestVersion =
             typeof latestRelease === 'undefined' ||
             typeof latestRelease.data === 'undefined'
               ? 'v0.0.0'
               : latestRelease.data.tag_name
-          console.log('latestVersion', latestVersion)
 
+          // get version from package json
           const packageJsonRecord = await github.rest.repos.getContent({
             owner: context.repo.owner,
             repo: context.repo.repo,
             path: 'package.json',
-            ref: 'main'
+            ref: ${{ git.ref }}
           })
+          console.log(packageJsonRecord)
           const packageJson =
             typeof packageJsonRecord === 'undefined' ||
             typeof packageJsonRecord.data === 'undefined'
               ? '{ "version": "v0.0.0" }'
               : Buffer.from(packageJsonRecord.data.content, 'base64').toString()
-          console.log(packageJson)
           const package = JSON.parse(packageJson)
-          console.log(package.version)
+          const packageVersion = package.version
 
           return latestVersion
 
