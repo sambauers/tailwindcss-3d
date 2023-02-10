@@ -60,8 +60,9 @@ jobs:
             typeof packageJsonRecord.data === 'undefined'
               ? '{}'
               : packageJsonRecord.data.content
-          const packageJson = JSON.parse(atob(packageJsonContent))
-          console.log(packageJson.version)
+          console.log(atob(packageJsonContent))
+          // const packageJson = JSON.parse(atob(packageJsonContent))
+          // console.log(packageJson.version)
 
           return latestVersion
 
