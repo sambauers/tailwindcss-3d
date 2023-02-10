@@ -7,6 +7,10 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/cache@v3
+      with:
+        path: .
+        key: cache-${{ github.ref_name }}
     - name: Setup pnpm
       uses: pnpm/action-setup@v2
       with:
