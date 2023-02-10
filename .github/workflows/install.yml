@@ -1,0 +1,20 @@
+name: Install
+
+on:
+  workflow_call
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 7.27.0
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
+        registry-url: 'https://registry.npmjs.org'
+    - run: pnpm install --frozen-lockfile
