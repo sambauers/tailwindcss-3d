@@ -30,8 +30,8 @@ jobs:
     # get latest version number
     - name: Install semver package
       run: pnpm add semver
-    - name: Get latest release version
-      id: latest-version
+    - name: Determine whether the package is a new release version
+      id: is-new-release
       uses: actions/github-script@v6
       with:
         result-encoding: string
@@ -56,7 +56,6 @@ jobs:
             path: 'package.json',
             ref: context.ref
           })
-          console.log(packageJsonRecord)
           const packageJson =
             typeof packageJsonRecord === 'undefined' ||
             typeof packageJsonRecord.data === 'undefined'
@@ -65,16 +64,11 @@ jobs:
           const package = JSON.parse(packageJson)
           const packageVersion = package.version
 
-          return latestVersion
-
-    # get checkout version number
-    - name: Get checkout package version
-      id: checkout-version
-      run: echo "result=$(jq .version package.json)" >> $GITHUB_OUTPUT
+          return semver.gt(packageVersion, latestVersion)
 
     # temp
     - run: |
-        echo ${{ steps.latest-version.outputs.result }} ${{ steps.checkout-version.outputs.result }}
+        echo ${{ steps.is-new-release.outputs.result }}
 
     # # stop or continue
     # - name: Determine if release should continue
