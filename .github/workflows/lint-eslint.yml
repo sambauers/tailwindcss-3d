@@ -7,21 +7,22 @@ on:
     branches: [ main ]
 
 jobs:
-  checkout:
-    uses: ./.github/workflows/checkout.yml
-  install:
-    needs: checkout
-    uses: ./.github/workflows/install.yml
   lint:
     runs-on: ubuntu-latest
-    needs: install
     steps:
-    - name: Setup pnpm
+    # checkout
+    - uses: actions/checkout@v3
+    # install
+    - name: Setup PNPM
       uses: pnpm/action-setup@v2
       with:
         version: 7.27.0
-    - uses: actions/cache/restore@v3
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
       with:
-        path: .
-        key: cache-${{ github.job }}-${{ github.ref_name }}
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
+        registry-url: 'https://registry.npmjs.org'
+    - run: pnpm install --frozen-lockfile
+    # lint
     - run: pnpm lint
