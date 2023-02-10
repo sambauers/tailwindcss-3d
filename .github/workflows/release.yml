@@ -54,7 +54,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             path: 'package.json',
-            ref: ${{ git.ref }}
+            ref: ${{ github.ref }}
           })
           console.log(packageJsonRecord)
           const packageJson =
