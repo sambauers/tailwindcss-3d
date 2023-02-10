@@ -31,34 +31,38 @@ jobs:
       id: checkout-version
       run: echo "result=$(jq .version package.json)" >> $GITHUB_OUTPUT
 
-    # stop or continue
-    - name: Determine if release should continue
-      if: ${{ steps.latest-version.outputs.result < steps.current-version.outputs.result }}
-      run: |
-        echo '::notice::The version committed to main is not newer than the current release'
-        stopMarker=$(uuidgen)
-        echo "::stop-commands::$stopMarker"
+    # temp
+    - run: |
+        echo ${{ steps.latest-version.outputs.result }} ${{ steps.checkout-version.outputs.result }}
 
-    # install
-    - name: Setup PNPM
-      if: 
-      uses: pnpm/action-setup@v2
-      with:
-        version: 7.27.0
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'pnpm'
-        registry-url: 'https://registry.npmjs.org'
-    - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+    # # stop or continue
+    # - name: Determine if release should continue
+    #   if: ${{ steps.latest-version.outputs.result < steps.current-version.outputs.result }}
+    #   run: |
+    #     echo '::notice::The version committed to main is not newer than the current release'
+    #     stopMarker=$(uuidgen)
+    #     echo "::stop-commands::$stopMarker"
 
-    # release to npm
-    - name: Release to NPM
-      run: pnpm release --dry-run
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
+    # # install
+    # - name: Setup PNPM
+    #   if: 
+    #   uses: pnpm/action-setup@v2
+    #   with:
+    #     version: 7.27.0
+    # - name: Setup Node.js
+    #   uses: actions/setup-node@v3
+    #   with:
+    #     node-version-file: '.nvmrc'
+    #     cache: 'pnpm'
+    #     registry-url: 'https://registry.npmjs.org'
+    # - name: Install dependencies
+    #   run: pnpm install --frozen-lockfile
+
+    # # release to npm
+    # - name: Release to NPM
+    #   run: pnpm release --dry-run
+    #   env:
+    #     NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
     # # tag release in github
     # - name: Tag release in GitHub
