@@ -55,14 +55,14 @@ jobs:
             path: 'package.json',
             ref: 'main'
           })
-          const packageJsonContent =
+          const packageJson =
             typeof packageJsonRecord === 'undefined' ||
             typeof packageJsonRecord.data === 'undefined'
-              ? btoa('{ "version": "v0.0.0" }')
-              : packageJsonRecord.data.content
-          console.log(packageJsonContent)
-          // const packageJson = JSON.parse(atob(packageJsonContent))
-          // console.log(packageJson.version)
+              ? '{ "version": "v0.0.0" }'
+              : Buffer.from(packageJsonRecord.data.content, 'base64').toString()
+          console.log(packageJson)
+          const package = JSON.parse(packageJson)
+          console.log(package.version)
 
           return latestVersion
 
