@@ -58,9 +58,9 @@ jobs:
           const packageJsonContent =
             typeof packageJsonRecord === 'undefined' ||
             typeof packageJsonRecord.data === 'undefined'
-              ? '{}'
+              ? btoa('{ "version": "v0.0.0" }')
               : packageJsonRecord.data.content
-          console.log(atob(packageJsonContent))
+          console.log(packageJsonContent)
           // const packageJson = JSON.parse(atob(packageJsonContent))
           // console.log(packageJson.version)
 
