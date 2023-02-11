@@ -73,7 +73,7 @@ jobs:
                     .from(packageJsonRecord.data.content, 'base64')
                     .toString()
             const package = JSON.parse(packageJson)
-            packageVersion = `v${sewver.clean(package.version)}`
+            packageVersion = `v${semver.clean(package.version)}`
             console.info(`Found current package version: ${packageVersion}`)
           } catch (e) {
             console.info(
