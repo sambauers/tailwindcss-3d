@@ -30,11 +30,10 @@ jobs:
     # get latest version number
     - name: Install semver package
       run: pnpm add semver
-    - name: Determine whether the package is a new release version
-      id: is-new-release
+    - name: Retrieve the latest release and current package versions
+      id: get-releases
       uses: actions/github-script@v6
       with:
-        result-encoding: string
         script: |
           const semver = require('semver')
           
@@ -80,28 +79,37 @@ jobs:
             )
           }
 
-          return semver.gt(packageVersion, latestVersion)
-
-    - run: git status
+          return {
+            package: packageVersion,
+            latest: latestVersion,
+            latestIsNew: semver.gt(packageVersion, latestVersion)
+          }
+    - name: Uninstall semver package 
+      run: git restore . && pnpm install --frozen-lockfile
 
     # release to npm
     - name: Release to NPM
-      if: ${{ steps.is-new-release.outputs.result }}
-      run: pnpm release --no-git-checks --dry-run
+      if: ${{ steps.get-releases.outputs.result.latestIsNew }}
+      run: pnpm release --dry-run
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
     # tag release in github
-    # - name: Tag release in GitHub
-    #   if: ${{ steps.is-new-release.outputs.result }}
-    #   uses: actions/github-script@v6
-    #   with:
-    #     result-encoding: string
-    #     script: |
-    #       github.rest.repos.createRelease({
-    #         owner: context.repo.owner,
-    #         repo: context.repo.repo,
-    #         tag_name: needs.versions.outputs.checkout-version,
-    #         draft: true
-    #       })
-    #       return `Created (draft) release ${needs.versions.outputs.checkout-version}`
+    - name: Tag release in GitHub
+      if: ${{ steps.get-releases.outputs.result.latestIsNew }}
+      uses: actions/github-script@v6
+      env:
+        RELEASE_TAG_NAME: ${{ steps.get-releases.outputs.result.latest }}
+      with:
+        result-encoding: string
+        script: |
+          const { RELEASE_TAG_NAME } = process.env
+          github.rest.repos.createRelease({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            tag_name: RELEASE_TAG_NAME,
+            draft: true
+          })
+          console.info(
+            `Created (draft) release ${needs.versions.outputs.checkout-version}`
+          )
