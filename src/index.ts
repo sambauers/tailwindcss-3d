@@ -33,7 +33,7 @@ const DEFAULT_VARIABLE_VALUES: Record<string, string> = {
   '--tw-scale-z': '1',
 }
 
-const tailwind3d = plugin(
+const tailwindcss3d = plugin(
   (api) => {
     const localAPI = api as LocalPluginAPI
 
@@ -95,4 +95,4 @@ const tailwind3d = plugin(
   }
 )
 
-export = tailwind3d
+export = tailwindcss3d
