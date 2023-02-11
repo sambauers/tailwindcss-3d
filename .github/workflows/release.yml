@@ -87,6 +87,11 @@ jobs:
     - name: Uninstall semver package 
       run: git restore . && pnpm install --frozen-lockfile
 
+    - run: echo ${{ steps.get-releases.outputs.result }}
+    - run: echo ${{ fromJson(steps.get-releases.outputs.result).package }}
+    - run: echo ${{ fromJson(steps.get-releases.outputs.result).latest }}
+    - run: echo ${{ fromJson(steps.get-releases.outputs.result).latestIsNew }}
+
     # release to npm
     - name: Release to NPM
       if: ${{ steps.get-releases.outputs.result.latestIsNew }}
