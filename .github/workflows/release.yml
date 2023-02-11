@@ -110,7 +110,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             tag_name,
-            target_commitish: context.ref,
+            target_commitish: context.sha,
             name: tag_name,
             draft: true
           })
