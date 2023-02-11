@@ -82,26 +82,16 @@ jobs:
 
           return semver.gt(packageVersion, latestVersion)
 
-    # temp
-    - run: |
-        echo ${{ steps.is-new-release.outputs.result }}
+    # release to npm
+    - name: Release to NPM
+      if: ${{ steps.is-new-release.outputs.result }}
+      run: pnpm release --dry-run
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
-    # # stop or continue
-    # - name: Determine if release should continue
-    #   if: ${{ steps.latest-version.outputs.result < steps.current-version.outputs.result }}
-    #   run: |
-    #     echo '::notice::The version committed to main is not newer than the current release'
-    #     stopMarker=$(uuidgen)
-    #     echo "::stop-commands::$stopMarker"
-
-    # # release to npm
-    # - name: Release to NPM
-    #   run: pnpm release --dry-run
-    #   env:
-    #     NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
-
-    # # tag release in github
+    # tag release in github
     # - name: Tag release in GitHub
+    #   if: ${{ steps.is-new-release.outputs.result }}
     #   uses: actions/github-script@v6
     #   with:
     #     result-encoding: string
