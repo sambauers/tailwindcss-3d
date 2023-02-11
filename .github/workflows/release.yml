@@ -110,6 +110,8 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             tag_name,
+            target_commitish: context.ref,
+            name: tag_name,
             draft: true
           })
           console.info(`Created (draft) release ${tag_name}`)
