@@ -103,18 +103,18 @@ class Bounce implements CSSAnimation {
       .transform(nameModifier('bounce'), {})
       .transform(signModifier(), {})
       .mapValues(({ value: [_duration, distance], axis, sign }: Keyframe) => {
-        const parameter = `translate${axis.toUpperCase()}`
+        const translateProperty = `translate${axis.toUpperCase()}`
 
         return {
           '0%, 100%': {
             translate: translate.normaliseFunctionValues({
-              [parameter]: `${sign}${distance}`,
+              [translateProperty]: `${sign}${distance}`,
             }),
             animationTimingFunction: 'cubic-bezier(0.5, 0, 1, 1)',
           },
           '50%': {
             translate: translate.normaliseFunctionValues({
-              [parameter]: '0',
+              [translateProperty]: '0',
             }),
             animationTimingFunction: 'cubic-bezier(0, 0, 0.5, 1)',
           },

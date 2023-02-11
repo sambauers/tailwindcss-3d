@@ -63,17 +63,17 @@ class Spin implements CSSAnimation {
       .transform(nameModifier('spin'), {})
       .transform(signModifier(), {})
       .mapValues(({ axis, sign }: SpinXYKeyframe) => {
-        const parameter = `rotate${axis.toUpperCase()}`
+        const rotateProperty = `rotate${axis.toUpperCase()}`
 
         return {
           from: {
             transform: transform.normaliseFunctionValues({
-              [parameter]: '0deg',
+              [rotateProperty]: '0deg',
             }),
           },
           to: {
             transform: transform.normaliseFunctionValues({
-              [parameter]: `${sign}360deg`,
+              [rotateProperty]: `${sign}360deg`,
             }),
           },
         }
