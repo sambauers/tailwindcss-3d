@@ -42,14 +42,14 @@ jobs:
           try {
             const latestRelease = await github.rest.repos.getLatestRelease({
               owner: context.repo.owner,
-              repo: context.repo.repo
+              repo: context.repo.repo,
             })
             latestVersion =
               typeof latestRelease === 'undefined' ||
               typeof latestRelease.data === 'undefined'
                 ? 'v0.0.0'
                 : `v${semver.clean(latestRelease.data.tag_name)}`
-            console.info(`Found latest release version: v${latestVersion}`)
+            console.info(`Found latest release version: ${latestVersion}`)
           } catch (e) {
             console.info(
               'Could not evaluate latest release version, using v0.0.0'
@@ -63,7 +63,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               path: 'package.json',
-              ref: context.ref
+              ref: context.ref,
             })
             const packageJson =
               typeof packageJsonRecord === 'undefined' ||
@@ -92,7 +92,7 @@ jobs:
     # release to npm
     - name: Release to NPM
       if: ${{ fromJSON(steps.get-releases.outputs.result).latestIsNew }}
-      run: pnpm release --dry-run
+      run: pnpm release
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
@@ -112,6 +112,5 @@ jobs:
             tag_name,
             target_commitish: context.sha,
             name: tag_name,
-            draft: true
           })
           console.info(`Created (draft) release ${tag_name}`)
