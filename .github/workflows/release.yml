@@ -48,8 +48,8 @@ jobs:
               typeof latestRelease === 'undefined' ||
               typeof latestRelease.data === 'undefined'
                 ? 'v0.0.0'
-                : latestRelease.data.tag_name
-            console.info(`Found latest release version: ${latestVersion}`)
+                : `v${semver.clean(latestRelease.data.tag_name)}`
+            console.info(`Found latest release version: v${latestVersion}`)
           } catch (e) {
             console.info(
               'Could not evaluate latest release version, using v0.0.0'
@@ -68,10 +68,12 @@ jobs:
             const packageJson =
               typeof packageJsonRecord === 'undefined' ||
               typeof packageJsonRecord.data === 'undefined'
-                ? '{ "version": "v0.0.0" }'
-                : Buffer.from(packageJsonRecord.data.content, 'base64').toString()
+                ? '{ "version": "0.0.0" }'
+                : Buffer
+                    .from(packageJsonRecord.data.content, 'base64')
+                    .toString()
             const package = JSON.parse(packageJson)
-            packageVersion = package.version
+            packageVersion = `v${sewver.clean(package.version)}`
             console.info(`Found current package version: ${packageVersion}`)
           } catch (e) {
             console.info(
@@ -99,17 +101,15 @@ jobs:
       if: ${{ fromJSON(steps.get-releases.outputs.result).latestIsNew }}
       uses: actions/github-script@v6
       env:
-        RELEASE_TAG_NAME: ${{ fromJSON(steps.get-releases.outputs.result).latest }}
+        RELEASE_TAG_NAME: ${{ fromJSON(steps.get-releases.outputs.result).package }}
       with:
         result-encoding: string
         script: |
-          const { RELEASE_TAG_NAME } = process.env
-          github.rest.repos.createRelease({
+          const { RELEASE_TAG_NAME: tag_name } = process.env
+          await github.rest.repos.createRelease({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            tag_name: RELEASE_TAG_NAME,
+            tag_name,
             draft: true
           })
-          console.info(
-            `Created (draft) release ${needs.versions.outputs.checkout-version}`
-          )
+          console.info(`Created (draft) release ${tag_name}`)
