@@ -87,24 +87,19 @@ jobs:
     - name: Uninstall semver package 
       run: git restore . && pnpm install --frozen-lockfile
 
-    - run: echo ${{ steps.get-releases.outputs.result }}
-    - run: echo ${{ fromJson(steps.get-releases.outputs.result).package }}
-    - run: echo ${{ fromJson(steps.get-releases.outputs.result).latest }}
-    - run: echo ${{ fromJson(steps.get-releases.outputs.result).latestIsNew }}
-
     # release to npm
     - name: Release to NPM
-      if: ${{ steps.get-releases.outputs.result.latestIsNew }}
+      if: ${{ fromJSON(steps.get-releases.outputs.result).latestIsNew }}
       run: pnpm release --dry-run
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
     # tag release in github
     - name: Tag release in GitHub
-      if: ${{ steps.get-releases.outputs.result.latestIsNew }}
+      if: ${{ fromJSON(steps.get-releases.outputs.result).latestIsNew }}
       uses: actions/github-script@v6
       env:
-        RELEASE_TAG_NAME: ${{ steps.get-releases.outputs.result.latest }}
+        RELEASE_TAG_NAME: ${{ fromJSON(steps.get-releases.outputs.result).latest }}
       with:
         result-encoding: string
         script: |
