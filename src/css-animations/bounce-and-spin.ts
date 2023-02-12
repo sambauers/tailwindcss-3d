@@ -130,7 +130,6 @@ class BounceAndSpin implements CSSAnimation {
       .transform(signModifier())
       .mapValues(({ value: [_duration, distance], axis, sign }: Keyframe) => {
         const translateProperty = `translate${axis.toUpperCase()}`
-        // const oppositeSign = axis === 'y' && sign === '' ? '-' : ''
 
         return {
           '0%, 100%': {
