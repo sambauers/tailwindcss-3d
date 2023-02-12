@@ -1,4 +1,4 @@
-import { normaliseAlphaValue } from '@/utils/css-value'
+import { normaliseAlphaValue } from '../../css-value'
 
 describe('utilities', () => {
   describe('css-value', () => {
