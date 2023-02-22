@@ -5,7 +5,7 @@
   },
   "jsc": {
     "parser": {
-      "syntax": "typescript"
+      "syntax": "typescript",
     },
     "paths": {
       "@/*": [
@@ -14,7 +14,6 @@
     }
   },
   "exclude": [
-    "./common.ts",
     "./**/__mocks__/*",
     "./**/__tests__/*"
   ]
