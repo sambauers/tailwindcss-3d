@@ -36,7 +36,7 @@ jobs:
       with:
         script: |
           const script = require('./.github/workflows/scripts/release-get-releases.js')
-          return script({github, context})
+          return await script({github, context})
     - name: Uninstall semver package 
       run: git restore . && pnpm install --frozen-lockfile
 
@@ -57,4 +57,4 @@ jobs:
         result-encoding: string
         script: |
           const script = require('./.github/workflows/scripts/release-tag-release.js')
-          script({github, context})
+          await script({github, context})
