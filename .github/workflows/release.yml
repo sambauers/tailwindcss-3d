@@ -113,4 +113,4 @@ jobs:
             target_commitish: context.sha,
             name: tag_name,
           })
-          console.info(`Created (draft) release ${tag_name}`)
+          console.info(`Created release ${tag_name}`)
