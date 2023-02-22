@@ -24,7 +24,7 @@
     "clean:scripts": "rm -rf ./build/scripts",
     "copy-release-files": "pnpm compile:scripts && node ./build/scripts/copy-release-files.js && pnpm clean:scripts",
     "build": "pnpm clean && pnpm compile",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
     "package": "pnpm lint && pnpm test && pnpm build && pnpm build:types && pnpm copy-release-files",
     "release": "pnpm package && pnpm publish dist",
     "dev": "pnpm clean && mkdir -p ./dist/types && pnpm copy-release-files && concurrently \"pnpm:compile --watch\" \"pnpm:build:types --watch\"",
