@@ -1,4 +1,4 @@
-import { LocalPluginAPI } from '../..'
+import type { LocalPluginAPI } from '@/common'
 
 // Note: not mocking a module, just a helper for understanding plugin api calls
 
