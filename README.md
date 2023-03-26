@@ -30,10 +30,17 @@ animations.
 
 ## Installation
 
-Install the plugin from npm:
+Install the plugin using npm or your preferred package manager:
 
 ```sh
-npm install tailwindcss-3d
+# npm
+npm install -D tailwindcss-3d
+
+# yarn
+yarn add -D tailwindcss-3d
+
+# pnpm
+pnpm add -D tailwindcss-3d
 ```
 
 Then add the plugin to your `tailwind.config.js` file:
@@ -51,7 +58,50 @@ module.exports = {
 }
 ```
 
+There are no options that you need to define when requiring the plugin. All
+configuration is done via theme configuration in your `tailwind.config.js` file.
+
+Appropriate theme configuration points are indicated under each utility below.
+
+Here is an example of extending the available rotation values to add a 30 degree
+and a 60 degree rotation value on all axes:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      rotate: {
+        '30': '30deg',
+        '60': '60deg',
+      },
+    },
+    // ...
+  },
+  plugins: [
+    require('tailwindcss-3d'),
+    // ...
+  ],
+}
+```
+
+For more information about extending your theme, see the relevant
+[Tailwind documentation](https://tailwindcss.com/docs/theme#customizing-the-default-theme).
+
 ## Usage
+
+### A note on coordinates
+
+"y" axis values in the CSS coordinate system can be a bit confusing at first.
+The origin of the coordinate system, where `x = 0, y = 0` in two-dimensional
+space is the top-left of the browser window. From there, positive values of "x"
+are to the right as expected, but positive values of "y" are in the downward
+direction from that point. This is the opposite of common usage in other
+contexts like maths and construction.
+
+The effect of this is felt most when translating elements which are in the
+middle of a page, and also in the case of this plugin when applying directions
+to animations.
 
 ### Utilities
 
@@ -64,50 +114,50 @@ module.exports = {
 | scale-z-0   | scale: … … 0          |
 | scale-0     | scale: 0 0 …          |
 | scale3d-0   | scale: 0 0 0          |
-| scale-x-50  | scale: .5 …… ……       |
-| scale-y-50  | scale: …… .5 ……       |
-| scale-z-50  | scale: …… …… .5       |
-| scale-50    | scale: .5 .5 ……       |
+| scale-x-50  | scale: .5 … …         |
+| scale-y-50  | scale: … .5 …         |
+| scale-z-50  | scale: … … .5         |
+| scale-50    | scale: .5 .5 …        |
 | scale3d-50  | scale: .5 .5 .5       |
-| scale-x-75  | scale: .75 ……… ………    |
-| scale-y-75  | scale: ……… .75 ………    |
-| scale-z-75  | scale: ……… ……… .75    |
-| scale-75    | scale: .75 .75 ………    |
+| scale-x-75  | scale: .75 … …        |
+| scale-y-75  | scale: … .75 …        |
+| scale-z-75  | scale: … … .75        |
+| scale-75    | scale: .75 .75 …      |
 | scale3d-75  | scale: .75 .75 .75    |
-| scale-x-90  | scale: .9 …… ……       |
-| scale-y-90  | scale: …… .9 ……       |
-| scale-z-90  | scale: …… …… .9       |
-| scale-90    | scale: .9 .9 ……       |
+| scale-x-90  | scale: .9 … …         |
+| scale-y-90  | scale: … .9 …         |
+| scale-z-90  | scale: … … .9         |
+| scale-90    | scale: .9 .9 …        |
 | scale3d-90  | scale: .9 .9 .9       |
-| scale-x-95  | scale: .95 ……… ………    |
-| scale-y-95  | scale: ……… .95 ………    |
-| scale-z-95  | scale: ……… ……… .95    |
-| scale-95    | scale: .95 .95 ………    |
+| scale-x-95  | scale: .95 … …        |
+| scale-y-95  | scale: … .95 …        |
+| scale-z-95  | scale: … … .95        |
+| scale-95    | scale: .95 .95 …      |
 | scale3d-95  | scale: .95 .95 .95    |
 | scale-x-100 | scale: 1 … …          |
 | scale-y-100 | scale: … 1 …          |
 | scale-z-100 | scale: … … 1          |
 | scale-100   | scale: 1 1 …          |
 | scale3d-100 | scale: 1 1 1          |
-| scale-x-105 | scale: 1.05 ………… ………… |
-| scale-y-105 | scale: ………… 1.05 ………… |
-| scale-z-105 | scale: ………… ………… 1.05 |
-| scale-105   | scale: 1.05 1.05 ………… |
+| scale-x-105 | scale: 1.05 … …       |
+| scale-y-105 | scale: … 1.05 …       |
+| scale-z-105 | scale: … … 1.05       |
+| scale-105   | scale: 1.05 1.05 …    |
 | scale3d-105 | scale: 1.05 1.05 1.05 |
-| scale-x-110 | scale: 1.1 ……… ………    |
-| scale-y-110 | scale: ……… 1.1 ………    |
-| scale-z-110 | scale: ……… ……… 1.1    |
-| scale-110   | scale: 1.1 1.1 ………    |
+| scale-x-110 | scale: 1.1 … …        |
+| scale-y-110 | scale: … 1.1 …        |
+| scale-z-110 | scale: … … 1.1        |
+| scale-110   | scale: 1.1 1.1 …      |
 | scale3d-110 | scale: 1.1 1.1 1.1    |
-| scale-x-125 | scale: 1.25 ………… ………… |
-| scale-y-125 | scale: ………… 1.25 ………… |
-| scale-z-125 | scale: ………… ………… 1.25 |
-| scale-125   | scale: 1.25 1.25 ………… |
+| scale-x-125 | scale: 1.25 … …       |
+| scale-y-125 | scale: … 1.25 …       |
+| scale-z-125 | scale: … … 1.25       |
+| scale-125   | scale: 1.25 1.25 …    |
 | scale3d-125 | scale: 1.25 1.25 1.25 |
-| scale-x-150 | scale: 1.5 ……… ………    |
-| scale-y-150 | scale: ……… 1.5 ………    |
-| scale-z-150 | scale: ……… ……… 1.5    |
-| scale-150   | scale: 1.5 1.5 ………    |
+| scale-x-150 | scale: 1.5 … …        |
+| scale-y-150 | scale: … 1.5 …        |
+| scale-z-150 | scale: … … 1.5        |
+| scale-150   | scale: 1.5 1.5 …      |
 | scale3d-150 | scale: 1.5 1.5 1.5    |
 
 Inherits values from `theme.scale` in your config.
@@ -234,127 +284,127 @@ You can mix rotation values together as well:
 
 #### translate
 
-| Class            | Properties                                   |
-| ---------------- | -------------------------------------------- |
-| translate-x-0    | translate: 0px ……… ………;                      |
-| translate-y-0    | translate: ……… 0px ………;                      |
-| translate-z-0    | translate: ……… ……… 0px;                      |
-| translate-x-px   | translate: 1px ……… ………;                      |
-| translate-y-px   | translate: ……… 1px ………;                      |
-| translate-z-px   | translate: ……… ……… 1px;                      |
-| translate-x-0.5  | translate: 0.125rem …………………… ……………………;       |
-| translate-y-0.5  | translate: …………………… 0.125rem ……………………;       |
-| translate-z-0.5  | translate: …………………… …………………… 0.125rem;       |
-| translate-x-1    | translate: 0.25rem ………………… …………………;          |
-| translate-y-1    | translate: ………………… 0.25rem …………………;          |
-| translate-z-1    | translate: ………………… ………………… 0.25rem;          |
-| translate-x-1.5  | translate: 0.375rem …………………… ……………………;       |
-| translate-y-1.5  | translate: …………………… 0.375rem ……………………;       |
-| translate-z-1.5  | translate: …………………… …………………… 0.375rem;       |
-| translate-x-2    | translate: 0.5rem ……………… ………………;             |
-| translate-y-2    | translate: ……………… 0.5rem ………………;             |
-| translate-z-2    | translate: ……………… ……………… 0.5rem;             |
-| translate-x-2.5  | translate: 0.625rem …………………… ……………………;       |
-| translate-y-2.5  | translate: …………………… 0.625rem ……………………;       |
-| translate-z-2.5  | translate: …………………… …………………… 0.625rem;       |
-| translate-x-3    | translate: 0.75rem ………………… …………………;          |
-| translate-y-3    | translate: ………………… 0.75rem …………………;          |
-| translate-z-3    | translate: ………………… ………………… 0.75rem;          |
-| translate-x-3.5  | translate: 0.875rem …………………… ……………………;       |
-| translate-y-3.5  | translate: …………………… 0.875rem ……………………;       |
-| translate-z-3.5  | translate: …………………… …………………… 0.875rem;       |
-| translate-x-4    | translate: 1rem ………… …………;                   |
-| translate-y-4    | translate: ………… 1rem …………;                   |
-| translate-z-4    | translate: ………… ………… 1rem;                   |
-| translate-x-5    | translate: 1.25rem ………………… …………………;          |
-| translate-y-5    | translate: ………………… 1.25rem …………………;          |
-| translate-z-5    | translate: ………………… ………………… 1.25rem;          |
-| translate-x-6    | translate: 1.5rem ……………… ………………;             |
-| translate-y-6    | translate: ……………… 1.5rem ………………;             |
-| translate-z-6    | translate: ……………… ……………… 1.5rem;             |
-| translate-x-7    | translate: 1.75rem ………………… …………………;          |
-| translate-y-7    | translate: ………………… 1.75rem …………………;          |
-| translate-z-7    | translate: ………………… ………………… 1.75rem;          |
-| translate-x-8    | translate: 2rem ………… …………;                   |
-| translate-y-8    | translate: ………… 2rem …………;                   |
-| translate-z-8    | translate: ………… ………… 2rem;                   |
-| translate-x-9    | translate: 2.25rem ………………… …………………;          |
-| translate-y-9    | translate: ………………… 2.25rem …………………;          |
-| translate-z-9    | translate: ………………… ………………… 2.25rem;          |
-| translate-x-10   | translate: 2.5rem ……………… ………………;             |
-| translate-y-10   | translate: ……………… 2.5rem ………………;             |
-| translate-z-10   | translate: ……………… ……………… 2.5rem;             |
-| translate-x-11   | translate: 2.75rem ………………… …………………;          |
-| translate-y-11   | translate: ………………… 2.75rem …………………;          |
-| translate-z-11   | translate: ………………… ………………… 2.75rem;          |
-| translate-x-12   | translate: 3rem ………… …………;                   |
-| translate-y-12   | translate: ………… 3rem …………;                   |
-| translate-z-12   | translate: ………… ………… 3rem;                   |
-| translate-x-14   | translate: 3.5rem ……………… ………………;             |
-| translate-y-14   | translate: ……………… 3.5rem ………………;             |
-| translate-z-14   | translate: ……………… ……………… 3.5rem;             |
-| translate-x-16   | translate: 4rem ………… …………;                   |
-| translate-y-16   | translate: ………… 4rem …………;                   |
-| translate-z-16   | translate: ………… ………… 4rem;                   |
-| translate-x-20   | translate: 5rem ………… …………;                   |
-| translate-y-20   | translate: ………… 5rem …………;                   |
-| translate-z-20   | translate: ………… ………… 5rem;                   |
-| translate-x-24   | translate: 6rem ………… …………;                   |
-| translate-y-24   | translate: ………… 6rem …………;                   |
-| translate-z-24   | translate: ………… ………… 6rem;                   |
-| translate-x-28   | translate: 7rem ………… …………;                   |
-| translate-y-28   | translate: ………… 7rem …………;                   |
-| translate-z-28   | translate: ………… ………… 7rem;                   |
-| translate-x-32   | translate: 8rem ………… …………;                   |
-| translate-y-32   | translate: ………… 8rem …………;                   |
-| translate-z-32   | translate: ………… ………… 8rem;                   |
-| translate-x-36   | translate: 9rem ………… …………;                   |
-| translate-y-36   | translate: ………… 9rem …………;                   |
-| translate-z-36   | translate: ………… ………… 9rem;                   |
-| translate-x-40   | translate: 10rem …………… ……………;                |
-| translate-y-40   | translate: …………… 10rem ……………;                |
-| translate-z-40   | translate: …………… …………… 10rem;                |
-| translate-x-44   | translate: 11rem …………… ……………;                |
-| translate-y-44   | translate: …………… 11rem ……………;                |
-| translate-z-44   | translate: …………… …………… 11rem;                |
-| translate-x-48   | translate: 12rem …………… ……………;                |
-| translate-y-48   | translate: …………… 12rem ……………;                |
-| translate-z-48   | translate: …………… …………… 12rem;                |
-| translate-x-52   | translate: 13rem …………… ……………;                |
-| translate-y-52   | translate: …………… 13rem ……………;                |
-| translate-z-52   | translate: …………… …………… 13rem;                |
-| translate-x-56   | translate: 14rem …………… ……………;                |
-| translate-y-56   | translate: …………… 14rem ……………;                |
-| translate-z-56   | translate: …………… …………… 14rem;                |
-| translate-x-60   | translate: 15rem …………… ……………;                |
-| translate-y-60   | translate: …………… 15rem ……………;                |
-| translate-z-60   | translate: …………… …………… 15rem;                |
-| translate-x-64   | translate: 16rem …………… ……………;                |
-| translate-y-64   | translate: …………… 16rem ……………;                |
-| translate-z-64   | translate: …………… …………… 16rem;                |
-| translate-x-72   | translate: 18rem …………… ……………;                |
-| translate-y-72   | translate: …………… 18rem ……………;                |
-| translate-z-72   | translate: …………… …………… 18rem;                |
-| translate-x-80   | translate: 20rem …………… ……………;                |
-| translate-y-80   | translate: …………… 20rem ……………;                |
-| translate-z-80   | translate: …………… …………… 20rem;                |
-| translate-x-96   | translate: 24rem …………… ……………;                |
-| translate-y-96   | translate: …………… 24rem ……………;                |
-| translate-z-96   | translate: …………… …………… 24rem;                |
-| translate-x-1/2  | translate: 50% ……… ………;                      |
-| translate-y-1/2  | translate: ……… 50% ………;                      |
-| translate-x-1/3  | translate: 33.333333% ………………………… …………………………; |
-| translate-y-1/3  | translate: ………………………… 33.333333% …………………………; |
-| translate-x-2/3  | translate: 66.666667% ………………………… …………………………; |
-| translate-y-2/3  | translate: ………………………… 66.666667% …………………………; |
-| translate-x-1/4  | translate: 25% ……… ………;                      |
-| translate-y-1/4  | translate: ……… 25% ………;                      |
-| translate-x-2/4  | translate: 50% ……… ………;                      |
-| translate-y-2/4  | translate: ……… 50% ………;                      |
-| translate-x-3/4  | translate: 75% ……… ………;                      |
-| translate-y-3/4  | translate: ……… 75% ………;                      |
-| translate-x-full | translate: 100% ………… …………;                   |
-| translate-y-full | translate: ………… 100% …………;                   |
+| Class            | Properties                 |
+| ---------------- | -------------------------- |
+| translate-x-0    | translate: 0px … …;        |
+| translate-y-0    | translate: … 0px …;        |
+| translate-z-0    | translate: … … 0px;        |
+| translate-x-px   | translate: 1px … …;        |
+| translate-y-px   | translate: … 1px …;        |
+| translate-z-px   | translate: … … 1px;        |
+| translate-x-0.5  | translate: 0.125rem … …;   |
+| translate-y-0.5  | translate: … 0.125rem …;   |
+| translate-z-0.5  | translate: … … 0.125rem;   |
+| translate-x-1    | translate: 0.25rem … …;    |
+| translate-y-1    | translate: … 0.25rem …;    |
+| translate-z-1    | translate: … … 0.25rem;    |
+| translate-x-1.5  | translate: 0.375rem … …;   |
+| translate-y-1.5  | translate: … 0.375rem …;   |
+| translate-z-1.5  | translate: … … 0.375rem;   |
+| translate-x-2    | translate: 0.5rem … …;     |
+| translate-y-2    | translate: … 0.5rem …;     |
+| translate-z-2    | translate: … … 0.5rem;     |
+| translate-x-2.5  | translate: 0.625rem … …;   |
+| translate-y-2.5  | translate: … 0.625rem …;   |
+| translate-z-2.5  | translate: … … 0.625rem;   |
+| translate-x-3    | translate: 0.75rem … …;    |
+| translate-y-3    | translate: … 0.75rem …;    |
+| translate-z-3    | translate: … … 0.75rem;    |
+| translate-x-3.5  | translate: 0.875rem … …;   |
+| translate-y-3.5  | translate: … 0.875rem …;   |
+| translate-z-3.5  | translate: … … 0.875rem;   |
+| translate-x-4    | translate: 1rem … …;       |
+| translate-y-4    | translate: … 1rem …;       |
+| translate-z-4    | translate: … … 1rem;       |
+| translate-x-5    | translate: 1.25rem … …;    |
+| translate-y-5    | translate: … 1.25rem …;    |
+| translate-z-5    | translate: … … 1.25rem;    |
+| translate-x-6    | translate: 1.5rem … …;     |
+| translate-y-6    | translate: … 1.5rem …;     |
+| translate-z-6    | translate: … … 1.5rem;     |
+| translate-x-7    | translate: 1.75rem … …;    |
+| translate-y-7    | translate: … 1.75rem …;    |
+| translate-z-7    | translate: … … 1.75rem;    |
+| translate-x-8    | translate: 2rem … …;       |
+| translate-y-8    | translate: … 2rem …;       |
+| translate-z-8    | translate: … … 2rem;       |
+| translate-x-9    | translate: 2.25rem … …;    |
+| translate-y-9    | translate: … 2.25rem …;    |
+| translate-z-9    | translate: … … 2.25rem;    |
+| translate-x-10   | translate: 2.5rem … …;     |
+| translate-y-10   | translate: … 2.5rem …;     |
+| translate-z-10   | translate: … … 2.5rem;     |
+| translate-x-11   | translate: 2.75rem … …;    |
+| translate-y-11   | translate: … 2.75rem …;    |
+| translate-z-11   | translate: … … 2.75rem;    |
+| translate-x-12   | translate: 3rem … …;       |
+| translate-y-12   | translate: … 3rem …;       |
+| translate-z-12   | translate: … … 3rem;       |
+| translate-x-14   | translate: 3.5rem … …;     |
+| translate-y-14   | translate: … 3.5rem …;     |
+| translate-z-14   | translate: … … 3.5rem;     |
+| translate-x-16   | translate: 4rem … …;       |
+| translate-y-16   | translate: … 4rem …;       |
+| translate-z-16   | translate: … … 4rem;       |
+| translate-x-20   | translate: 5rem … …;       |
+| translate-y-20   | translate: … 5rem …;       |
+| translate-z-20   | translate: … … 5rem;       |
+| translate-x-24   | translate: 6rem … …;       |
+| translate-y-24   | translate: … 6rem …;       |
+| translate-z-24   | translate: … … 6rem;       |
+| translate-x-28   | translate: 7rem … …;       |
+| translate-y-28   | translate: … 7rem …;       |
+| translate-z-28   | translate: … … 7rem;       |
+| translate-x-32   | translate: 8rem … …;       |
+| translate-y-32   | translate: … 8rem …;       |
+| translate-z-32   | translate: … … 8rem;       |
+| translate-x-36   | translate: 9rem … …;       |
+| translate-y-36   | translate: … 9rem …;       |
+| translate-z-36   | translate: … … 9rem;       |
+| translate-x-40   | translate: 10rem … …;      |
+| translate-y-40   | translate: … 10rem …;      |
+| translate-z-40   | translate: … … 10rem;      |
+| translate-x-44   | translate: 11rem … …;      |
+| translate-y-44   | translate: … 11rem …;      |
+| translate-z-44   | translate: … … 11rem;      |
+| translate-x-48   | translate: 12rem … …;      |
+| translate-y-48   | translate: … 12rem …;      |
+| translate-z-48   | translate: … … 12rem;      |
+| translate-x-52   | translate: 13rem … …;      |
+| translate-y-52   | translate: … 13rem …;      |
+| translate-z-52   | translate: … … 13rem;      |
+| translate-x-56   | translate: 14rem … …;      |
+| translate-y-56   | translate: … 14rem …;      |
+| translate-z-56   | translate: … … 14rem;      |
+| translate-x-60   | translate: 15rem … …;      |
+| translate-y-60   | translate: … 15rem …;      |
+| translate-z-60   | translate: … … 15rem;      |
+| translate-x-64   | translate: 16rem … …;      |
+| translate-y-64   | translate: … 16rem …;      |
+| translate-z-64   | translate: … … 16rem;      |
+| translate-x-72   | translate: 18rem … …;      |
+| translate-y-72   | translate: … 18rem …;      |
+| translate-z-72   | translate: … … 18rem;      |
+| translate-x-80   | translate: 20rem … …;      |
+| translate-y-80   | translate: … 20rem …;      |
+| translate-z-80   | translate: … … 20rem;      |
+| translate-x-96   | translate: 24rem … …;      |
+| translate-y-96   | translate: … 24rem …;      |
+| translate-z-96   | translate: … … 24rem;      |
+| translate-x-1/2  | translate: 50% … …;        |
+| translate-y-1/2  | translate: … 50% …;        |
+| translate-x-1/3  | translate: 33.333333% … …; |
+| translate-y-1/3  | translate: … 33.333333% …; |
+| translate-x-2/3  | translate: 66.666667% … …; |
+| translate-y-2/3  | translate: … 66.666667% …; |
+| translate-x-1/4  | translate: 25% … …;        |
+| translate-y-1/4  | translate: … 25% …;        |
+| translate-x-2/4  | translate: 50% … …;        |
+| translate-y-2/4  | translate: … 50% …;        |
+| translate-x-3/4  | translate: 75% … …;        |
+| translate-y-3/4  | translate: … 75% …;        |
+| translate-x-full | translate: 100% … …;       |
+| translate-y-full | translate: … 100% …;       |
 
 Inherits values from `theme.translate` in your config.
 
