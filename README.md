@@ -28,6 +28,13 @@ where support in more recent browsers allows. This opens some new possibilities
 when combining utility classes with animations, and in the composition of new
 animations.
 
+## Browser compatibility
+
+Since this pluign uses newer CSS properties, it will produce CSS which is not
+compatible with some older browsers.
+
+Refer to [this list of CSS features on CanIUse.com](https://caniuse.com/?feats=mdn-css_properties_rotate,mdn-css_properties_scale,mdn-css_properties_translate,mdn-css_properties_perspective,mdn-css_properties_perspective-origin,mdn-css_properties_backface-visibility,mdn-css_properties_transform-box,mdn-css_properties_transform-style,transforms2d,transforms3d)
+
 ## Installation
 
 Install the plugin using npm or your preferred package manager:
