@@ -25,6 +25,7 @@ delete distPackageJson.packageManager
 delete distPackageJson.scripts
 distPackageJson.main = 'index.js'
 distPackageJson.types = 'types/index.d.ts'
+distPackageJson.devDependencies = { lodash: packageJson.devDependencies.lodash }
 const distPackageContents = JSON.stringify(distPackageJson, null, '  ')
 writeFileSync(distPackageURL, distPackageContents.concat('\n'))
 
