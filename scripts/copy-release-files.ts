@@ -21,6 +21,7 @@ const distPackageURL = fileURLToPath(new URL(distPackagePath, import.meta.url))
 const distPackageJson = { ...packageJson }
 delete distPackageJson.devDependencies
 delete distPackageJson.files
+delete distPackageJson.packageManager
 delete distPackageJson.scripts
 distPackageJson.main = 'index.js'
 distPackageJson.types = 'types/index.d.ts'
