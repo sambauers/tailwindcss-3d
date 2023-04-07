@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { chain } from 'lodash'
 import { signModifier } from '../../lodash-transformers'
 
 const INPUT_WITH_VALUE = {
@@ -17,7 +17,7 @@ describe('utilities', () => {
   describe('lodash-transformers', () => {
     describe('signModifier()', () => {
       it('transforms an object when no signs are provided', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(signModifier(), {})
           .value()
 
@@ -32,7 +32,7 @@ describe('utilities', () => {
       })
 
       it('transforms an object when signs are provided', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(signModifier(['+', '-', '#']), {})
           .value()
 
@@ -50,7 +50,7 @@ describe('utilities', () => {
       })
 
       it('transforms an object when a single sign is provided', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(signModifier('#'), {})
           .value()
 
@@ -62,7 +62,7 @@ describe('utilities', () => {
       })
 
       it('merges existing values from previous transformations', () => {
-        const outputObject = _.chain(INPUT_WITH_OBJECT)
+        const outputObject = chain(INPUT_WITH_OBJECT)
           .transform(signModifier(), {})
           .value()
 

@@ -1,6 +1,13 @@
 import type { CSSAnimation } from '@/css-animations'
 import type { PluginUtils } from 'tailwindcss/types/config'
-import _ from 'lodash'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import isArray from 'lodash/isArray'
+import isPlainObject from 'lodash/isPlainObject'
+import every from 'lodash/every'
+import keys from 'lodash/keys'
+import values from 'lodash/values'
+import { chain } from 'lodash'
 import { generateGuard } from '@/utils/generate-guard'
 import {
   normaliseLengthPercentageValue,
@@ -24,37 +31,37 @@ type Values = Record<string, Value>
 
 class Bounce implements CSSAnimation {
   private isProcessablePrimitive = generateGuard<ProcessablePrimitive>(
-    _.isString,
-    _.isUndefined
+    isString,
+    isUndefined
   )
 
   private isProcessableValue = generateGuard<ProcessableValue>([
-    _.isArray,
+    isArray,
     (maybe) => maybe.length === 2,
-    (maybe) => _.every(_.values(maybe), this.isProcessablePrimitive),
+    (maybe) => every(values(maybe), this.isProcessablePrimitive),
   ])
 
   private isProcessableValues = generateGuard<ProcessableValues>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), this.isProcessableValue),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), this.isProcessableValue),
   ])
 
   private isValue = generateGuard<Value>([
-    _.isArray,
+    isArray,
     (maybe) => maybe.length === 2,
-    (maybe) => _.every(_.values(maybe), _.isString),
+    (maybe) => every(values(maybe), isString),
   ])
 
   private isValues = generateGuard<Values>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), this.isValue),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), this.isValue),
   ])
 
   private normaliseValues = (values: unknown): Values => {
     return this.isProcessableValues(values)
-      ? _.chain(values)
+      ? chain(values)
           .mapKeys((_value, modifier) => normaliseNumberValue(modifier) ?? '')
           .mapValues(
             ([duration, distance]): ProcessableValue => [
@@ -65,10 +72,10 @@ class Bounce implements CSSAnimation {
           .pickBy((value, modifier): value is Value => {
             const [duration, distance] = value
             return (
-              _.isString(modifier) &&
+              isString(modifier) &&
               modifier !== '' &&
-              _.isString(duration) &&
-              _.isString(distance)
+              isString(duration) &&
+              isString(distance)
             )
           })
           .value()
@@ -76,7 +83,7 @@ class Bounce implements CSSAnimation {
   }
 
   public defaultTheme = this.normaliseValues(
-    _.chain(defaultTheme.spacing)
+    chain(defaultTheme.spacing)
       .transform(addDurationWithGravity(), {})
       .mapValues(({ value: distance, duration }: { [k: string]: string }) => [
         duration,
@@ -98,7 +105,7 @@ class Bounce implements CSSAnimation {
       sign: string
     }
 
-    return _.chain(values)
+    return chain(values)
       .transform(axesModifier(), {})
       .transform(nameModifier('bounce'), {})
       .transform(signModifier(), {})
@@ -130,7 +137,7 @@ class Bounce implements CSSAnimation {
       value: Value
     }
 
-    return _.chain(values)
+    return chain(values)
       .transform(axesModifier(), {})
       .transform(nameModifier('bounce'), {})
       .transform(signModifier(), {})

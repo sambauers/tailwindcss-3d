@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { chain } from 'lodash'
 import { nameModifier } from '../../lodash-transformers'
 
 const INPUT_WITH_VALUE = {
@@ -17,7 +17,7 @@ describe('utilities', () => {
   describe('lodash-transformers', () => {
     describe('nameModifier()', () => {
       it('transforms an object when no name is provided, but does not append the property', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(nameModifier(), {})
           .value()
 
@@ -29,7 +29,7 @@ describe('utilities', () => {
       })
 
       it('transforms an object when name is an empty string, but does not append the property', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(nameModifier(''), {})
           .value()
 
@@ -41,7 +41,7 @@ describe('utilities', () => {
       })
 
       it('transforms an object when name is provided, and appends the property', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(nameModifier('bounce'), {})
           .value()
 
@@ -53,7 +53,7 @@ describe('utilities', () => {
       })
 
       it('silences a specific modifier', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(nameModifier('bounce', '2'), {})
           .value()
 
@@ -65,7 +65,7 @@ describe('utilities', () => {
       })
 
       it('merges existing values from previous transformations', () => {
-        const outputObject = _.chain(INPUT_WITH_OBJECT)
+        const outputObject = chain(INPUT_WITH_OBJECT)
           .transform(nameModifier('bounce'), {})
           .value()
 

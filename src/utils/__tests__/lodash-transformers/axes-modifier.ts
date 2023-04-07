@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { chain } from 'lodash'
 import { axesModifier } from '../../lodash-transformers'
 
 const INPUT_WITH_VALUE = {
@@ -17,7 +17,7 @@ describe('utilities', () => {
   describe('lodash-transformers', () => {
     describe('axesModifier()', () => {
       it('transforms an object with defaults', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(axesModifier(), {})
           .value()
 
@@ -35,7 +35,7 @@ describe('utilities', () => {
       })
 
       it('transforms an object with only two axes', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(axesModifier(['x', 'y']), {})
           .value()
 
@@ -50,7 +50,7 @@ describe('utilities', () => {
       })
 
       it('transforms an object without a silent modifier', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(axesModifier(undefined, ''), {})
           .value()
 
@@ -68,7 +68,7 @@ describe('utilities', () => {
       })
 
       it('merges existing values from previous transformations', () => {
-        const outputObject = _.chain(INPUT_WITH_OBJECT)
+        const outputObject = chain(INPUT_WITH_OBJECT)
           .transform(axesModifier(), {})
           .value()
 

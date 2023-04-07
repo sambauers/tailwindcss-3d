@@ -1,11 +1,12 @@
 import { generateGuard } from '@/utils/generate-guard'
-import _ from 'lodash'
+import isString from 'lodash/isString'
+import includes from 'lodash/includes'
 
 export type Dimension = '3d' | '2d'
 
 export const isDimension = generateGuard<Dimension>([
-  _.isString,
-  (maybe) => _.includes(['3d', '2d'], maybe),
+  isString,
+  (maybe) => includes(['3d', '2d'], maybe),
 ])
 
 export const normaliseDimension = (dimension?: string): Dimension =>

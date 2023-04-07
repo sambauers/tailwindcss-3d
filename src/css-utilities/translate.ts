@@ -3,7 +3,14 @@ import type { LocalPluginAPI } from '@/common'
 import type { Dimension } from '@/utils/dimension'
 import type { UnsafeCSSValue } from '@/utils/css-value'
 import { generateGuard } from '@/utils/generate-guard'
-import _ from 'lodash'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import isPlainObject from 'lodash/isPlainObject'
+import every from 'lodash/every'
+import keys from 'lodash/keys'
+import values from 'lodash/values'
+import { chain } from 'lodash'
+import pickBy from 'lodash/pickBy'
 import {
   normaliseLengthPercentageValue,
   normaliseLengthValue,
@@ -24,29 +31,29 @@ interface NormaliseFunctionValuesOptions {
 
 class Translate implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
-    _.isString,
-    _.isUndefined
+    isString,
+    isUndefined
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), this.isProcessableValue),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), this.isProcessableValue),
   ])
 
   private isValues = generateGuard<Values>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), _.isString),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), isString),
   ])
 
   private normaliseValues = (values: unknown): Values =>
     this.isProcessableValues(values)
-      ? _.chain(values)
+      ? chain(values)
           .mapValues((duration) => normaliseLengthPercentageValue(duration))
           .pickBy(
             (duration, modifier): duration is Value =>
-              _.isString(modifier) && modifier !== '' && _.isString(duration)
+              isString(modifier) && modifier !== '' && isString(duration)
           )
           .value()
       : {}
@@ -117,7 +124,7 @@ class Translate implements CSSUtility {
         }),
       },
       {
-        values: _.pickBy(values, (value) => !value.endsWith('%')),
+        values: pickBy(values, (value) => !value.endsWith('%')),
         supportsNegativeValues: true,
       }
     )

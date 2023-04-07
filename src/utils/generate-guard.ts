@@ -1,4 +1,10 @@
-import _ from 'lodash'
+import some from 'lodash/some'
+import castArray from 'lodash/castArray'
+import every from 'lodash/every'
+import over from 'lodash/over'
+import isFunction from 'lodash/isFunction'
+import isBoolean from 'lodash/isBoolean'
+import isArray from 'lodash/isArray'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GuardTest = (arg: any) => boolean
@@ -11,36 +17,36 @@ export const generateGuard = <T>(...testGroups: GuardTestGroups) => {
   }
 
   return (maybe?: unknown): maybe is T =>
-    _.some(testGroups, (tests) => {
-      const safeTests = _.castArray(tests)
+    some(testGroups, (tests) => {
+      const safeTests = castArray(tests)
 
       if (safeTests.length < 1) {
         return false
       }
 
-      return _.every(
-        _.over<boolean>(...safeTests)(maybe),
+      return every(
+        over<boolean>(...safeTests)(maybe),
         (result) => result === true
       )
     })
 }
 
 export const isGuardTest = generateGuard<GuardTest>([
-  _.isFunction,
+  isFunction,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (maybe: (...args: any[]) => any) =>
-    _.isFunction(maybe) && _.isBoolean(maybe('something')),
+    isFunction(maybe) && isBoolean(maybe('something')),
 ])
 
 export const isGuardTests = generateGuard<GuardTests>([
-  _.isArray,
-  (maybe) => _.every(maybe, isGuardTest),
+  isArray,
+  (maybe) => every(maybe, isGuardTest),
 ])
 
 export const isGuardTestGroups = generateGuard<GuardTests>([
-  _.isArray,
+  isArray,
   (maybe) =>
-    _.every(
+    every(
       maybe,
       (testGroup) => isGuardTest(testGroup) || isGuardTests(testGroup)
     ),

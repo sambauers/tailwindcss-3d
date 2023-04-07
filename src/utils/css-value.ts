@@ -1,4 +1,17 @@
-import _ from 'lodash'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import isArray from 'lodash/isArray'
+import isPlainObject from 'lodash/isPlainObject'
+import isObject from 'lodash/isObject'
+import isFinite from 'lodash/isFinite'
+import isNumber from 'lodash/isNumber'
+import isBoolean from 'lodash/isBoolean'
+import trim from 'lodash/trim'
+import toLower from 'lodash/toLower'
+import has from 'lodash/has'
+import get from 'lodash/get'
+import includes from 'lodash/includes'
+import { chain } from 'lodash'
 import { generateGuard } from '@/utils/generate-guard'
 
 export const VALID_LENGTH_UNITS = [
@@ -35,11 +48,11 @@ export const VALID_TIME_UNITS = ['s', 'ms']
 export type UnsafeCSSValue = string | number | undefined
 
 export const toStringValue = (value: UnsafeCSSValue): string | undefined => {
-  if (_.isString(value)) {
+  if (isString(value)) {
     return value.trim()
   }
 
-  if (_.isFinite(value)) {
+  if (isFinite(value)) {
     return String(value)
   }
 
@@ -47,11 +60,11 @@ export const toStringValue = (value: UnsafeCSSValue): string | undefined => {
 }
 
 export const toNumericValue = (value: UnsafeCSSValue): number | undefined => {
-  if (_.isFinite(value)) {
+  if (isFinite(value)) {
     return Number(value)
   }
 
-  if (_.isString(value)) {
+  if (isString(value)) {
     const trimmed = value.trim()
     if (trimmed === '') {
       return undefined
@@ -84,7 +97,7 @@ export const toNumericValueAndUnit = (
     unit: undefined,
   }
 
-  if (_.isUndefined(stringValue)) {
+  if (isUndefined(stringValue)) {
     return evaluated
   }
 
@@ -94,10 +107,10 @@ export const toNumericValueAndUnit = (
 
   const strippedStringValue = stringValue.replace(/\s/g, '')
 
-  const safeValidUnits = _.chain(validUnits)
+  const safeValidUnits = chain(validUnits)
     .castArray()
     .uniq()
-    .filter(generateGuard<string>([_.isString, (maybe) => maybe !== '']))
+    .filter(generateGuard<string>([isString, (maybe) => maybe !== '']))
     .value()
 
   if (safeValidUnits.length > 0) {
@@ -106,25 +119,25 @@ export const toNumericValueAndUnit = (
       new RegExp(`(?:${unitsUnion})$`)
     )
 
-    if (_.isArray(unitsMatch) && unitsMatch.length === 1) {
+    if (isArray(unitsMatch) && unitsMatch.length === 1) {
       evaluated.unit = unitsMatch[0]
     }
   }
 
   // Simple numbers without units
   const numberValue = toNumericValue(strippedStringValue)
-  if (_.isNumber(numberValue)) {
+  if (isNumber(numberValue)) {
     evaluated.value = numberValue
     return evaluated
   }
 
-  const unitlessStringValue = _.isString(evaluated.unit)
+  const unitlessStringValue = isString(evaluated.unit)
     ? strippedStringValue.replace(new RegExp(`${evaluated.unit}$`), '')
     : strippedStringValue
 
   const unitlessNumberValue = toNumericValue(unitlessStringValue)
 
-  if (_.isNumber(unitlessNumberValue)) {
+  if (isNumber(unitlessNumberValue)) {
     evaluated.value = unitlessNumberValue
     return evaluated
   }
@@ -133,7 +146,7 @@ export const toNumericValueAndUnit = (
     .replace(/[^\d.-]/g, '')
     .replace(/\b-/g, '')
   const rescueNumberValue = toNumericValue(rescueStringValue)
-  if (_.isNumber(rescueNumberValue)) {
+  if (isNumber(rescueNumberValue)) {
     evaluated.value = rescueNumberValue
     return evaluated
   }
@@ -155,21 +168,21 @@ export const normaliseUnionValue: NormaliseUnionValueFunction = (
   const safeValue = toStringValue(value)
   const safeDefaultValue = toStringValue(defaultValue)
 
-  if (_.isUndefined(safeValue)) {
+  if (isUndefined(safeValue)) {
     return safeDefaultValue
   }
 
-  const safeAllowedValues = _.chain(defaultValue)
+  const safeAllowedValues = chain(defaultValue)
     .castArray()
-    .concat(allowedValues)
+    .concat(allowedValues ?? [])
     .uniq()
-    .filter(_.isString)
-    .map(_.trim)
+    .filter(isString)
+    .map(trim)
     .value()
 
-  const matchedIndex = _.chain(safeAllowedValues)
-    .map(_.toLower)
-    .indexOf(_.toLower(safeValue))
+  const matchedIndex = chain(safeAllowedValues)
+    .map(toLower)
+    .indexOf(toLower(safeValue))
     .value()
 
   if (matchedIndex !== -1) {
@@ -186,12 +199,12 @@ interface Limit {
 }
 
 const isLimit = generateGuard<Limit>([
-  _.isPlainObject,
-  (maybe) => _.isNumber(_.get(maybe, 'limit')),
+  isPlainObject,
+  (maybe) => isNumber(get(maybe, 'limit')),
   (maybe) =>
-    _.has(maybe, 'inclusive') ? _.isBoolean(_.get(maybe, 'inclusive')) : true,
+    has(maybe, 'inclusive') ? isBoolean(get(maybe, 'inclusive')) : true,
   (maybe) =>
-    _.has(maybe, 'adjustBy') ? _.isNumber(_.get(maybe, 'adjustBy')) : true,
+    has(maybe, 'adjustBy') ? isNumber(get(maybe, 'adjustBy')) : true,
 ])
 
 // Not a type guard
@@ -243,24 +256,24 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
     upperLimit,
     lowerLimit,
   }: NormaliseUnitValueOptions =
-    _.isObject(options) && _.isPlainObject(options) ? options : {}
+    isObject(options) && isPlainObject(options) ? options : {}
 
   const safeDefaultNil =
-    _.isString(defaultNil) && _.includes(['0', 'none', ''], defaultNil)
+    isString(defaultNil) && includes(['0', 'none', ''], defaultNil)
       ? defaultNil
       : '0'
 
-  if (_.isUndefined(safeValue)) {
+  if (isUndefined(safeValue)) {
     return safeDefaultValue ?? safeDefaultNil
   }
 
-  const safeAllowNone = _.isBoolean(allowNone) ? allowNone : true
+  const safeAllowNone = isBoolean(allowNone) ? allowNone : true
 
   if (safeAllowNone && safeValue.toLowerCase() === 'none') {
     return 'none'
   }
 
-  const safeAllowVar = _.isBoolean(allowVar) ? allowVar : true
+  const safeAllowVar = isBoolean(allowVar) ? allowVar : true
 
   // Return a var() if that is allowed - fairly coarse validation
   if (safeValue.startsWith('var(')) {
@@ -269,7 +282,7 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
       : safeDefaultValue ?? safeDefaultNil
   }
 
-  const safeAllowCalc = _.isBoolean(allowCalc) ? allowCalc : false
+  const safeAllowCalc = isBoolean(allowCalc) ? allowCalc : false
 
   // Return a calc() if that is allowed - fairly coarse validation
   if (safeValue.startsWith('calc(')) {
@@ -279,10 +292,10 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   }
 
   const safeDefaultUnit = toStringValue(defaultUnit) ?? ''
-  const safeValidUnits = _.chain(safeDefaultUnit)
+  const safeValidUnits = chain(safeDefaultUnit)
     .castArray()
     .concat(validUnits ?? [])
-    .filter(_.isString)
+    .filter(isString)
     .value()
 
   // Get the number value and unit from the string
@@ -293,16 +306,16 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   const safeUnit = unit ?? defaultUnit ?? ''
 
   // From here on we are dealing with number values
-  if (!_.isNumber(safeNumberValue)) {
+  if (!isNumber(safeNumberValue)) {
     return safeDefaultValue ?? safeDefaultNil
   }
 
-  const safeDisallowValues = _.chain(disallowValues)
+  const safeDisallowValues = chain(disallowValues)
     .castArray()
-    .filter(_.isNumber)
+    .filter(isNumber)
     .value()
 
-  const safeAllowDecimal = _.isBoolean(allowDecimal) ? allowDecimal : true
+  const safeAllowDecimal = isBoolean(allowDecimal) ? allowDecimal : true
 
   // Set up an integer value
   const safeIntegerValue = Math.round(safeNumberValue)
@@ -310,7 +323,7 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   // Check the value isn't disallowed
   // - use integer value if decimals are not allowed
   if (
-    _.includes(
+    includes(
       safeDisallowValues,
       safeAllowDecimal ? safeNumberValue : safeIntegerValue
     )
@@ -323,16 +336,16 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
     unit: safeUnit,
   }
 
-  const safeUpperLimit: false | Required<Limit> = _.isNumber(upperLimit)
+  const safeUpperLimit: false | Required<Limit> = isNumber(upperLimit)
     ? { limit: upperLimit, inclusive: true, adjustBy: 1 }
     : isLimit(upperLimit)
     ? {
         limit: upperLimit.limit,
-        inclusive: _.isBoolean(upperLimit.inclusive)
+        inclusive: isBoolean(upperLimit.inclusive)
           ? upperLimit.inclusive
           : true,
         adjustBy:
-          _.isNumber(upperLimit.adjustBy) && upperLimit.adjustBy !== 0
+          isNumber(upperLimit.adjustBy) && upperLimit.adjustBy !== 0
             ? upperLimit.adjustBy
             : 1,
       }
@@ -351,16 +364,16 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
     }
   }
 
-  const safeLowerLimit: false | Required<Limit> = _.isNumber(lowerLimit)
+  const safeLowerLimit: false | Required<Limit> = isNumber(lowerLimit)
     ? { limit: lowerLimit, inclusive: true, adjustBy: 1 }
     : isLimit(lowerLimit)
     ? {
         limit: lowerLimit.limit,
-        inclusive: _.isBoolean(lowerLimit.inclusive)
+        inclusive: isBoolean(lowerLimit.inclusive)
           ? lowerLimit.inclusive
           : true,
         adjustBy:
-          _.isNumber(lowerLimit.adjustBy) && lowerLimit.adjustBy !== 0
+          isNumber(lowerLimit.adjustBy) && lowerLimit.adjustBy !== 0
             ? lowerLimit.adjustBy
             : 1,
       }
@@ -405,7 +418,7 @@ export const normaliseAlphaValue: NormaliseAlphaValueFunction = (
   const safeValue = toStringValue(value)
   const safeDefaultValue = toStringValue(defaultValue)
 
-  if (_.isUndefined(safeValue)) {
+  if (isUndefined(safeValue)) {
     return safeDefaultValue
   }
 

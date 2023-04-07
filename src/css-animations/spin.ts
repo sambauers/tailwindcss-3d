@@ -1,6 +1,13 @@
 import type { CSSAnimation } from '@/css-animations'
 import type { PluginUtils } from 'tailwindcss/types/config'
-import _ from 'lodash'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import isPlainObject from 'lodash/isPlainObject'
+import every from 'lodash/every'
+import keys from 'lodash/keys'
+import values from 'lodash/values'
+import mapValues from 'lodash/mapValues'
+import { chain } from 'lodash'
 import { generateGuard } from '@/utils/generate-guard'
 import { normaliseNumberValue, normaliseTimeValue } from '@/utils/css-value'
 import defaultTheme from 'tailwindcss/defaultTheme'
@@ -18,38 +25,38 @@ type Values = Record<string, Value>
 
 class Spin implements CSSAnimation {
   private isProcessableValue = generateGuard<ProcessableValue>(
-    _.isString,
-    _.isUndefined
+    isString,
+    isUndefined
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), this.isProcessableValue),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), this.isProcessableValue),
   ])
 
   private isValues = generateGuard<Values>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), _.isString),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), isString),
   ])
 
   private normaliseValues = (values: unknown): Values =>
     this.isProcessableValues(values)
-      ? _.chain(values)
+      ? chain(values)
           .mapKeys(
             (_duration, modifier) => normaliseNumberValue(modifier) ?? ''
           )
           .mapValues((duration) => normaliseTimeValue(duration))
           .pickBy(
             (duration, modifier): duration is Value =>
-              _.isString(modifier) && modifier !== '' && _.isString(duration)
+              isString(modifier) && modifier !== '' && isString(duration)
           )
           .value()
       : {}
 
   public defaultTheme = this.normaliseValues(
-    _.mapValues(defaultTheme.spacing, (_spacing, modifier) => `${modifier}s`)
+    mapValues(defaultTheme.spacing, (_spacing, modifier) => `${modifier}s`)
   )
 
   private xyKeyframes = () => {
@@ -58,7 +65,7 @@ class Spin implements CSSAnimation {
       sign: string
     }
 
-    return _.chain({ '1': '' })
+    return chain({ '1': '' })
       .transform(axesModifier(['x', 'y']), {})
       .transform(nameModifier('spin'), {})
       .transform(signModifier(), {})
@@ -86,7 +93,7 @@ class Spin implements CSSAnimation {
       sign: string
     }
 
-    return _.chain({ '1': '' })
+    return chain({ '1': '' })
       .transform(axesModifier('z'), {})
       .transform(nameModifier('spin'), {})
       .transform(signModifier(), {})
@@ -114,7 +121,7 @@ class Spin implements CSSAnimation {
       sign: string
     }
 
-    return _.chain(values)
+    return chain(values)
       .transform(axesModifier(), {})
       .transform(nameModifier('spin'), {})
       .transform(signModifier(), {})

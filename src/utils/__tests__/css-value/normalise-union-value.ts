@@ -48,6 +48,11 @@ describe('utilities', () => {
           'baz'
         )
       })
+
+      it('allows undefined allowed values', () => {
+        expect(normaliseUnionValue('baz', 'foo')).toBe('foo')
+        expect(normaliseUnionValue('foo', 'foo')).toBe('foo')
+      })
     })
   })
 })

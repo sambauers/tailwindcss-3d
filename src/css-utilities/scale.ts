@@ -3,7 +3,13 @@ import type { LocalPluginAPI } from '@/common'
 import type { Dimension } from '@/utils/dimension'
 import type { UnsafeCSSValue } from '@/utils/css-value'
 import { generateGuard } from '@/utils/generate-guard'
-import _ from 'lodash'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import isPlainObject from 'lodash/isPlainObject'
+import every from 'lodash/every'
+import keys from 'lodash/keys'
+import values from 'lodash/values'
+import { chain } from 'lodash'
 import { normaliseNumberPercentageValue } from '@/utils/css-value'
 import { normaliseDimension } from '@/utils/dimension'
 
@@ -21,31 +27,31 @@ interface NormaliseFunctionValuesOptions {
 
 class Scale implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
-    [_.isString],
-    [_.isUndefined]
+    [isString],
+    [isUndefined]
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), this.isProcessableValue),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), this.isProcessableValue),
   ])
 
   private isValues = generateGuard<Values>([
-    _.isPlainObject,
-    (maybe) => _.every(_.keys(maybe), _.isString),
-    (maybe) => _.every(_.values(maybe), _.isString),
+    isPlainObject,
+    (maybe) => every(keys(maybe), isString),
+    (maybe) => every(values(maybe), isString),
   ])
 
   private normaliseValues = (values: unknown): Values =>
     this.isProcessableValues(values)
-      ? _.chain(values)
+      ? chain(values)
           .mapValues((length) =>
             normaliseNumberPercentageValue(length, '1', { lowerLimit: 0 })
           )
           .pickBy(
             (length, modifier): length is Value =>
-              _.isString(modifier) && modifier !== '' && _.isString(length)
+              isString(modifier) && modifier !== '' && isString(length)
           )
           .value()
       : {}

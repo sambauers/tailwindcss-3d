@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import { chain } from 'lodash'
 import { addDurationWithGravity } from '../../lodash-transformers'
 
 const INPUT_WITH_VALUE = {
@@ -17,7 +17,7 @@ describe('utilities', () => {
   describe('lodash-transformers', () => {
     describe('addDurationWithGravity()', () => {
       it('transforms an object', () => {
-        const outputObject = _.chain(INPUT_WITH_VALUE)
+        const outputObject = chain(INPUT_WITH_VALUE)
           .transform(addDurationWithGravity(), {})
           .value()
 
@@ -29,7 +29,7 @@ describe('utilities', () => {
       })
 
       it('merges existing values from previous transformations', () => {
-        const outputObject = _.chain(INPUT_WITH_OBJECT)
+        const outputObject = chain(INPUT_WITH_OBJECT)
           .transform(addDurationWithGravity(), {})
           .value()
 
