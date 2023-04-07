@@ -17,7 +17,7 @@ jobs:
       if: 
       uses: pnpm/action-setup@v2
       with:
-        version: 8.1.0
+        version: 8.1.1
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
