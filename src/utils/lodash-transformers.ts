@@ -12,9 +12,7 @@ export const axesModifier = <T extends RecordAny>(
   silentModifier?: string
 ) => {
   const safeAxes = isUndefined(axes) ? ['x', 'y', 'z'] : flatten([axes])
-  const safeSilentModifier = isUndefined(silentModifier)
-    ? '1'
-    : silentModifier
+  const safeSilentModifier = isUndefined(silentModifier) ? '1' : silentModifier
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (result: T, value: any, modifier: string) => {

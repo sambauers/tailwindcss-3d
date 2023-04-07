@@ -203,8 +203,7 @@ const isLimit = generateGuard<Limit>([
   (maybe) => isNumber(get(maybe, 'limit')),
   (maybe) =>
     has(maybe, 'inclusive') ? isBoolean(get(maybe, 'inclusive')) : true,
-  (maybe) =>
-    has(maybe, 'adjustBy') ? isNumber(get(maybe, 'adjustBy')) : true,
+  (maybe) => (has(maybe, 'adjustBy') ? isNumber(get(maybe, 'adjustBy')) : true),
 ])
 
 // Not a type guard
