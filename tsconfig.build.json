@@ -1,7 +1,6 @@
 {
   "extends": "./tsconfig.common.json",
   "exclude": [
-    "./**/__mocks__/*",
     "./**/__tests__/*"
   ]
 }
