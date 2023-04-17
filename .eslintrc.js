@@ -1,6 +1,6 @@
 // @ts-check
 
-/** @type {import('eslint').Linter.Config} */
+/** @type {import('eslint').Linter} */
 const eslintConfig = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -14,6 +14,7 @@ const eslintConfig = {
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
+        varsIgnorePattern: '^_',
         argsIgnorePattern: '^_',
         destructuredArrayIgnorePattern: '^_',
       },
