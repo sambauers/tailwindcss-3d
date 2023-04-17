@@ -233,7 +233,7 @@ type NormaliseUnitValueFunction = (
   value: UnsafeCSSValue,
   defaultValue?: UnsafeCSSValue,
   options?: NormaliseUnitValueOptions
-) => string | undefined
+) => string
 
 export const normaliseUnitValue: NormaliseUnitValueFunction = (
   value,
