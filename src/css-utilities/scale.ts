@@ -1,7 +1,7 @@
 import type { CSSUtility } from '@/css-utilities'
-import type { LocalPluginAPI } from '@/common'
 import type { Dimension } from '@/utils/dimension'
 import type { UnsafeCSSValue } from '@/utils/css-value'
+import { Base } from '@/css-utilities/base'
 import { generateGuard } from '@/utils/generate-guard'
 import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
@@ -12,20 +12,25 @@ import values from 'lodash/values'
 import { chain } from 'lodash'
 import { normaliseNumberPercentageValue } from '@/utils/css-value'
 import { normaliseDimension } from '@/utils/dimension'
+import { Transform } from '@/css-utilities/transform'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-interface NormaliseFunctionValuesOptions {
+export interface NormaliseFunctionValuesOptions {
   dimension?: Dimension
   scaleX?: UnsafeCSSValue
   scaleY?: UnsafeCSSValue
   scaleZ?: UnsafeCSSValue
 }
 
-class Scale implements CSSUtility {
+export interface ScaleDeclarations {
+  scale: string
+}
+
+export class Scale extends Base implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     [isString],
     [isUndefined]
@@ -35,12 +40,6 @@ class Scale implements CSSUtility {
     isPlainObject,
     (maybe) => every(keys(maybe), isString),
     (maybe) => every(values(maybe), this.isProcessableValue),
-  ])
-
-  private isValues = generateGuard<Values>([
-    isPlainObject,
-    (maybe) => every(keys(maybe), isString),
-    (maybe) => every(values(maybe), isString),
   ])
 
   private normaliseValues = (values: unknown): Values =>
@@ -56,7 +55,7 @@ class Scale implements CSSUtility {
           .value()
       : {}
 
-  private defaultFunctionValues: Required<
+  static defaultFunctionValues: Required<
     Omit<NormaliseFunctionValuesOptions, 'dimension'>
   > = {
     scaleX: 'var(--tw-scale-x)',
@@ -64,7 +63,7 @@ class Scale implements CSSUtility {
     scaleZ: 'var(--tw-scale-z)',
   }
 
-  public normaliseFunctionValues = ({
+  static normaliseFunctionValues = ({
     dimension,
     scaleX,
     scaleY,
@@ -73,12 +72,12 @@ class Scale implements CSSUtility {
     const safeValues = [
       normaliseNumberPercentageValue(
         scaleX,
-        this.defaultFunctionValues.scaleX,
+        Scale.defaultFunctionValues.scaleX,
         { lowerLimit: 0 }
       ),
       normaliseNumberPercentageValue(
         scaleY,
-        this.defaultFunctionValues.scaleY,
+        Scale.defaultFunctionValues.scaleY,
         { lowerLimit: 0 }
       ),
     ]
@@ -87,7 +86,7 @@ class Scale implements CSSUtility {
       safeValues.push(
         normaliseNumberPercentageValue(
           scaleZ,
-          this.defaultFunctionValues.scaleZ,
+          Scale.defaultFunctionValues.scaleZ,
           { lowerLimit: 0 }
         )
       )
@@ -96,39 +95,49 @@ class Scale implements CSSUtility {
     return safeValues.join(' ')
   }
 
-  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
-    const functionValues = this.normaliseFunctionValues()
-    const values = this.normaliseValues(theme('scale'))
+  static declarations = (
+    values: NormaliseFunctionValuesOptions = {}
+  ): ScaleDeclarations => ({
+    scale: Scale.normaliseFunctionValues(values),
+  })
 
-    matchUtilities(
+  static legacyDeclarations = () => Transform.legacyDeclarations()
+
+  public utilities = () => {
+    const values = this.normaliseValues(this.api.theme('scale'))
+    const cssDeclarations = this.legacy
+      ? Scale.legacyDeclarations()
+      : Scale.declarations()
+
+    this.api.matchUtilities(
       {
         scale: (value) => ({
           '@defaults transform': {},
           '--tw-scale-x': value,
           '--tw-scale-y': value,
-          scale: functionValues,
+          ...cssDeclarations,
         }),
         scale3d: (value) => ({
           '@defaults transform': {},
           '--tw-scale-x': value,
           '--tw-scale-y': value,
           '--tw-scale-z': value,
-          scale: functionValues,
+          ...cssDeclarations,
         }),
         'scale-x': (value) => ({
           '@defaults transform': {},
           '--tw-scale-x': value,
-          scale: functionValues,
+          ...cssDeclarations,
         }),
         'scale-y': (value) => ({
           '@defaults transform': {},
           '--tw-scale-y': value,
-          scale: functionValues,
+          ...cssDeclarations,
         }),
         'scale-z': (value) => ({
           '@defaults transform': {},
           '--tw-scale-z': value,
-          scale: functionValues,
+          ...cssDeclarations,
         }),
       },
       {
@@ -138,5 +147,3 @@ class Scale implements CSSUtility {
     )
   }
 }
-
-export const scale = new Scale()

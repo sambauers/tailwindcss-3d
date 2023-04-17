@@ -1,5 +1,6 @@
 import type { CSSAnimation } from '@/css-animations'
 import type { PluginUtils } from 'tailwindcss/types/config'
+import { Base } from '@/css-animations/base'
 import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
 import isPlainObject from 'lodash/isPlainObject'
@@ -11,7 +12,7 @@ import { chain } from 'lodash'
 import { generateGuard } from '@/utils/generate-guard'
 import { normaliseNumberValue, normaliseTimeValue } from '@/utils/css-value'
 import defaultTheme from 'tailwindcss/defaultTheme'
-import { transform } from '@/css-utilities/transform'
+import { Transform } from '@/css-utilities/transform'
 import {
   axesModifier,
   nameModifier,
@@ -23,7 +24,7 @@ type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-class Spin implements CSSAnimation {
+export class Spin extends Base implements CSSAnimation {
   private isProcessableValue = generateGuard<ProcessableValue>(
     isString,
     isUndefined
@@ -35,18 +36,10 @@ class Spin implements CSSAnimation {
     (maybe) => every(values(maybe), this.isProcessableValue),
   ])
 
-  private isValues = generateGuard<Values>([
-    isPlainObject,
-    (maybe) => every(keys(maybe), isString),
-    (maybe) => every(values(maybe), isString),
-  ])
-
   private normaliseValues = (values: unknown): Values =>
     this.isProcessableValues(values)
       ? chain(values)
-          .mapKeys(
-            (_duration, modifier) => normaliseNumberValue(modifier) ?? ''
-          )
+          .mapKeys((_duration, modifier) => normaliseNumberValue(modifier))
           .mapValues((duration) => normaliseTimeValue(duration))
           .pickBy(
             (duration, modifier): duration is Value =>
@@ -65,26 +58,34 @@ class Spin implements CSSAnimation {
       sign: string
     }
 
+    interface TransformDeclarations {
+      '--webkit-transform': string
+      transform?: string
+    }
+
+    const rotateDeclarations = (
+      axis: string,
+      value: string
+    ): TransformDeclarations => {
+      const rotateProperty = `rotate${axis.toUpperCase()}`
+      const transformValue = this.legacy
+        ? Transform.normaliseLegacyFunctionValues({ [rotateProperty]: value })
+        : Transform.normaliseFunctionValues({ [rotateProperty]: value })
+
+      return {
+        '--webkit-transform': transformValue,
+        transform: transformValue,
+      }
+    }
+
     return chain({ '1': '' })
       .transform(axesModifier(['x', 'y']), {})
       .transform(nameModifier('spin'), {})
       .transform(signModifier(), {})
-      .mapValues(({ axis, sign }: SpinXYKeyframe) => {
-        const rotateProperty = `rotate${axis.toUpperCase()}`
-
-        return {
-          from: {
-            transform: transform.normaliseFunctionValues({
-              [rotateProperty]: '0deg',
-            }),
-          },
-          to: {
-            transform: transform.normaliseFunctionValues({
-              [rotateProperty]: `${sign}360deg`,
-            }),
-          },
-        }
-      })
+      .mapValues(({ axis, sign }: SpinXYKeyframe) => ({
+        from: { ...rotateDeclarations(axis, '0deg') },
+        to: { ...rotateDeclarations(axis, `${sign}360deg`) },
+      }))
       .value()
   }
 
@@ -93,16 +94,40 @@ class Spin implements CSSAnimation {
       sign: string
     }
 
+    interface RotateDeclarations {
+      rotate: string
+    }
+
+    interface TransformDeclarations {
+      '--webkit-transform': string
+      transform?: string
+    }
+
+    const rotateDeclarations = (
+      value: string
+    ): RotateDeclarations | TransformDeclarations => {
+      if (!this.legacy) {
+        return { rotate: value }
+      }
+
+      const transformValue = Transform.normaliseLegacyFunctionValues({
+        rotateZ: value,
+      })
+
+      return {
+        '--webkit-transform': transformValue,
+        transform: transformValue,
+      }
+    }
+
     return chain({ '1': '' })
       .transform(axesModifier('z'), {})
       .transform(nameModifier('spin'), {})
       .transform(signModifier(), {})
-      .mapValues(({ sign }: SpinZKeyframe) => {
-        return {
-          from: { rotate: '0deg' },
-          to: { rotate: `${sign}360deg` },
-        }
-      })
+      .mapValues(({ sign }: SpinZKeyframe) => ({
+        from: { ...rotateDeclarations('0deg') },
+        to: { ...rotateDeclarations(`${sign}360deg`) },
+      }))
       .value()
   }
 
@@ -132,5 +157,3 @@ class Spin implements CSSAnimation {
       .value()
   }
 }
-
-export const spin = new Spin()

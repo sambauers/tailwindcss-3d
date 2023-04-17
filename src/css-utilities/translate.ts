@@ -1,7 +1,11 @@
-import type { CSSUtility } from '@/css-utilities'
-import type { LocalPluginAPI } from '@/common'
-import type { Dimension } from '@/utils/dimension'
-import type { UnsafeCSSValue } from '@/utils/css-value'
+import { type CSSUtility } from '@/css-utilities'
+import { type Dimension, normaliseDimension } from '@/utils/dimension'
+import {
+  type UnsafeCSSValue,
+  normaliseLengthPercentageValue,
+  normaliseLengthValue,
+} from '@/utils/css-value'
+import { Base } from '@/css-utilities/base'
 import { generateGuard } from '@/utils/generate-guard'
 import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
@@ -11,25 +15,25 @@ import keys from 'lodash/keys'
 import values from 'lodash/values'
 import { chain } from 'lodash'
 import pickBy from 'lodash/pickBy'
-import {
-  normaliseLengthPercentageValue,
-  normaliseLengthValue,
-} from '@/utils/css-value'
-import { normaliseDimension } from '@/utils/dimension'
+import { Transform } from '@/css-utilities/transform'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-interface NormaliseFunctionValuesOptions {
+export interface NormaliseFunctionValuesOptions {
   dimension?: Dimension
   translateX?: UnsafeCSSValue
   translateY?: UnsafeCSSValue
   translateZ?: UnsafeCSSValue
 }
 
-class Translate implements CSSUtility {
+export interface TranslateDeclarations {
+  translate: string
+}
+
+export class Translate extends Base implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     isString,
     isUndefined
@@ -39,12 +43,6 @@ class Translate implements CSSUtility {
     isPlainObject,
     (maybe) => every(keys(maybe), isString),
     (maybe) => every(values(maybe), this.isProcessableValue),
-  ])
-
-  private isValues = generateGuard<Values>([
-    isPlainObject,
-    (maybe) => every(keys(maybe), isString),
-    (maybe) => every(values(maybe), isString),
   ])
 
   private normaliseValues = (values: unknown): Values =>
@@ -58,7 +56,7 @@ class Translate implements CSSUtility {
           .value()
       : {}
 
-  private defaultFunctionValues: Required<
+  static defaultFunctionValues: Required<
     Omit<NormaliseFunctionValuesOptions, 'dimension'>
   > = {
     translateX: 'var(--tw-translate-x)',
@@ -66,7 +64,7 @@ class Translate implements CSSUtility {
     translateZ: 'var(--tw-translate-z)',
   }
 
-  public normaliseFunctionValues = ({
+  static normaliseFunctionValues = ({
     dimension,
     translateX,
     translateY,
@@ -75,38 +73,51 @@ class Translate implements CSSUtility {
     const safeValues = [
       normaliseLengthPercentageValue(
         translateX,
-        this.defaultFunctionValues.translateX
+        Translate.defaultFunctionValues.translateX
       ),
       normaliseLengthPercentageValue(
         translateY,
-        this.defaultFunctionValues.translateY
+        Translate.defaultFunctionValues.translateY
       ),
     ]
 
     if (normaliseDimension(dimension) === '3d') {
       safeValues.push(
-        normaliseLengthValue(translateZ, this.defaultFunctionValues.translateZ)
+        normaliseLengthValue(
+          translateZ,
+          Translate.defaultFunctionValues.translateZ
+        )
       )
     }
 
     return safeValues.join(' ')
   }
 
-  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
-    const functionValues = this.normaliseFunctionValues()
-    const values = this.normaliseValues(theme('translate'))
+  static declarations = (
+    values: NormaliseFunctionValuesOptions = {}
+  ): TranslateDeclarations => ({
+    translate: Translate.normaliseFunctionValues(values),
+  })
 
-    matchUtilities(
+  static legacyDeclarations = () => Transform.legacyDeclarations()
+
+  public utilities = () => {
+    const values = this.normaliseValues(this.api.theme('translate'))
+    const cssDeclarations = this.legacy
+      ? Translate.legacyDeclarations()
+      : Translate.declarations()
+
+    this.api.matchUtilities(
       {
         'translate-x': (value) => ({
           '@defaults transform': {},
           '--tw-translate-x': value,
-          translate: functionValues,
+          ...cssDeclarations,
         }),
         'translate-y': (value) => ({
           '@defaults transform': {},
           '--tw-translate-y': value,
-          translate: functionValues,
+          ...cssDeclarations,
         }),
       },
       {
@@ -115,12 +126,12 @@ class Translate implements CSSUtility {
       }
     )
 
-    matchUtilities(
+    this.api.matchUtilities(
       {
         'translate-z': (value) => ({
           '@defaults transform': {},
           '--tw-translate-z': value,
-          translate: functionValues,
+          ...cssDeclarations,
         }),
       },
       {
@@ -130,5 +141,3 @@ class Translate implements CSSUtility {
     )
   }
 }
-
-export const translate = new Translate()

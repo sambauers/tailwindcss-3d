@@ -1,5 +1,6 @@
 import type { CSSAnimation } from '@/css-animations'
 import type { PluginUtils } from 'tailwindcss/types/config'
+import { Base } from '@/css-animations/base'
 import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
 import isArray from 'lodash/isArray'
@@ -21,7 +22,8 @@ import {
   nameModifier,
   signModifier,
 } from '@/utils/lodash-transformers'
-import { translate } from '@/css-utilities/translate'
+import { Translate } from '@/css-utilities/translate'
+import { Transform } from '@/css-utilities/transform'
 
 type ProcessablePrimitive = string | undefined
 type ProcessableValue = [ProcessablePrimitive, ProcessablePrimitive]
@@ -29,7 +31,7 @@ type ProcessableValues = Record<string, ProcessableValue>
 type Value = [string, string]
 type Values = Record<string, Value>
 
-class Bounce implements CSSAnimation {
+export class Bounce extends Base implements CSSAnimation {
   private isProcessablePrimitive = generateGuard<ProcessablePrimitive>(
     isString,
     isUndefined
@@ -47,22 +49,10 @@ class Bounce implements CSSAnimation {
     (maybe) => every(values(maybe), this.isProcessableValue),
   ])
 
-  private isValue = generateGuard<Value>([
-    isArray,
-    (maybe) => maybe.length === 2,
-    (maybe) => every(values(maybe), isString),
-  ])
-
-  private isValues = generateGuard<Values>([
-    isPlainObject,
-    (maybe) => every(keys(maybe), isString),
-    (maybe) => every(values(maybe), this.isValue),
-  ])
-
-  private normaliseValues = (values: unknown): Values => {
-    return this.isProcessableValues(values)
+  private normaliseValues = (values: unknown): Values =>
+    this.isProcessableValues(values)
       ? chain(values)
-          .mapKeys((_value, modifier) => normaliseNumberValue(modifier) ?? '')
+          .mapKeys((_value, modifier) => normaliseNumberValue(modifier))
           .mapValues(
             ([duration, distance]): ProcessableValue => [
               normaliseTimeValue(duration),
@@ -74,13 +64,13 @@ class Bounce implements CSSAnimation {
             return (
               isString(modifier) &&
               modifier !== '' &&
+              modifier !== 'px' &&
               isString(duration) &&
               isString(distance)
             )
           })
           .value()
       : {}
-  }
 
   public defaultTheme = this.normaliseValues(
     chain(defaultTheme.spacing)
@@ -95,38 +85,59 @@ class Bounce implements CSSAnimation {
   public keyframes = ({ theme }: PluginUtils) => {
     const values = this.normaliseValues(theme('bounce'))
 
-    if (!this.isValues(values)) {
-      return {}
-    }
-
     interface Keyframe {
       value: Value
       axis: string
       sign: string
     }
 
+    interface TranslateDeclarations {
+      translate: string
+    }
+
+    interface TransformDeclarations {
+      '--webkit-transform': string
+      transform?: string
+    }
+
+    const translateDeclarations = (
+      axis: string,
+      value: string
+    ): TranslateDeclarations | TransformDeclarations => {
+      const translateProperty = `translate${axis.toUpperCase()}`
+
+      if (!this.legacy) {
+        return {
+          translate: Translate.normaliseFunctionValues({
+            [translateProperty]: value,
+          }),
+        }
+      }
+
+      const transformValue = Transform.normaliseLegacyFunctionValues({
+        [translateProperty]: value,
+      })
+
+      return {
+        '--webkit-transform': transformValue,
+        transform: transformValue,
+      }
+    }
+
     return chain(values)
       .transform(axesModifier(), {})
       .transform(nameModifier('bounce'), {})
       .transform(signModifier(), {})
-      .mapValues(({ value: [_duration, distance], axis, sign }: Keyframe) => {
-        const translateProperty = `translate${axis.toUpperCase()}`
-
-        return {
-          '0%, 100%': {
-            translate: translate.normaliseFunctionValues({
-              [translateProperty]: `${sign}${distance}`,
-            }),
-            animationTimingFunction: 'cubic-bezier(0.5, 0, 1, 1)',
-          },
-          '50%': {
-            translate: translate.normaliseFunctionValues({
-              [translateProperty]: '0',
-            }),
-            animationTimingFunction: 'cubic-bezier(0, 0, 0.5, 1)',
-          },
-        }
-      })
+      .mapValues(({ value: [_duration, distance], axis, sign }: Keyframe) => ({
+        '0%, 100%': {
+          ...translateDeclarations(axis, `${sign}${distance}`),
+          animationTimingFunction: 'cubic-bezier(0.5, 0, 1, 1)',
+        },
+        '50%': {
+          ...translateDeclarations(axis, '0'),
+          animationTimingFunction: 'cubic-bezier(0, 0, 0.5, 1)',
+        },
+      }))
       .value()
   }
 
@@ -148,5 +159,3 @@ class Bounce implements CSSAnimation {
       .value()
   }
 }
-
-export const bounce = new Bounce()

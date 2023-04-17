@@ -1,25 +1,26 @@
 import plugin from 'tailwindcss/plugin'
+import { ensureBoolean } from '@/utils/ensure'
 import type { LocalPluginAPI } from '@/common'
 
 // css-utilities
-import { perspective } from './css-utilities/perspective'
-import { transformStyle } from './css-utilities/transform-style'
-import { translate } from './css-utilities/translate'
-import { transform } from './css-utilities/transform'
-import { scale } from './css-utilities/scale'
-import { backface } from './css-utilities/backface'
-import { perspectiveOrigin } from './css-utilities/perspective-origin'
-import { transformBox } from './css-utilities/transform-box'
-import { transformCore } from './css-utilities/transform-core'
+import { Perspective } from './css-utilities/perspective'
+import { TransformStyle } from './css-utilities/transform-style'
+import { Translate } from './css-utilities/translate'
+import { Transform } from './css-utilities/transform'
+import { Scale } from './css-utilities/scale'
+import { Backface } from './css-utilities/backface'
+import { PerspectiveOrigin } from './css-utilities/perspective-origin'
+import { TransformBox } from './css-utilities/transform-box'
+import { TransformCore } from './css-utilities/transform-core'
 
 // css-animations
-import { spin } from './css-animations/spin'
-import { bounce } from './css-animations/bounce'
-import { bounceAndSpin } from './css-animations/bounce-and-spin'
+import { Spin } from './css-animations/spin'
+import { Bounce } from './css-animations/bounce'
+import { BounceAndSpin } from './css-animations/bounce-and-spin'
 
 // Default CSS variables, modelled from core
 const DEFAULT_VARIABLE_VALUES: Record<string, string> = {
-  '--tw-perspective:': 'none',
+  '--tw-perspective': 'none',
   '--tw-translate-x': '0',
   '--tw-translate-y': '0',
   '--tw-translate-z': '0',
@@ -33,65 +34,96 @@ const DEFAULT_VARIABLE_VALUES: Record<string, string> = {
   '--tw-scale-z': '1',
 }
 
-const tailwindcss3d = plugin(
-  (api) => {
-    const localAPI = api as LocalPluginAPI
+interface PluginOptions {
+  legacy?: boolean
+}
 
-    // Replace the transform core plugin defaults and add some new ones
-    localAPI.addDefaults('transform', DEFAULT_VARIABLE_VALUES)
+const optionDefaults: Required<PluginOptions> = {
+  legacy: false,
+}
 
-    // New CSS Utilities
-    perspective.utilities(localAPI)
-    transformStyle.utilities(localAPI)
-    translate.utilities(localAPI)
-    transform.utilities(localAPI)
-    scale.utilities(localAPI)
-    backface.utilities(localAPI)
-    perspectiveOrigin.utilities(localAPI)
-    transformBox.utilities(localAPI)
-    transformCore.utilities(localAPI)
+const tailwindcss3d = plugin.withOptions(
+  ({ legacy = optionDefaults.legacy }: PluginOptions = optionDefaults) => {
+    const safeLegacy = ensureBoolean(legacy, optionDefaults.legacy)
+
+    return (api) => {
+      const localAPI = api as LocalPluginAPI
+
+      // Replace the transform core plugin defaults and add some new ones
+      localAPI.addDefaults('transform', DEFAULT_VARIABLE_VALUES)
+
+      const perspective = new Perspective(localAPI, safeLegacy)
+      const transformStyle = new TransformStyle(localAPI)
+      const translate = new Translate(localAPI, safeLegacy)
+      const transform = new Transform(localAPI, safeLegacy)
+      const scale = new Scale(localAPI, safeLegacy)
+      const backface = new Backface(localAPI)
+      const perspectiveOrigin = new PerspectiveOrigin(localAPI)
+      const transformBox = new TransformBox(localAPI)
+      const transformCore = new TransformCore(localAPI, safeLegacy)
+
+      // New CSS Utilities
+      perspective.utilities()
+      transformStyle.utilities()
+      translate.utilities()
+      transform.utilities()
+      scale.utilities()
+      backface.utilities()
+      perspectiveOrigin.utilities()
+      transformBox.utilities()
+      transformCore.utilities()
+    }
   },
-  {
-    theme: {
-      // Set new theme defaults
-      perspective: perspective.defaultTheme,
-      transformStyle: transformStyle.defaultTheme,
-      backface: backface.defaultTheme,
-      perspectiveOrigin: perspectiveOrigin.defaultTheme,
-      transformBox: transformBox.defaultTheme,
-      spin: spin.defaultTheme,
-      bounce: bounce.defaultTheme,
-      bounceAndSpin: bounceAndSpin.defaultTheme,
+  ({ legacy = optionDefaults.legacy }: PluginOptions = optionDefaults) => {
+    const safeLegacy = ensureBoolean(legacy, optionDefaults.legacy)
 
-      extend: {
-        // Update the core transform transition property
-        transitionProperty: {
-          transform:
-            'perspective, translate, scale, transform, perspective, rotate',
+    const spin = new Spin(safeLegacy)
+    const bounce = new Bounce(safeLegacy)
+    const bounceAndSpin = new BounceAndSpin(safeLegacy)
+
+    return {
+      theme: {
+        // Set new theme defaults
+        perspective: Perspective.defaultTheme,
+        transformStyle: TransformStyle.defaultTheme,
+        backface: Backface.defaultTheme,
+        perspectiveOrigin: PerspectiveOrigin.defaultTheme,
+        transformBox: TransformBox.defaultTheme,
+        spin: spin.defaultTheme,
+        bounce: bounce.defaultTheme,
+        bounceAndSpin: bounceAndSpin.defaultTheme,
+
+        extend: {
+          // Update the core transform transition property
+          transitionProperty: {
+            transform: safeLegacy
+              ? 'transform'
+              : 'perspective, translate, scale, transform, perspective, rotate',
+          },
+
+          // New CSS keyframes and animations
+          keyframes: (pluginUtilities) => ({
+            ...spin.keyframes(),
+            ...bounce.keyframes(pluginUtilities),
+            ...bounceAndSpin.keyframes(pluginUtilities),
+          }),
+          animation: (pluginUtilities) => ({
+            ...spin.animation(pluginUtilities),
+            ...bounce.animation(pluginUtilities),
+            ...bounceAndSpin.animation(pluginUtilities),
+          }),
         },
-
-        // New CSS keyframes and animations
-        keyframes: (pluginUtilities) => ({
-          ...spin.keyframes(),
-          ...bounce.keyframes(pluginUtilities),
-          ...bounceAndSpin.keyframes(pluginUtilities),
-        }),
-        animation: (pluginUtilities) => ({
-          ...spin.animation(pluginUtilities),
-          ...bounce.animation(pluginUtilities),
-          ...bounceAndSpin.animation(pluginUtilities),
-        }),
       },
-    },
 
-    // Disable some core plugins which are superceded by this plugin
-    corePlugins: {
-      rotate: false,
-      scale: false,
-      skew: false,
-      transform: false,
-      translate: false,
-    },
+      // Disable some core plugins which are superceded by this plugin
+      corePlugins: {
+        rotate: false,
+        scale: false,
+        skew: false,
+        transform: false,
+        translate: false,
+      },
+    }
   }
 )
 

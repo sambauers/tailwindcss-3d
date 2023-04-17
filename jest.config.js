@@ -34,6 +34,7 @@ const jestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  coveragePathIgnorePatterns: ['<rootDir>/jest'],
 }
 
 module.exports = jestConfig

@@ -1,16 +1,14 @@
 import type { CSSUtility } from '@/css-utilities'
-import type { LocalPluginAPI } from '@/common'
+import { Base } from '@/css-utilities/base'
 import defaultTheme from 'tailwindcss/defaultTheme'
 
-class PerspectiveOrigin implements CSSUtility {
-  public defaultTheme = defaultTheme.transformOrigin
+export class PerspectiveOrigin extends Base implements CSSUtility {
+  static defaultTheme = defaultTheme.transformOrigin
 
-  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
-    matchUtilities(
+  public utilities = () => {
+    this.api.matchUtilities(
       { 'perspective-origin': (value) => ({ 'perspective-origin': value }) },
-      { values: theme('perspectiveOrigin') }
+      { values: this.api.theme('perspectiveOrigin') }
     )
   }
 }
-
-export const perspectiveOrigin = new PerspectiveOrigin()

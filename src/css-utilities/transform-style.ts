@@ -1,18 +1,16 @@
 import type { CSSUtility } from '@/css-utilities'
-import type { LocalPluginAPI } from '@/common'
+import { Base } from '@/css-utilities/base'
 
-class TransformStyle implements CSSUtility {
-  public defaultTheme = {
+export class TransformStyle extends Base implements CSSUtility {
+  static defaultTheme = {
     flat: 'flat',
     '3d': 'preserve-3d',
   }
 
-  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
-    matchUtilities(
+  public utilities = () => {
+    this.api.matchUtilities(
       { 'transform-style': (value) => ({ 'transform-style': value }) },
-      { values: theme('transformStyle') }
+      { values: this.api.theme('transformStyle') }
     )
   }
 }
-
-export const transformStyle = new TransformStyle()

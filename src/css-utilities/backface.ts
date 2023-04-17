@@ -1,15 +1,13 @@
 import type { CSSUtility } from '@/css-utilities'
-import type { LocalPluginAPI } from '@/common'
+import { Base } from '@/css-utilities/base'
 
-class Backface implements CSSUtility {
-  public defaultTheme = { visible: 'visible', hidden: 'hidden' }
+export class Backface extends Base implements CSSUtility {
+  static defaultTheme = { visible: 'visible', hidden: 'hidden' }
 
-  public utilities = ({ matchUtilities, theme }: LocalPluginAPI) => {
-    matchUtilities(
+  public utilities = () => {
+    this.api.matchUtilities(
       { backface: (value) => ({ 'backface-visibility': value }) },
-      { values: theme('backface') }
+      { values: this.api.theme('backface') }
     )
   }
 }
-
-export const backface = new Backface()
