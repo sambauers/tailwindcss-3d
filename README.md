@@ -35,6 +35,8 @@ compatible with some older browsers.
 
 Refer to [this list of CSS features on CanIUse.com](https://caniuse.com/?feats=mdn-css_properties_rotate,mdn-css_properties_scale,mdn-css_properties_translate,mdn-css_properties_perspective,mdn-css_properties_perspective-origin,mdn-css_properties_backface-visibility,mdn-css_properties_transform-box,mdn-css_properties_transform-style,transforms2d,transforms3d)
 
+If you want to support older browsers, you can use `legacy` mode.
+
 ## Installation
 
 Install the plugin using npm or your preferred package manager:
@@ -65,8 +67,23 @@ module.exports = {
 }
 ```
 
-There are no options that you need to define when requiring the plugin. All
-configuration is done via theme configuration in your `tailwind.config.js` file.
+Turn on `legacy` mode to support older browsers like this:
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('tailwindcss-3d')({ legacy: true }),
+    // ...
+  ],
+}
+```
+
+All configuration of utility values is done via theme configuration in your
+`tailwind.config.js` file.
 
 Appropriate theme configuration points are indicated under each utility below.
 
