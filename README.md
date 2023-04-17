@@ -1,4 +1,4 @@
-# TailwindCSS 3D
+# 3D Plugin for Tailwind CSS
 
 [![Test (Jest)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml)
 [![Lint (ESLInt)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml)
@@ -7,8 +7,8 @@ Add 3D transforms to your TailwindCSS project.
 
 ## Description
 
-TailwindCSS 3D is a TailwindCSS plugin that adds additional transform utilities
-and animations which can help you to add three dimensional styling.
+3D Plugin for Tailwind CSS adds additional transform utilities and animations
+which can help you to add three dimensional styling to your interface.
 
 By default TailwindCSS adds transforms in two dimensions ("x" and "y" axis
 only), so scale, rotate, and translate are flat transformations. This plugin
