@@ -1,6 +1,7 @@
-import type { CSSUtility } from '@/css-utilities'
-import { Base } from '@/css-utilities/base'
 import defaultTheme from 'tailwindcss/defaultTheme'
+
+import { type CSSUtility } from '@/css-utilities'
+import { Base } from '@/css-utilities/base'
 
 export class PerspectiveOrigin extends Base implements CSSUtility {
   static defaultTheme = defaultTheme.transformOrigin

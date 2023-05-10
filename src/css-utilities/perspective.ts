@@ -1,15 +1,15 @@
-import { normaliseDimension, type Dimension } from '@/utils/dimension'
-import { type UnsafeCSSValue, normaliseLengthValue } from '@/utils/css-value'
 import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'
 import { Transform } from '@/css-utilities/transform'
+import { type UnsafeCSSValue, normaliseLengthValue } from '@/utils/css-value'
+import { normaliseDimension, type Dimension } from '@/utils/dimension'
 
-export interface NormaliseFunctionValuesOptions {
+interface NormaliseFunctionValuesOptions {
   dimension?: Dimension
   perspective?: UnsafeCSSValue
 }
 
-export interface PerspectiveDeclarations {
+interface PerspectiveDeclarations {
   perspective: string
 }
 

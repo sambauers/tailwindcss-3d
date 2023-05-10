@@ -1,4 +1,4 @@
-import type { PluginAPI } from 'tailwindcss/types/config'
+import { type PluginAPI } from 'tailwindcss/types/config'
 
 declare module '@/common' {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

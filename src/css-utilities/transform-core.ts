@@ -1,8 +1,8 @@
-import type { CSSUtility } from '@/css-utilities'
+import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'
-import { Translate } from '@/css-utilities/translate'
 import { Scale } from '@/css-utilities/scale'
 import { Transform } from '@/css-utilities/transform'
+import { Translate } from '@/css-utilities/translate'
 
 export class TransformCore extends Base implements CSSUtility {
   public utilities = () => {

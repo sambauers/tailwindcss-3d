@@ -1,18 +1,19 @@
-import type { CSSAnimation } from '@/css-animations'
-import type { PluginUtils } from 'tailwindcss/types/config'
-import { Base } from '@/css-animations/base'
+import { chain } from 'lodash'
+import every from 'lodash/every'
+import isPlainObject from 'lodash/isPlainObject'
 import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
-import isPlainObject from 'lodash/isPlainObject'
-import every from 'lodash/every'
 import keys from 'lodash/keys'
-import values from 'lodash/values'
 import mapValues from 'lodash/mapValues'
-import { chain } from 'lodash'
-import { generateGuard } from '@/utils/generate-guard'
-import { normaliseNumberValue, normaliseTimeValue } from '@/utils/css-value'
+import values from 'lodash/values'
 import defaultTheme from 'tailwindcss/defaultTheme'
+import { type PluginUtils } from 'tailwindcss/types/config'
+
+import { type CSSAnimation } from '@/css-animations'
+import { Base } from '@/css-animations/base'
 import { Transform } from '@/css-utilities/transform'
+import { normaliseNumberValue, normaliseTimeValue } from '@/utils/css-value'
+import { generateGuard } from '@/utils/generate-guard'
 import {
   axesModifier,
   nameModifier,

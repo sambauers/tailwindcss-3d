@@ -1,5 +1,3 @@
-import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import {
   readFileSync,
   writeFileSync,
@@ -9,6 +7,8 @@ import {
   rmSync,
   readdirSync,
 } from 'node:fs'
+import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const packagePath = join('..', '..', 'package.json')
 const packageURL = fileURLToPath(new URL(packagePath, import.meta.url))

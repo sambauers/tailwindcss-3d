@@ -1,4 +1,4 @@
-import type { CSSUtility } from '@/css-utilities'
+import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'
 
 export class Backface extends Base implements CSSUtility {

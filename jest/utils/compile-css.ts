@@ -1,8 +1,10 @@
+import { resolve } from 'node:path'
+
 import postcss from 'postcss'
 import tailwindcss from 'tailwindcss'
-import { resolve } from 'node:path'
-import tailwindcss3d from '../../src'
 import { type Config } from 'tailwindcss/types/config'
+
+import tailwindcss3d from '../../src'
 
 type Theme = Config['theme']
 

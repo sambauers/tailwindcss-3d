@@ -1,32 +1,33 @@
-import type { CSSUtility } from '@/css-utilities'
-import type { Dimension } from '@/utils/dimension'
-import type { UnsafeCSSValue } from '@/utils/css-value'
-import { Base } from '@/css-utilities/base'
-import { generateGuard } from '@/utils/generate-guard'
+import { chain } from 'lodash'
+import every from 'lodash/every'
+import isPlainObject from 'lodash/isPlainObject'
 import isString from 'lodash/isString'
 import isUndefined from 'lodash/isUndefined'
-import isPlainObject from 'lodash/isPlainObject'
-import every from 'lodash/every'
 import keys from 'lodash/keys'
 import values from 'lodash/values'
-import { chain } from 'lodash'
+
+import { type CSSUtility } from '@/css-utilities'
+import { Base } from '@/css-utilities/base'
+import { Transform } from '@/css-utilities/transform'
+import { type UnsafeCSSValue } from '@/utils/css-value'
 import { normaliseNumberPercentageValue } from '@/utils/css-value'
 import { normaliseDimension } from '@/utils/dimension'
-import { Transform } from '@/css-utilities/transform'
+import { type Dimension } from '@/utils/dimension'
+import { generateGuard } from '@/utils/generate-guard'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-export interface NormaliseFunctionValuesOptions {
+interface NormaliseFunctionValuesOptions {
   dimension?: Dimension
   scaleX?: UnsafeCSSValue
   scaleY?: UnsafeCSSValue
   scaleZ?: UnsafeCSSValue
 }
 
-export interface ScaleDeclarations {
+interface ScaleDeclarations {
   scale: string
 }
 

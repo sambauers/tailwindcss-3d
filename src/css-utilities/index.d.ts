@@ -1,5 +1,6 @@
-import type { ResolvableTo } from 'tailwindcss/types/config'
-import type { KeyValuePair } from '@/common'
+import { type ResolvableTo } from 'tailwindcss/types/config'
+
+import { type KeyValuePair } from '@/common'
 
 declare module '@/css-utilities' {
   interface CSSUtility {

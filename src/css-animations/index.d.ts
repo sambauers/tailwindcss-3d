@@ -1,5 +1,6 @@
-import type { ResolvableTo, PluginUtils } from 'tailwindcss/types/config'
-import type { KeyValuePair } from '@/common'
+import { type ResolvableTo, type PluginUtils } from 'tailwindcss/types/config'
+
+import { type KeyValuePair } from '@/common'
 
 declare module '@/css-animations' {
   interface CSSAnimation {

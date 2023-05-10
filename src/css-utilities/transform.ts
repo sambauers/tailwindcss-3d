@@ -1,5 +1,13 @@
-import type { CSSUtility } from '@/css-utilities'
-import type { Dimension } from '@/utils/dimension'
+import { chain } from 'lodash'
+import every from 'lodash/every'
+import isPlainObject from 'lodash/isPlainObject'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import keys from 'lodash/keys'
+import values from 'lodash/values'
+
+import { type CSSUtility } from '@/css-utilities'
+import { Base } from '@/css-utilities/base'
 import {
   type UnsafeCSSValue,
   normaliseAngleValue,
@@ -7,15 +15,8 @@ import {
   normaliseNumberPercentageValue,
   normaliseLengthValue,
 } from '@/utils/css-value'
-import { Base } from '@/css-utilities/base'
+import { type Dimension } from '@/utils/dimension'
 import { normaliseDimension } from '@/utils/dimension'
-import isString from 'lodash/isString'
-import isUndefined from 'lodash/isUndefined'
-import isPlainObject from 'lodash/isPlainObject'
-import every from 'lodash/every'
-import keys from 'lodash/keys'
-import values from 'lodash/values'
-import { chain } from 'lodash'
 import { generateGuard } from '@/utils/generate-guard'
 
 type ProcessableValue = string | undefined
@@ -23,7 +24,7 @@ type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-export interface NormaliseFunctionValuesOptions {
+interface NormaliseFunctionValuesOptions {
   dimension?: Dimension
   rotateX?: UnsafeCSSValue
   rotateY?: UnsafeCSSValue
@@ -31,7 +32,7 @@ export interface NormaliseFunctionValuesOptions {
   skewY?: UnsafeCSSValue
 }
 
-export interface NormaliseLegacyFunctionValuesOptions
+interface NormaliseLegacyFunctionValuesOptions
   extends NormaliseFunctionValuesOptions {
   translateX?: UnsafeCSSValue
   translateY?: UnsafeCSSValue
@@ -43,6 +44,7 @@ export interface NormaliseLegacyFunctionValuesOptions
   perspective?: UnsafeCSSValue
 }
 
+// eslint-disable-next-line import/no-unused-modules
 export interface TransformDeclarations {
   '--webkit-transform': string
   transform: string

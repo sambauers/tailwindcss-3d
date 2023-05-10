@@ -1,4 +1,4 @@
-import type { CSSUtility } from '@/css-utilities'
+import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'
 
 export class TransformStyle extends Base implements CSSUtility {

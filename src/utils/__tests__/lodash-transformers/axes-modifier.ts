@@ -1,4 +1,5 @@
 import { chain } from 'lodash'
+
 import { axesModifier } from '../../lodash-transformers'
 
 const INPUT_WITH_VALUE = {

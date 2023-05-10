@@ -1,10 +1,10 @@
-import some from 'lodash/some'
 import castArray from 'lodash/castArray'
 import every from 'lodash/every'
-import over from 'lodash/over'
-import isFunction from 'lodash/isFunction'
-import isBoolean from 'lodash/isBoolean'
 import isArray from 'lodash/isArray'
+import isBoolean from 'lodash/isBoolean'
+import isFunction from 'lodash/isFunction'
+import over from 'lodash/over'
+import some from 'lodash/some'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type GuardTest = (arg: any) => boolean

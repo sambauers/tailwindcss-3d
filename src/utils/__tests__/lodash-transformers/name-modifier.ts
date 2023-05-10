@@ -1,4 +1,5 @@
 import { chain } from 'lodash'
+
 import { nameModifier } from '../../lodash-transformers'
 
 const INPUT_WITH_VALUE = {

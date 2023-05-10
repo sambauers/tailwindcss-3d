@@ -1,29 +1,30 @@
-import type { CSSAnimation } from '@/css-animations'
-import type { PluginUtils } from 'tailwindcss/types/config'
-import { Base } from '@/css-animations/base'
-import isString from 'lodash/isString'
-import isUndefined from 'lodash/isUndefined'
+import { chain } from 'lodash'
+import every from 'lodash/every'
 import isArray from 'lodash/isArray'
 import isPlainObject from 'lodash/isPlainObject'
-import every from 'lodash/every'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
 import keys from 'lodash/keys'
 import values from 'lodash/values'
-import { chain } from 'lodash'
-import { generateGuard } from '@/utils/generate-guard'
+import defaultTheme from 'tailwindcss/defaultTheme'
+import { type PluginUtils } from 'tailwindcss/types/config'
+
+import { type CSSAnimation } from '@/css-animations'
+import { Base } from '@/css-animations/base'
+import { Transform } from '@/css-utilities/transform'
+import { Translate } from '@/css-utilities/translate'
 import {
   normaliseLengthPercentageValue,
   normaliseNumberValue,
   normaliseTimeValue,
 } from '@/utils/css-value'
-import defaultTheme from 'tailwindcss/defaultTheme'
+import { generateGuard } from '@/utils/generate-guard'
 import {
   addDurationWithGravity,
   axesModifier,
   nameModifier,
   signModifier,
 } from '@/utils/lodash-transformers'
-import { Translate } from '@/css-utilities/translate'
-import { Transform } from '@/css-utilities/transform'
 
 type ProcessablePrimitive = string | undefined
 type ProcessableValue = [ProcessablePrimitive, ProcessablePrimitive]

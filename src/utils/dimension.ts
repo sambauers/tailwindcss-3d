@@ -1,6 +1,7 @@
-import { generateGuard } from '@/utils/generate-guard'
-import isString from 'lodash/isString'
 import includes from 'lodash/includes'
+import isString from 'lodash/isString'
+
+import { generateGuard } from '@/utils/generate-guard'
 
 export type Dimension = '3d' | '2d'
 

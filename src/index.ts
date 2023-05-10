@@ -1,22 +1,23 @@
 import plugin from 'tailwindcss/plugin'
-import { ensureBoolean } from '@/utils/ensure'
-import type { LocalPluginAPI } from '@/common'
 
 // css-utilities
-import { Perspective } from './css-utilities/perspective'
-import { TransformStyle } from './css-utilities/transform-style'
-import { Translate } from './css-utilities/translate'
-import { Transform } from './css-utilities/transform'
-import { Scale } from './css-utilities/scale'
-import { Backface } from './css-utilities/backface'
-import { PerspectiveOrigin } from './css-utilities/perspective-origin'
-import { TransformBox } from './css-utilities/transform-box'
-import { TransformCore } from './css-utilities/transform-core'
-
-// css-animations
-import { Spin } from './css-animations/spin'
 import { Bounce } from './css-animations/bounce'
 import { BounceAndSpin } from './css-animations/bounce-and-spin'
+import { Spin } from './css-animations/spin'
+import { Backface } from './css-utilities/backface'
+import { Perspective } from './css-utilities/perspective'
+import { PerspectiveOrigin } from './css-utilities/perspective-origin'
+import { Scale } from './css-utilities/scale'
+import { Transform } from './css-utilities/transform'
+import { TransformBox } from './css-utilities/transform-box'
+import { TransformCore } from './css-utilities/transform-core'
+import { TransformStyle } from './css-utilities/transform-style'
+import { Translate } from './css-utilities/translate'
+
+// css-animations
+
+import { type LocalPluginAPI } from '@/common'
+import { ensureBoolean } from '@/utils/ensure'
 
 // Default CSS variables, modelled from core
 const DEFAULT_VARIABLE_VALUES: Record<string, string> = {

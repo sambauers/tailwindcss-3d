@@ -1,35 +1,36 @@
+import { chain } from 'lodash'
+import every from 'lodash/every'
+import isPlainObject from 'lodash/isPlainObject'
+import isString from 'lodash/isString'
+import isUndefined from 'lodash/isUndefined'
+import keys from 'lodash/keys'
+import pickBy from 'lodash/pickBy'
+import values from 'lodash/values'
+
 import { type CSSUtility } from '@/css-utilities'
-import { type Dimension, normaliseDimension } from '@/utils/dimension'
+import { Base } from '@/css-utilities/base'
+import { Transform } from '@/css-utilities/transform'
 import {
   type UnsafeCSSValue,
   normaliseLengthPercentageValue,
   normaliseLengthValue,
 } from '@/utils/css-value'
-import { Base } from '@/css-utilities/base'
+import { type Dimension, normaliseDimension } from '@/utils/dimension'
 import { generateGuard } from '@/utils/generate-guard'
-import isString from 'lodash/isString'
-import isUndefined from 'lodash/isUndefined'
-import isPlainObject from 'lodash/isPlainObject'
-import every from 'lodash/every'
-import keys from 'lodash/keys'
-import values from 'lodash/values'
-import { chain } from 'lodash'
-import pickBy from 'lodash/pickBy'
-import { Transform } from '@/css-utilities/transform'
 
 type ProcessableValue = string | undefined
 type ProcessableValues = Record<string, ProcessableValue>
 type Value = string
 type Values = Record<string, Value>
 
-export interface NormaliseFunctionValuesOptions {
+interface NormaliseFunctionValuesOptions {
   dimension?: Dimension
   translateX?: UnsafeCSSValue
   translateY?: UnsafeCSSValue
   translateZ?: UnsafeCSSValue
 }
 
-export interface TranslateDeclarations {
+interface TranslateDeclarations {
   translate: string
 }
 
