@@ -132,6 +132,8 @@ to animations.
 
 #### scale
 
+[Tailwind Play scale utility examples](https://play.tailwindcss.com/IzMFd64IOn)
+
 | Class.      | Properties            |
 | ----------- | --------------------- |
 | scale-x-0   | scale: 0 … …          |
@@ -231,6 +233,8 @@ Scale all three dimensions in proportion:
 
 #### rotate
 
+[Tailwind Play rotate utility examples](https://play.tailwindcss.com/m1NO5HFfGx)
+
 | Class        | Properties                  |
 | ------------ | --------------------------- |
 | rotate-x-0   | transform: rotateX(0deg);   |
@@ -308,6 +312,8 @@ You can mix rotation values together as well:
 ```
 
 #### translate
+
+[Tailwind Play translate utility examples](https://play.tailwindcss.com/5O5nybIKRJ)
 
 | Class            | Properties                 |
 | ---------------- | -------------------------- |
@@ -513,6 +519,8 @@ Inherits values from `theme.transformBox` in your config.
 Inherits values from `theme.transformStyle` in your config.
 
 ### Animations
+
+[Tailwind Play animation examples](https://play.tailwindcss.com/3eRYxPuBZX)
 
 Available animations:
 
