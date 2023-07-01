@@ -13,7 +13,7 @@ type GuardTestGroups = GuardTests[]
 
 export const generateGuard = <T>(...testGroups: GuardTestGroups) => {
   if (testGroups.length < 1) {
-    return () => false
+    return (maybe?: unknown): maybe is T => false
   }
 
   return (maybe?: unknown): maybe is T =>
