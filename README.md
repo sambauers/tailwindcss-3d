@@ -1,8 +1,9 @@
 # 3D Plugin for Tailwind CSS
 
-[![Lint (ESLInt)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml)
-[![Test (Jest)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml/badge.svg)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml)
-[![codecov](https://codecov.io/github/sambauers/tailwindcss-3d/branch/main/graph/badge.svg?token=E1EAWC72I1)](https://codecov.io/github/sambauers/tailwindcss-3d)
+[![NPM package version](https://img.shields.io/npm/v/tailwindcss-3d?style=flat&logoColor=white&labelColor=gray&color=black&logo=npm&label=Package%20version)](https://www.npmjs.com/package/tailwindcss-3d)
+[![Lint with ESLint](https://img.shields.io/github/actions/workflow/status/sambauers/tailwindcss-3d/lint-eslint.yml?style=flat&logoColor=white&labelColor=gray&color=black&logo=eslint&label=Lint)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/lint-eslint.yml)
+[![Tests with Jest](https://img.shields.io/github/actions/workflow/status/sambauers/tailwindcss-3d/test-jest.yml?style=flat&logoColor=white&labelColor=gray&color=black&logo=jest&label=Tests)](https://github.com/sambauers/tailwindcss-3d/actions/workflows/test-jest.yml)
+[![Test Coverage on Codecov](https://img.shields.io/codecov/c/github/sambauers/tailwindcss-3d?style=flat&logoColor=white&labelColor=gray&color=black&logo=codecov&label=Test%20coverage)](https://app.codecov.io/gh/sambauers/tailwindcss-3d)
 
 Add 3D transforms to your TailwindCSS project.
 
