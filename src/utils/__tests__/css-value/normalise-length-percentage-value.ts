@@ -1,6 +1,6 @@
 import {
-  VALID_LENGTH_UNITS,
   normaliseLengthPercentageValue,
+  VALID_LENGTH_UNITS,
 } from '../../css-value'
 
 describe('utilities', () => {

@@ -1,6 +1,6 @@
 import {
-  VALID_ANGLE_UNITS,
   normaliseAnglePercentageValue,
+  VALID_ANGLE_UNITS,
 } from '../../css-value'
 
 describe('utilities', () => {

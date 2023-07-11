@@ -1,5 +1,4 @@
 // @ts-check
-/* eslint-disable no-undef */
 
 /**
  * @type {import('@swc/core/types').Options}
@@ -37,4 +36,5 @@ const jestConfig = {
   coveragePathIgnorePatterns: ['<rootDir>/jest'],
 }
 
+// eslint-disable-next-line no-undef
 module.exports = jestConfig

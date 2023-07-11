@@ -1,4 +1,4 @@
-import { type ResolvableTo, type PluginUtils } from 'tailwindcss/types/config'
+import { type PluginUtils, type ResolvableTo } from 'tailwindcss/types/config'
 
 import { type KeyValuePair } from '@/common'
 

@@ -1,4 +1,4 @@
-import { VALID_ANGLE_UNITS, normaliseAngleValue } from '../../css-value'
+import { normaliseAngleValue, VALID_ANGLE_UNITS } from '../../css-value'
 
 describe('utilities', () => {
   describe('css-value', () => {

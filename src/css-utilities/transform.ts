@@ -9,11 +9,11 @@ import values from 'lodash/values'
 import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'
 import {
-  type UnsafeCSSValue,
   normaliseAngleValue,
   normaliseLengthPercentageValue,
-  normaliseNumberPercentageValue,
   normaliseLengthValue,
+  normaliseNumberPercentageValue,
+  type UnsafeCSSValue,
 } from '@/utils/css-value'
 import { type Dimension } from '@/utils/dimension'
 import { normaliseDimension } from '@/utils/dimension'
@@ -44,7 +44,6 @@ interface NormaliseLegacyFunctionValuesOptions
   perspective?: UnsafeCSSValue
 }
 
-// eslint-disable-next-line import/no-unused-modules
 export interface TransformDeclarations {
   '--webkit-transform': string
   transform: string

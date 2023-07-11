@@ -4,12 +4,10 @@
 const eslintConfig = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'import', 'prettier'],
+  plugins: ['@typescript-eslint', 'simple-import-sort', 'prettier'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:import/recommended',
-    'plugin:import/typescript',
     'prettier',
   ],
   rules: {
@@ -28,22 +26,7 @@ const eslintConfig = {
         fixStyle: 'inline-type-imports',
       },
     ],
-    'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
-    'import/no-unused-modules': [
-      'error',
-      {
-        unusedExports: true,
-      },
-    ],
-    'import/order': [
-      'error',
-      {
-        alphabetize: {
-          order: 'asc',
-        },
-        'newlines-between': 'always',
-      },
-    ],
+    'simple-import-sort/imports': 'error',
     'prettier/prettier': 'error',
   },
   settings: {

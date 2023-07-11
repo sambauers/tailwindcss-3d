@@ -1,4 +1,4 @@
-import { VALID_TIME_UNITS, normaliseTimePercentageValue } from '../../css-value'
+import { normaliseTimePercentageValue, VALID_TIME_UNITS } from '../../css-value'
 
 describe('utilities', () => {
   describe('css-value', () => {

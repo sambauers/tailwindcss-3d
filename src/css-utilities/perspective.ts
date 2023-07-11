@@ -1,8 +1,8 @@
 import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'
 import { Transform } from '@/css-utilities/transform'
-import { type UnsafeCSSValue, normaliseLengthValue } from '@/utils/css-value'
-import { normaliseDimension, type Dimension } from '@/utils/dimension'
+import { normaliseLengthValue, type UnsafeCSSValue } from '@/utils/css-value'
+import { type Dimension, normaliseDimension } from '@/utils/dimension'
 
 interface NormaliseFunctionValuesOptions {
   dimension?: Dimension

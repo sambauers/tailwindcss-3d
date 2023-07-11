@@ -1,4 +1,4 @@
-import { VALID_LENGTH_UNITS, normaliseLengthValue } from '../../css-value'
+import { normaliseLengthValue, VALID_LENGTH_UNITS } from '../../css-value'
 
 describe('utilities', () => {
   describe('css-value', () => {
