@@ -25,7 +25,9 @@ export const compileCSS = async (
       plugins: [tailwindcss3d({ legacy })],
       theme,
     })
-  ).process('@tailwind utilities;', {
-    from: `${resolve(__filename)}?test=${currentTestName}`,
-  }).css
+  )
+    .process('@tailwind utilities;', {
+      from: `${resolve(__filename)}?test=${currentTestName}`,
+    })
+    .then((result) => result.css)
 }
