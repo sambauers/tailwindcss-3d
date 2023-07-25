@@ -4,6 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      typescript-eslint:
+        patterns:
+          - "@typescript-eslint/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
