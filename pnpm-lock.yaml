@@ -23,8 +23,8 @@ devDependencies:
     specifier: 29.5.3
     version: 29.5.3
   '@types/lodash':
-    specifier: 4.14.196
-    version: 4.14.196
+    specifier: 4.14.197
+    version: 4.14.197
   '@types/node':
     specifier: 20.4.6
     version: 20.4.6
@@ -1109,8 +1109,8 @@ packages:
       '@types/node': 20.4.6
     dev: true
 
-  /@types/lodash@4.14.196:
-    resolution: {integrity: sha512-22y3o88f4a94mKljsZcanlNWPzO0uBsBdzLAngf2tp533LzZcQzb6+eZPJ+vCTt+bqF2XnvT9gejTLsAcJAJyQ==}
+  /@types/lodash@4.14.197:
+    resolution: {integrity: sha512-BMVOiWs0uNxHVlHBgzTIqJYmj+PgCo4euloGF+5m4okL3rEYzM2EEv78mw8zWSMM57dM7kVIgJ2QDvwHSoCI5g==}
     dev: true
 
   /@types/node@20.4.6:
