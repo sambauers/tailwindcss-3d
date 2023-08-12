@@ -11,6 +11,7 @@ const swcConfig = {
     parser: {
       syntax: 'typescript',
     },
+    baseUrl: '.',
     paths: {
       '@/*': ['./src/*'],
     },
