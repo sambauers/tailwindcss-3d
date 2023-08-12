@@ -10,3 +10,7 @@ declare module '@/css-animations' {
     animation: (pluginUtilities: PluginUtils) => void
   }
 }
+
+export * from './bounce'
+export * from './bounce-and-spin'
+export * from './spin'

@@ -1,4 +1,4 @@
-import { Perspective } from '../../perspective'
+import { Perspective } from '../..'
 
 describe('css-utilities', () => {
   describe('Perspective', () => {
