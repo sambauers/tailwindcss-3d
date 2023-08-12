@@ -1,10 +1,12 @@
-import { chain } from 'lodash'
-import every from 'lodash/every'
-import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
-import isUndefined from 'lodash/isUndefined'
-import keys from 'lodash/keys'
-import values from 'lodash/values'
+import {
+  chain,
+  every,
+  isPlainObject,
+  isString,
+  isUndefined,
+  keys,
+  values,
+} from 'lodash'
 
 import { type CSSUtility } from '@/css-utilities'
 import { Base } from '@/css-utilities/base'

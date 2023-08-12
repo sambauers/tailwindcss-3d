@@ -1,11 +1,13 @@
-import { chain } from 'lodash'
-import every from 'lodash/every'
-import isArray from 'lodash/isArray'
-import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
-import isUndefined from 'lodash/isUndefined'
-import keys from 'lodash/keys'
-import values from 'lodash/values'
+import {
+  chain,
+  every,
+  isArray,
+  isPlainObject,
+  isString,
+  isUndefined,
+  keys,
+  values,
+} from 'lodash'
 import defaultTheme from 'tailwindcss/defaultTheme'
 import { type PluginUtils } from 'tailwindcss/types/config'
 

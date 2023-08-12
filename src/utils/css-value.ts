@@ -1,17 +1,19 @@
-import { chain } from 'lodash'
-import get from 'lodash/get'
-import has from 'lodash/has'
-import includes from 'lodash/includes'
-import isArray from 'lodash/isArray'
-import isBoolean from 'lodash/isBoolean'
-import isFinite from 'lodash/isFinite'
-import isNumber from 'lodash/isNumber'
-import isObject from 'lodash/isObject'
-import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
-import isUndefined from 'lodash/isUndefined'
-import toLower from 'lodash/toLower'
-import trim from 'lodash/trim'
+import {
+  chain,
+  get,
+  has,
+  includes,
+  isArray,
+  isBoolean,
+  isFinite,
+  isNumber,
+  isObject,
+  isPlainObject,
+  isString,
+  isUndefined,
+  toLower,
+  trim,
+} from 'lodash'
 
 import { generateGuard } from '@/utils/generate-guard'
 
