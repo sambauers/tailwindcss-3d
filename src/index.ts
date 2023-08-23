@@ -39,7 +39,7 @@ const optionDefaults: Required<PluginOptions> = {
   legacy: false,
 }
 
-const tailwindcss3d = plugin.withOptions(
+const tailwindCss3d = plugin.withOptions(
   ({ legacy = optionDefaults.legacy }: PluginOptions = optionDefaults) => {
     const safeLegacy = ensureBoolean(legacy, optionDefaults.legacy)
 
@@ -124,4 +124,4 @@ const tailwindcss3d = plugin.withOptions(
   }
 )
 
-export = tailwindcss3d
+export = tailwindCss3d
