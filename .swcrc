@@ -12,7 +12,8 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "externalHelpers": true
   },
   "exclude": [
     "./**/__tests__/*"
