@@ -10,7 +10,7 @@ jobs:
     steps:
     # checkout
     - name: Checkout repository code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     # install
     - name: Setup PNPM
