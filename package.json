@@ -35,7 +35,7 @@
     "tailwindcss": ">=3.2.0"
   },
   "dependencies": {
-    "@swc/helpers": "0.5.1",
+    "@swc/helpers": "0.5.2",
     "lodash": "4.17.21"
   },
   "devDependencies": {
