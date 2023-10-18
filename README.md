@@ -200,7 +200,7 @@ Scaling in one dimension:
 <div class="scale-y-75">
 
 <!-- scale on z-axis 110% -->
-<div class="scale-y-110">
+<div class="scale-z-110">
 ```
 
 You can mix scaling values together as well:
