@@ -37,8 +37,8 @@ export const nameModifier = <T extends RecordAny>(
   const safeSilentModifier = isString(silentModifier)
     ? silentModifier
     : safeName === '' // If there is no name, don't silence the modifier
-    ? ''
-    : '1'
+      ? ''
+      : '1'
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (result: T, value: any, modifier: string) => {
@@ -46,8 +46,8 @@ export const nameModifier = <T extends RecordAny>(
       String(modifier) === safeSilentModifier
         ? safeName
         : safeName === ''
-        ? modifier
-        : `${safeName}-${modifier}`
+          ? modifier
+          : `${safeName}-${modifier}`
 
     result[property as keyof T] = isPlainObject(value)
       ? { name, originalModifier: modifier, ...value }

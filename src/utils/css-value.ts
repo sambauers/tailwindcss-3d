@@ -341,17 +341,17 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   const safeUpperLimit: false | Required<Limit> = isNumber(upperLimit)
     ? { limit: upperLimit, inclusive: true, adjustBy: 1 }
     : isLimit(upperLimit)
-    ? {
-        limit: upperLimit.limit,
-        inclusive: isBoolean(upperLimit.inclusive)
-          ? upperLimit.inclusive
-          : true,
-        adjustBy:
-          isNumber(upperLimit.adjustBy) && upperLimit.adjustBy !== 0
-            ? upperLimit.adjustBy
-            : 1,
-      }
-    : false
+      ? {
+          limit: upperLimit.limit,
+          inclusive: isBoolean(upperLimit.inclusive)
+            ? upperLimit.inclusive
+            : true,
+          adjustBy:
+            isNumber(upperLimit.adjustBy) && upperLimit.adjustBy !== 0
+              ? upperLimit.adjustBy
+              : 1,
+        }
+      : false
 
   // Set the evaluated value within the upper limit
   if (safeUpperLimit) {
@@ -369,17 +369,17 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   const safeLowerLimit: false | Required<Limit> = isNumber(lowerLimit)
     ? { limit: lowerLimit, inclusive: true, adjustBy: 1 }
     : isLimit(lowerLimit)
-    ? {
-        limit: lowerLimit.limit,
-        inclusive: isBoolean(lowerLimit.inclusive)
-          ? lowerLimit.inclusive
-          : true,
-        adjustBy:
-          isNumber(lowerLimit.adjustBy) && lowerLimit.adjustBy !== 0
-            ? lowerLimit.adjustBy
-            : 1,
-      }
-    : false
+      ? {
+          limit: lowerLimit.limit,
+          inclusive: isBoolean(lowerLimit.inclusive)
+            ? lowerLimit.inclusive
+            : true,
+          adjustBy:
+            isNumber(lowerLimit.adjustBy) && lowerLimit.adjustBy !== 0
+              ? lowerLimit.adjustBy
+              : 1,
+        }
+      : false
 
   // Set the evaluated value within the lower limit
   if (safeLowerLimit) {
