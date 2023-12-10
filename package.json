@@ -15,7 +15,7 @@
   "files": [
     "src/*"
   ],
-  "packageManager": "pnpm@8.11.0",
+  "packageManager": "pnpm@8.12.0",
   "scripts": {
     "clean": "rm -rf dist",
     "lint": "markdownlint *.md && eslint .",
