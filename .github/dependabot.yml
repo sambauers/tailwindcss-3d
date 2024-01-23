@@ -5,6 +5,9 @@ updates:
     schedule:
       interval: "daily"
     groups:
+      swc:
+        patterns:
+          - "@swc/*"
       typescript-eslint:
         patterns:
           - "@typescript-eslint/*"
