@@ -33,13 +33,13 @@ describe('utilities', () => {
 
       it('accepts options for percentage', () => {
         expect(
-          normaliseAlphaValue('150%', '0', { percentage: { upperLimit: 200 } })
+          normaliseAlphaValue('150%', '0', { percentage: { upperLimit: 200 } }),
         ).toBe('150%')
       })
 
       it('accepts options for number', () => {
         expect(
-          normaliseAlphaValue('1.5', '0', { number: { upperLimit: 2 } })
+          normaliseAlphaValue('1.5', '0', { number: { upperLimit: 2 } }),
         ).toBe('1.5')
       })
     })

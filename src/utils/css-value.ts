@@ -91,7 +91,7 @@ interface NumericValueAndUnit {
 
 export const toNumericValueAndUnit = (
   value: UnsafeCSSValue,
-  validUnits?: string | string[]
+  validUnits?: string | string[],
 ): NumericValueAndUnit => {
   const stringValue = toStringValue(value)
 
@@ -119,7 +119,7 @@ export const toNumericValueAndUnit = (
   if (safeValidUnits.length > 0) {
     const unitsUnion = safeValidUnits.join('|')
     const unitsMatch = strippedStringValue.match(
-      new RegExp(`(?:${unitsUnion})$`)
+      new RegExp(`(?:${unitsUnion})$`),
     )
 
     if (isArray(unitsMatch) && unitsMatch.length === 1) {
@@ -160,13 +160,13 @@ export const toNumericValueAndUnit = (
 type NormaliseUnionValueFunction = (
   value: UnsafeCSSValue,
   defaultValue?: UnsafeCSSValue,
-  allowedValues?: string | string[]
+  allowedValues?: string | string[],
 ) => string | undefined
 
 export const normaliseUnionValue: NormaliseUnionValueFunction = (
   value,
   defaultValue,
-  allowedValues
+  allowedValues,
 ): string | undefined => {
   const safeValue = toStringValue(value)
   const safeDefaultValue = toStringValue(defaultValue)
@@ -216,7 +216,7 @@ const isVar = (maybe: string) =>
 // Not a type guard
 const isCalc = (maybe: string) =>
   /^calc\(\s*(?:var\(\s*--[a-zA-Z0-9-]+\s*(,\s*.+)?\s*\)|[0-9]+[a-zA-Z%]*)\s+[*/+-]\s+(?:var\(\s*--[a-zA-Z0-9-]+\s*(,\s*.+)?\s*\)|[0-9]+[a-zA-Z%]*)\s*\)$/.test(
-    maybe
+    maybe,
   )
 
 interface NormaliseUnitValueOptions {
@@ -235,13 +235,13 @@ interface NormaliseUnitValueOptions {
 type NormaliseUnitValueFunction = (
   value: UnsafeCSSValue,
   defaultValue?: UnsafeCSSValue,
-  options?: NormaliseUnitValueOptions
+  options?: NormaliseUnitValueOptions,
 ) => string
 
 export const normaliseUnitValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) => {
   const safeValue = toStringValue(value)
   const safeDefaultValue = toStringValue(defaultValue)
@@ -303,7 +303,7 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   // Get the number value and unit from the string
   const { value: safeNumberValue, unit } = toNumericValueAndUnit(
     safeValue,
-    safeValidUnits
+    safeValidUnits,
   )
   const safeUnit = unit ?? defaultUnit ?? ''
 
@@ -327,7 +327,7 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   if (
     includes(
       safeDisallowValues,
-      safeAllowDecimal ? safeNumberValue : safeIntegerValue
+      safeAllowDecimal ? safeNumberValue : safeIntegerValue,
     )
   ) {
     return safeDefaultValue ?? safeDefaultNil
@@ -409,13 +409,13 @@ interface NormaliseAlphaValueOptions {
 type NormaliseAlphaValueFunction = (
   value: UnsafeCSSValue,
   defaultValue?: UnsafeCSSValue,
-  options?: NormaliseAlphaValueOptions
+  options?: NormaliseAlphaValueOptions,
 ) => string | undefined
 
 export const normaliseAlphaValue: NormaliseAlphaValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) => {
   const safeValue = toStringValue(value)
   const safeDefaultValue = toStringValue(defaultValue)
@@ -442,7 +442,7 @@ export const normaliseAlphaValue: NormaliseAlphaValueFunction = (
 export const normaliseAngleValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: 'deg',
@@ -453,7 +453,7 @@ export const normaliseAngleValue: NormaliseUnitValueFunction = (
 export const normaliseAnglePercentageValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: 'deg',
@@ -464,7 +464,7 @@ export const normaliseAnglePercentageValue: NormaliseUnitValueFunction = (
 export const normaliseLengthValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: 'px',
@@ -475,7 +475,7 @@ export const normaliseLengthValue: NormaliseUnitValueFunction = (
 export const normaliseLengthPercentageValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: 'px',
@@ -486,13 +486,13 @@ export const normaliseLengthPercentageValue: NormaliseUnitValueFunction = (
 export const normaliseNumberValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) => normaliseUnitValue(value, defaultValue, options)
 
 export const normaliseNumberPercentageValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     validUnits: ['', '%'],
@@ -502,7 +502,7 @@ export const normaliseNumberPercentageValue: NormaliseUnitValueFunction = (
 export const normalisePercentageValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: '%',
@@ -513,7 +513,7 @@ export const normalisePercentageValue: NormaliseUnitValueFunction = (
 export const normaliseTimeValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: 's',
@@ -524,7 +524,7 @@ export const normaliseTimeValue: NormaliseUnitValueFunction = (
 export const normaliseTimePercentageValue: NormaliseUnitValueFunction = (
   value,
   defaultValue,
-  options
+  options,
 ) =>
   normaliseUnitValue(value, defaultValue, {
     defaultUnit: 's',

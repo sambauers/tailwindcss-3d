@@ -9,10 +9,10 @@ describe('css-utilities', () => {
       `)
 
       expect(css).toMatch(
-        cssClassRegExp('backface-visible', 'backface-visibility: visible')
+        cssClassRegExp('backface-visible', 'backface-visibility: visible'),
       )
       expect(css).toMatch(
-        cssClassRegExp('backface-hidden', 'backface-visibility: hidden')
+        cssClassRegExp('backface-hidden', 'backface-visibility: hidden'),
       )
     })
   })

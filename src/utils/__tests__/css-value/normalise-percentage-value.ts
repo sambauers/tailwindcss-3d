@@ -18,7 +18,9 @@ describe('utilities', () => {
 
       it('accepts options', () => {
         expect(
-          normalisePercentageValue('150foo', undefined, { validUnits: ['foo'] })
+          normalisePercentageValue('150foo', undefined, {
+            validUnits: ['foo'],
+          }),
         ).toBe('150foo')
       })
     })

@@ -7,7 +7,7 @@ describe('css-animations', () => {
         const css = await compileCSS(
           '<div class="animate-spin-y"></div>',
           false,
-          { spin: { '0': 0 } }
+          { spin: { '0': 0 } },
         )
 
         expect(css).toBe('')

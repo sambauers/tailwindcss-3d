@@ -8,7 +8,7 @@ describe('utilities', () => {
           isGuardTestGroups([
             [(maybe) => typeof maybe === 'string', (maybe) => maybe !== ''],
             [(maybe) => typeof maybe === 'boolean', (maybe) => maybe === true],
-          ])
+          ]),
         ).toBe(true)
       })
 
@@ -17,7 +17,7 @@ describe('utilities', () => {
           isGuardTestGroups([
             [(maybe) => typeof maybe === 'string', (maybe) => maybe !== ''],
             (maybe) => typeof maybe === 'boolean',
-          ])
+          ]),
         ).toBe(true)
       })
 
@@ -29,13 +29,13 @@ describe('utilities', () => {
               (maybe) => `call me ${maybe}`,
             ],
             [(maybe) => typeof maybe === 'boolean', (maybe) => maybe === true],
-          ])
+          ]),
         ).toBe(false)
       })
 
       it('does not validate a single guard test', () => {
         expect(isGuardTestGroups((maybe) => typeof maybe === 'string')).toBe(
-          false
+          false,
         )
       })
 

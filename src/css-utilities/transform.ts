@@ -54,7 +54,7 @@ export interface TransformDeclarations {
 export class Transform extends Base implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     isString,
-    isUndefined
+    isUndefined,
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
@@ -69,7 +69,7 @@ export class Transform extends Base implements CSSUtility {
           .mapValues((angle) => normaliseAngleValue(angle))
           .pickBy(
             (angle, modifier): angle is Value =>
-              isString(modifier) && modifier !== '' && isString(angle)
+              isString(modifier) && modifier !== '' && isString(angle),
           )
           .value()
       : {}
@@ -109,11 +109,11 @@ export class Transform extends Base implements CSSUtility {
     const safeValues = {
       rotateX: normaliseAngleValue(
         rotateX,
-        Transform.defaultFunctionValues.rotateX
+        Transform.defaultFunctionValues.rotateX,
       ),
       rotateY: normaliseAngleValue(
         rotateY,
-        Transform.defaultFunctionValues.rotateY
+        Transform.defaultFunctionValues.rotateY,
       ),
       skewX: normaliseAngleValue(skewX, Transform.defaultFunctionValues.skewX),
       skewY: normaliseAngleValue(skewY, Transform.defaultFunctionValues.skewY),
@@ -152,54 +152,54 @@ export class Transform extends Base implements CSSUtility {
     const safeValues = {
       translateX: normaliseLengthPercentageValue(
         translateX,
-        Transform.defaultLegacyFunctionValues.translateX
+        Transform.defaultLegacyFunctionValues.translateX,
       ),
       translateY: normaliseLengthPercentageValue(
         translateY,
-        Transform.defaultLegacyFunctionValues.translateY
+        Transform.defaultLegacyFunctionValues.translateY,
       ),
       translateZ: normaliseLengthPercentageValue(
         translateZ,
-        Transform.defaultLegacyFunctionValues.translateZ
+        Transform.defaultLegacyFunctionValues.translateZ,
       ),
       rotateX: normaliseAngleValue(
         rotateX,
-        Transform.defaultLegacyFunctionValues.rotateX
+        Transform.defaultLegacyFunctionValues.rotateX,
       ),
       rotateY: normaliseAngleValue(
         rotateY,
-        Transform.defaultLegacyFunctionValues.rotateY
+        Transform.defaultLegacyFunctionValues.rotateY,
       ),
       rotateZ: normaliseAngleValue(
         rotateZ,
-        Transform.defaultLegacyFunctionValues.rotateZ
+        Transform.defaultLegacyFunctionValues.rotateZ,
       ),
       skewX: normaliseAngleValue(
         skewX,
-        Transform.defaultLegacyFunctionValues.skewX
+        Transform.defaultLegacyFunctionValues.skewX,
       ),
       skewY: normaliseAngleValue(
         skewY,
-        Transform.defaultLegacyFunctionValues.skewY
+        Transform.defaultLegacyFunctionValues.skewY,
       ),
       scaleX: normaliseNumberPercentageValue(
         scaleX,
         Transform.defaultLegacyFunctionValues.scaleX,
-        { lowerLimit: 0 }
+        { lowerLimit: 0 },
       ),
       scaleY: normaliseNumberPercentageValue(
         scaleY,
         Transform.defaultLegacyFunctionValues.scaleY,
-        { lowerLimit: 0 }
+        { lowerLimit: 0 },
       ),
       scaleZ: normaliseNumberPercentageValue(
         scaleZ,
         Transform.defaultLegacyFunctionValues.scaleZ,
-        { lowerLimit: 0 }
+        { lowerLimit: 0 },
       ),
       perspective: normaliseLengthValue(
         perspective,
-        Transform.defaultLegacyFunctionValues.perspective
+        Transform.defaultLegacyFunctionValues.perspective,
       ),
     }
 
@@ -231,7 +231,7 @@ export class Transform extends Base implements CSSUtility {
   }
 
   static declarations = (
-    values: NormaliseFunctionValuesOptions = {}
+    values: NormaliseFunctionValuesOptions = {},
   ): TransformDeclarations => {
     const functionValues = Transform.normaliseFunctionValues(values)
     return {
@@ -241,7 +241,7 @@ export class Transform extends Base implements CSSUtility {
   }
 
   static legacyDeclarations = (
-    values: NormaliseLegacyFunctionValuesOptions = {}
+    values: NormaliseLegacyFunctionValuesOptions = {},
   ): TransformDeclarations => {
     const functionValues = Transform.normaliseLegacyFunctionValues(values)
     return {
@@ -287,7 +287,7 @@ export class Transform extends Base implements CSSUtility {
       {
         values: rotateValues,
         supportsNegativeValues: true,
-      }
+      },
     )
 
     this.api.matchUtilities(
@@ -306,7 +306,7 @@ export class Transform extends Base implements CSSUtility {
       {
         values: skewValues,
         supportsNegativeValues: true,
-      }
+      },
     )
   }
 }

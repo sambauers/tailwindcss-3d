@@ -3,17 +3,17 @@ const escape = (value: string): string =>
 
 export const cssClassRegExp = (
   className: string,
-  properties: string | string[]
+  properties: string | string[],
 ): RegExp => {
   const escapedProperties = [properties].flat().map(escape).join(';\\s+')
   return new RegExp(
-    `.*\\.${escape(className)}\\s+\\{\\s+${escapedProperties}\\s+\\}.*`
+    `.*\\.${escape(className)}\\s+\\{\\s+${escapedProperties}\\s+\\}.*`,
   )
 }
 
 const cssKeyframeRegExpString = (
   marker: string,
-  properties: string | string[]
+  properties: string | string[],
 ): string => {
   const escapedProperties = [properties].flat().map(escape).join(';\\s+')
   return `.*${escape(marker)}\\s+\\{\\s+${escapedProperties}\\s+\\}.*`
@@ -21,13 +21,13 @@ const cssKeyframeRegExpString = (
 
 export const cssKeyframesRegExp = (
   name: string,
-  keyframes: Array<[string, string | string[]]>
+  keyframes: Array<[string, string | string[]]>,
 ): RegExp => {
   const escapedkeyframes = [keyframes]
     .flat()
     .map(([marker, properties]) => cssKeyframeRegExpString(marker, properties))
     .join('\\s+')
   return new RegExp(
-    `.*@keyframes\\s+${escape(name)}\\s+\\{\\s+${escapedkeyframes}\\s+\\}.*`
+    `.*@keyframes\\s+${escape(name)}\\s+\\{\\s+${escapedkeyframes}\\s+\\}.*`,
   )
 }

@@ -6,7 +6,7 @@ export abstract class Base {
 
   constructor(
     protected api: LocalPluginAPI,
-    legacy = false
+    legacy = false,
   ) {
     this.legacy = ensureBoolean(legacy, false)
   }

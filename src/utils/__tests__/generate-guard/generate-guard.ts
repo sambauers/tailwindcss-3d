@@ -19,7 +19,7 @@ describe('utilities', () => {
       it('generates a guard that validates a string or a number', () => {
         const isStringOrNumber = generateGuard(
           (maybe) => typeof maybe === 'string',
-          (maybe) => typeof maybe === 'number'
+          (maybe) => typeof maybe === 'number',
         )
         expect(isStringOrNumber).toStrictEqual(expect.any(Function))
         expect(isStringOrNumber('')).toBe(true)
@@ -57,7 +57,7 @@ describe('utilities', () => {
       it('generates a guard that can possibly return true when there are no tests in one test group', () => {
         const isSometimesGoingToPass = generateGuard(
           [],
-          [(maybe) => typeof maybe === 'number']
+          [(maybe) => typeof maybe === 'number'],
         )
         expect(isSometimesGoingToPass).toStrictEqual(expect.any(Function))
         expect(isSometimesGoingToPass).toStrictEqual(expect.any(Function))

@@ -29,7 +29,7 @@ describe('utilities', () => {
         expect(
           normaliseLengthPercentageValue('150foo', undefined, {
             validUnits: ['foo'],
-          })
+          }),
         ).toBe('150foo')
       })
     })

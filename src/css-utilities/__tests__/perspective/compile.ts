@@ -26,19 +26,19 @@ describe('css-utilities', () => {
         cssClassRegExp('perspective-none', [
           '--tw-perspective: none',
           perspectiveDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('perspective-250', [
           '--tw-perspective: 250px',
           perspectiveDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('perspective-\\[175px\\]', [
           '--tw-perspective: 175px',
           perspectiveDeclaration,
-        ])
+        ]),
       )
     })
 
@@ -50,21 +50,21 @@ describe('css-utilities', () => {
           '--tw-perspective: none',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('perspective-250', [
           '--tw-perspective: 250px',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('perspective-\\[175px\\]', [
           '--tw-perspective: 175px',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
     })
   })

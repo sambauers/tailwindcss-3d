@@ -7,7 +7,7 @@ declare module '@/common' {
   interface LocalPluginAPI extends PluginAPI {
     addDefaults: (
       group: string,
-      declarations: Record<string, string | string[]>
+      declarations: Record<string, string | string[]>,
     ) => void
   }
 }

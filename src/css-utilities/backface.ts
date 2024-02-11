@@ -7,7 +7,7 @@ export class Backface extends Base implements CSSUtility {
   public utilities = () => {
     this.api.matchUtilities(
       { backface: (value) => ({ 'backface-visibility': value }) },
-      { values: this.api.theme('backface') }
+      { values: this.api.theme('backface') },
     )
   }
 }

@@ -9,10 +9,10 @@ describe('css-utilities', () => {
       `)
 
       expect(css).toMatch(
-        cssClassRegExp('transform-box-content', 'transform-box: content-box')
+        cssClassRegExp('transform-box-content', 'transform-box: content-box'),
       )
       expect(css).toMatch(
-        cssClassRegExp('transform-box-fill', 'transform-box: fill-box')
+        cssClassRegExp('transform-box-fill', 'transform-box: fill-box'),
       )
     })
   })

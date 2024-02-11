@@ -20,7 +20,7 @@ describe('utilities', () => {
 
       it('accepts options', () => {
         expect(
-          normaliseTimeValue('150foo', undefined, { validUnits: ['foo'] })
+          normaliseTimeValue('150foo', undefined, { validUnits: ['foo'] }),
         ).toBe('150foo')
       })
     })

@@ -9,7 +9,7 @@ export class PerspectiveOrigin extends Base implements CSSUtility {
   public utilities = () => {
     this.api.matchUtilities(
       { 'perspective-origin': (value) => ({ 'perspective-origin': value }) },
-      { values: this.api.theme('perspectiveOrigin') }
+      { values: this.api.theme('perspectiveOrigin') },
     )
   }
 }

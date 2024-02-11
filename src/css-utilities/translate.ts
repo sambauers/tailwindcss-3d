@@ -39,7 +39,7 @@ interface TranslateDeclarations {
 export class Translate extends Base implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     isString,
-    isUndefined
+    isUndefined,
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
@@ -54,7 +54,7 @@ export class Translate extends Base implements CSSUtility {
           .mapValues((duration) => normaliseLengthPercentageValue(duration))
           .pickBy(
             (duration, modifier): duration is Value =>
-              isString(modifier) && modifier !== '' && isString(duration)
+              isString(modifier) && modifier !== '' && isString(duration),
           )
           .value()
       : {}
@@ -76,11 +76,11 @@ export class Translate extends Base implements CSSUtility {
     const safeValues = [
       normaliseLengthPercentageValue(
         translateX,
-        Translate.defaultFunctionValues.translateX
+        Translate.defaultFunctionValues.translateX,
       ),
       normaliseLengthPercentageValue(
         translateY,
-        Translate.defaultFunctionValues.translateY
+        Translate.defaultFunctionValues.translateY,
       ),
     ]
 
@@ -88,8 +88,8 @@ export class Translate extends Base implements CSSUtility {
       safeValues.push(
         normaliseLengthValue(
           translateZ,
-          Translate.defaultFunctionValues.translateZ
-        )
+          Translate.defaultFunctionValues.translateZ,
+        ),
       )
     }
 
@@ -97,7 +97,7 @@ export class Translate extends Base implements CSSUtility {
   }
 
   static declarations = (
-    values: NormaliseFunctionValuesOptions = {}
+    values: NormaliseFunctionValuesOptions = {},
   ): TranslateDeclarations => ({
     translate: Translate.normaliseFunctionValues(values),
   })
@@ -126,7 +126,7 @@ export class Translate extends Base implements CSSUtility {
       {
         values,
         supportsNegativeValues: true,
-      }
+      },
     )
 
     this.api.matchUtilities(
@@ -140,7 +140,7 @@ export class Translate extends Base implements CSSUtility {
       {
         values: pickBy(values, (value) => !value.endsWith('%')),
         supportsNegativeValues: true,
-      }
+      },
     )
   }
 }

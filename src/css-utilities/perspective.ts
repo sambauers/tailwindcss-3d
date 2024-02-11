@@ -37,12 +37,12 @@ export class Perspective extends Base implements CSSUtility {
 
     return normaliseLengthValue(
       perspective,
-      Perspective.defaultFunctionValues.perspective
+      Perspective.defaultFunctionValues.perspective,
     )
   }
 
   static declarations = (
-    values: NormaliseFunctionValuesOptions = {}
+    values: NormaliseFunctionValuesOptions = {},
   ): PerspectiveDeclarations => ({
     perspective: Perspective.normaliseFunctionValues(values),
   })
@@ -65,7 +65,7 @@ export class Perspective extends Base implements CSSUtility {
       {
         values: this.api.theme('perspective'),
         supportsNegativeValues: true,
-      }
+      },
     )
   }
 }

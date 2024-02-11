@@ -7,7 +7,7 @@ describe('css-animations', () => {
         const css = await compileCSS(
           '<div class="animate-bounce-y"></div>',
           false,
-          { bounce: { '0': 0 } }
+          { bounce: { '0': 0 } },
         )
 
         expect(css).toBe('')

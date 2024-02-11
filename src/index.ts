@@ -121,7 +121,7 @@ const tailwindCss3d = plugin.withOptions(
         translate: false,
       },
     }
-  }
+  },
 )
 
 export = tailwindCss3d

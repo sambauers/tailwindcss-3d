@@ -9,10 +9,10 @@ describe('css-utilities', () => {
       `)
 
       expect(css).toMatch(
-        cssClassRegExp('transform-style-flat', 'transform-style: flat')
+        cssClassRegExp('transform-style-flat', 'transform-style: flat'),
       )
       expect(css).toMatch(
-        cssClassRegExp('transform-style-3d', 'transform-style: preserve-3d')
+        cssClassRegExp('transform-style-3d', 'transform-style: preserve-3d'),
       )
     })
   })

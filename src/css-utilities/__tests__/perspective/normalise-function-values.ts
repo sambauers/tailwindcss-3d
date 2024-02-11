@@ -5,15 +5,15 @@ describe('css-utilities', () => {
     describe('normaliseFunctionValues()', () => {
       it('will return fallback values when required', async () => {
         expect(Perspective.normaliseFunctionValues()).toBe(
-          'var(--tw-perspective)'
+          'var(--tw-perspective)',
         )
 
         expect(Perspective.normaliseFunctionValues({ dimension: '2d' })).toBe(
-          'none'
+          'none',
         )
 
         expect(
-          Perspective.normaliseFunctionValues({ perspective: '200px' })
+          Perspective.normaliseFunctionValues({ perspective: '200px' }),
         ).toBe('200px')
       })
     })

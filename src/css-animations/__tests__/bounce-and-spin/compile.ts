@@ -59,13 +59,13 @@ describe('css-animations', () => {
               'animation-timing-function: ease-out',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-and-spin-x',
-          'animation: bounce-and-spin-x 1s infinite'
-        )
+          'animation: bounce-and-spin-x 1s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -108,13 +108,13 @@ describe('css-animations', () => {
               'animation-timing-function: ease-out',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-and-spin-y-2',
-          'animation: bounce-and-spin-y-2 1.19s infinite'
-        )
+          'animation: bounce-and-spin-y-2 1.19s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -139,13 +139,13 @@ describe('css-animations', () => {
             '95%, 100%',
             ['rotate: -360deg', 'animation-timing-function: ease-out'],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-and-spin-z-4',
-          'animation: -bounce-and-spin-z-4 1.41s infinite'
-        )
+          'animation: -bounce-and-spin-z-4 1.41s infinite',
+        ),
       )
     })
 

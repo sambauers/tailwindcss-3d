@@ -36,7 +36,7 @@ interface ScaleDeclarations {
 export class Scale extends Base implements CSSUtility {
   private isProcessableValue = generateGuard<ProcessableValue>(
     [isString],
-    [isUndefined]
+    [isUndefined],
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
@@ -49,11 +49,11 @@ export class Scale extends Base implements CSSUtility {
     this.isProcessableValues(values)
       ? chain(values)
           .mapValues((length) =>
-            normaliseNumberPercentageValue(length, '1', { lowerLimit: 0 })
+            normaliseNumberPercentageValue(length, '1', { lowerLimit: 0 }),
           )
           .pickBy(
             (length, modifier): length is Value =>
-              isString(modifier) && modifier !== '' && isString(length)
+              isString(modifier) && modifier !== '' && isString(length),
           )
           .value()
       : {}
@@ -76,12 +76,12 @@ export class Scale extends Base implements CSSUtility {
       normaliseNumberPercentageValue(
         scaleX,
         Scale.defaultFunctionValues.scaleX,
-        { lowerLimit: 0 }
+        { lowerLimit: 0 },
       ),
       normaliseNumberPercentageValue(
         scaleY,
         Scale.defaultFunctionValues.scaleY,
-        { lowerLimit: 0 }
+        { lowerLimit: 0 },
       ),
     ]
 
@@ -90,8 +90,8 @@ export class Scale extends Base implements CSSUtility {
         normaliseNumberPercentageValue(
           scaleZ,
           Scale.defaultFunctionValues.scaleZ,
-          { lowerLimit: 0 }
-        )
+          { lowerLimit: 0 },
+        ),
       )
     }
 
@@ -99,7 +99,7 @@ export class Scale extends Base implements CSSUtility {
   }
 
   static declarations = (
-    values: NormaliseFunctionValuesOptions = {}
+    values: NormaliseFunctionValuesOptions = {},
   ): ScaleDeclarations => ({
     scale: Scale.normaliseFunctionValues(values),
   })
@@ -146,7 +146,7 @@ export class Scale extends Base implements CSSUtility {
       {
         values,
         supportsNegativeValues: true,
-      }
+      },
     )
   }
 }

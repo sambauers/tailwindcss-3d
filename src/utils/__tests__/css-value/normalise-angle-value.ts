@@ -20,7 +20,7 @@ describe('utilities', () => {
 
       it('accepts options', () => {
         expect(
-          normaliseAngleValue('150foo', undefined, { validUnits: ['foo'] })
+          normaliseAngleValue('150foo', undefined, { validUnits: ['foo'] }),
         ).toBe('150foo')
       })
     })

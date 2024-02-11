@@ -9,7 +9,7 @@ type RecordAny = Record<string, any>
 
 export const axesModifier = <T extends RecordAny>(
   axes?: string | string[],
-  silentModifier?: string
+  silentModifier?: string,
 ) => {
   const safeAxes = isUndefined(axes) ? ['x', 'y', 'z'] : flatten([axes])
   const safeSilentModifier = isUndefined(silentModifier) ? '1' : silentModifier
@@ -31,7 +31,7 @@ export const axesModifier = <T extends RecordAny>(
 
 export const nameModifier = <T extends RecordAny>(
   name?: string,
-  silentModifier?: string
+  silentModifier?: string,
 ) => {
   const safeName = isString(name) ? name : ''
   const safeSilentModifier = isString(silentModifier)
@@ -56,7 +56,7 @@ export const nameModifier = <T extends RecordAny>(
 }
 
 export const signModifier = <T extends RecordAny>(
-  signs?: string | string[]
+  signs?: string | string[],
 ) => {
   const safeSigns = isUndefined(signs) ? ['', '-'] : flatten([signs])
 
@@ -76,7 +76,7 @@ export const addDurationWithGravity =
   (result: T, value: any, modifier: string) => {
     const duration = Math.pow(
       Number(value.originalModifier ?? modifier),
-      0.25
+      0.25,
     ).toFixed(2)
 
     result[modifier as keyof T] = isPlainObject(value)

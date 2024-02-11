@@ -14,32 +14,32 @@ describe('css-utilities', () => {
       expect(css).toMatch(
         cssClassRegExp(
           'perspective-origin-center',
-          'perspective-origin: center'
-        )
+          'perspective-origin: center',
+        ),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'perspective-origin-top-left',
-          'perspective-origin: top left'
-        )
+          'perspective-origin: top left',
+        ),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'perspective-origin-\\[150\\%\\]',
-          'perspective-origin: 150%'
-        )
+          'perspective-origin: 150%',
+        ),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'perspective-origin-\\[250\\%_-500\\%\\]',
-          'perspective-origin: 250% -500%'
-        )
+          'perspective-origin: 250% -500%',
+        ),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'perspective-origin-\\[top_-500\\%\\]',
-          'perspective-origin: top -500%'
-        )
+          'perspective-origin: top -500%',
+        ),
       )
     })
   })

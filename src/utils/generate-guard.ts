@@ -26,7 +26,7 @@ export const generateGuard = <T>(...testGroups: GuardTestGroups) => {
 
       return every(
         over<boolean>(...safeTests)(maybe),
-        (result) => result === true
+        (result) => result === true,
       )
     })
 }
@@ -48,6 +48,6 @@ export const isGuardTestGroups = generateGuard<GuardTests>([
   (maybe) =>
     every(
       maybe,
-      (testGroup) => isGuardTest(testGroup) || isGuardTests(testGroup)
+      (testGroup) => isGuardTest(testGroup) || isGuardTests(testGroup),
     ),
 ])

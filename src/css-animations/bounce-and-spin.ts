@@ -37,7 +37,7 @@ type Values = Record<string, Value>
 export class BounceAndSpin extends Base implements CSSAnimation {
   private isProcessablePrimitive = generateGuard<ProcessablePrimitive>(
     isString,
-    isUndefined
+    isUndefined,
   )
 
   private isProcessableValue = generateGuard<ProcessableValue>([
@@ -60,7 +60,7 @@ export class BounceAndSpin extends Base implements CSSAnimation {
             ([duration, distance]): ProcessableValue => [
               normaliseTimeValue(duration),
               normaliseLengthPercentageValue(distance),
-            ]
+            ],
           )
           .pickBy((value, modifier): value is Value => {
             const [duration, distance] = value
@@ -81,7 +81,7 @@ export class BounceAndSpin extends Base implements CSSAnimation {
         duration,
         distance,
       ])
-      .value()
+      .value(),
   )
 
   public keyframes = ({ theme }: PluginUtils) => {
@@ -108,7 +108,7 @@ export class BounceAndSpin extends Base implements CSSAnimation {
 
     const translateDeclarations = (
       axis: string,
-      value: string
+      value: string,
     ): TranslateDeclarations => {
       const translateProperty = `translate${axis.toUpperCase()}`
 
@@ -121,7 +121,7 @@ export class BounceAndSpin extends Base implements CSSAnimation {
 
     const rotateDeclarations = (
       axis: string,
-      value: string
+      value: string,
     ): RotateDeclarations | TransformDeclarations => {
       if (axis === 'z') {
         return { rotate: value }
@@ -180,7 +180,7 @@ export class BounceAndSpin extends Base implements CSSAnimation {
       .transform(signModifier())
       .mapValues(
         ({ value: [duration] }: Animation, modifier: string) =>
-          `${modifier} ${duration} infinite`
+          `${modifier} ${duration} infinite`,
       )
       .value()
   }

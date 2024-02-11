@@ -30,7 +30,7 @@ type Values = Record<string, Value>
 export class Spin extends Base implements CSSAnimation {
   private isProcessableValue = generateGuard<ProcessableValue>(
     isString,
-    isUndefined
+    isUndefined,
   )
 
   private isProcessableValues = generateGuard<ProcessableValues>([
@@ -46,13 +46,13 @@ export class Spin extends Base implements CSSAnimation {
           .mapValues((duration) => normaliseTimeValue(duration))
           .pickBy(
             (duration, modifier): duration is Value =>
-              isString(modifier) && modifier !== '' && isString(duration)
+              isString(modifier) && modifier !== '' && isString(duration),
           )
           .value()
       : {}
 
   public defaultTheme = this.normaliseValues(
-    mapValues(defaultTheme.spacing, (_spacing, modifier) => `${modifier}s`)
+    mapValues(defaultTheme.spacing, (_spacing, modifier) => `${modifier}s`),
   )
 
   private xyKeyframes = () => {
@@ -68,7 +68,7 @@ export class Spin extends Base implements CSSAnimation {
 
     const rotateDeclarations = (
       axis: string,
-      value: string
+      value: string,
     ): TransformDeclarations => {
       const rotateProperty = `rotate${axis.toUpperCase()}`
       const transformValue = this.legacy
@@ -107,7 +107,7 @@ export class Spin extends Base implements CSSAnimation {
     }
 
     const rotateDeclarations = (
-      value: string
+      value: string,
     ): RotateDeclarations | TransformDeclarations => {
       if (!this.legacy) {
         return { rotate: value }
@@ -155,7 +155,7 @@ export class Spin extends Base implements CSSAnimation {
       .transform(signModifier(), {})
       .mapValues(
         ({ value, axis, name, sign }: SpinAnimation) =>
-          `${sign}${name}-${axis} ${value} linear infinite`
+          `${sign}${name}-${axis} ${value} linear infinite`,
       )
       .value()
   }

@@ -41,10 +41,10 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-bounce-x', 'animation: bounce-x 1s infinite')
+        cssClassRegExp('animate-bounce-x', 'animation: bounce-x 1s infinite'),
       )
 
       expect(css).toMatch(
@@ -63,13 +63,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-x-2',
-          'animation: bounce-x-2 1.19s infinite'
-        )
+          'animation: bounce-x-2 1.19s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -88,13 +88,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-x-4',
-          'animation: -bounce-x-4 1.41s infinite'
-        )
+          'animation: -bounce-x-4 1.41s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -113,10 +113,10 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-bounce-y', 'animation: bounce-y 1s infinite')
+        cssClassRegExp('animate-bounce-y', 'animation: bounce-y 1s infinite'),
       )
 
       expect(css).toMatch(
@@ -135,13 +135,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-y-2',
-          'animation: bounce-y-2 1.19s infinite'
-        )
+          'animation: bounce-y-2 1.19s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -160,13 +160,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-y-4',
-          'animation: -bounce-y-4 1.41s infinite'
-        )
+          'animation: -bounce-y-4 1.41s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -185,10 +185,10 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-bounce-z', 'animation: bounce-z 1s infinite')
+        cssClassRegExp('animate-bounce-z', 'animation: bounce-z 1s infinite'),
       )
 
       expect(css).toMatch(
@@ -207,13 +207,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-z-2',
-          'animation: bounce-z-2 1.19s infinite'
-        )
+          'animation: bounce-z-2 1.19s infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -232,13 +232,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-z-4',
-          'animation: -bounce-z-4 1.41s infinite'
-        )
+          'animation: -bounce-z-4 1.41s infinite',
+        ),
       )
     })
 
@@ -269,10 +269,10 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-bounce-x', 'animation: bounce-x 1s infinite')
+        cssClassRegExp('animate-bounce-x', 'animation: bounce-x 1s infinite'),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -296,13 +296,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-x-2',
-          'animation: bounce-x-2 1.19s infinite'
-        )
+          'animation: bounce-x-2 1.19s infinite',
+        ),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -326,13 +326,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-x-4',
-          'animation: -bounce-x-4 1.41s infinite'
-        )
+          'animation: -bounce-x-4 1.41s infinite',
+        ),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -359,10 +359,10 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-bounce-y', 'animation: bounce-y 1s infinite')
+        cssClassRegExp('animate-bounce-y', 'animation: bounce-y 1s infinite'),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -386,13 +386,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-y-2',
-          'animation: bounce-y-2 1.19s infinite'
-        )
+          'animation: bounce-y-2 1.19s infinite',
+        ),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -416,13 +416,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-y-4',
-          'animation: -bounce-y-4 1.41s infinite'
-        )
+          'animation: -bounce-y-4 1.41s infinite',
+        ),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -449,10 +449,10 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-bounce-z', 'animation: bounce-z 1s infinite')
+        cssClassRegExp('animate-bounce-z', 'animation: bounce-z 1s infinite'),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -476,13 +476,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           'animate-bounce-z-2',
-          'animation: bounce-z-2 1.19s infinite'
-        )
+          'animation: bounce-z-2 1.19s infinite',
+        ),
       )
 
       transformValuesA = legacyTransform3DValue({
@@ -506,13 +506,13 @@ describe('css-animations', () => {
               'animation-timing-function: cubic-bezier(0, 0, 0.5, 1)',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-bounce-z-4',
-          'animation: -bounce-z-4 1.41s infinite'
-        )
+          'animation: -bounce-z-4 1.41s infinite',
+        ),
       )
     })
   })

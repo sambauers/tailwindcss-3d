@@ -10,7 +10,7 @@ const replace = (list: List, replacements?: List): List => {
   }
 
   const mappedListEntries: [string, string][] = Object.entries(list).map(
-    ([key, value]) => [key, replacements[key] ?? value]
+    ([key, value]) => [key, replacements[key] ?? value],
   )
   return Object.fromEntries(mappedListEntries)
 }
@@ -30,7 +30,7 @@ export const legacyTransform2DValue = (replacements?: List) =>
       scaleX: 'var(--tw-scale-x)',
       scaleY: 'var(--tw-scale-y)',
     },
-    replacements
+    replacements,
   )
 
 export const legacyTransform3DValue = (replacements?: List): string =>
@@ -48,5 +48,5 @@ export const legacyTransform3DValue = (replacements?: List): string =>
       scaleZ: 'var(--tw-scale-z)',
       perspective: 'var(--tw-perspective)',
     },
-    replacements
+    replacements,
   )

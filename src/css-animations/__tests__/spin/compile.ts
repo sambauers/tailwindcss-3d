@@ -41,17 +41,20 @@ describe('css-animations', () => {
               'transform: rotateX(360deg) rotateY(var(--tw-rotate-y)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-spin-x', 'animation: spin-x 1s linear infinite')
+        cssClassRegExp(
+          'animate-spin-x',
+          'animation: spin-x 1s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssClassRegExp(
           'animate-spin-x-2',
-          'animation: spin-x 2s linear infinite'
-        )
+          'animation: spin-x 2s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -70,13 +73,13 @@ describe('css-animations', () => {
               'transform: rotateX(-360deg) rotateY(var(--tw-rotate-y)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-spin-x-4',
-          'animation: -spin-x 4s linear infinite'
-        )
+          'animation: -spin-x 4s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -95,17 +98,20 @@ describe('css-animations', () => {
               'transform: rotateX(var(--tw-rotate-x)) rotateY(360deg) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-spin-y', 'animation: spin-y 1s linear infinite')
+        cssClassRegExp(
+          'animate-spin-y',
+          'animation: spin-y 1s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssClassRegExp(
           'animate-spin-y-2',
-          'animation: spin-y 2s linear infinite'
-        )
+          'animation: spin-y 2s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
@@ -124,43 +130,46 @@ describe('css-animations', () => {
               'transform: rotateX(var(--tw-rotate-x)) rotateY(-360deg) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-spin-y-4',
-          'animation: -spin-y 4s linear infinite'
-        )
+          'animation: -spin-y 4s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssKeyframesRegExp('spin-z', [
           ['from', 'rotate: 0deg'],
           ['to', 'rotate: 360deg'],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-spin-z', 'animation: spin-z 1s linear infinite')
+        cssClassRegExp(
+          'animate-spin-z',
+          'animation: spin-z 1s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssClassRegExp(
           'animate-spin-z-2',
-          'animation: spin-z 2s linear infinite'
-        )
+          'animation: spin-z 2s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssKeyframesRegExp('-spin-z', [
           ['from', 'rotate: 0deg'],
           ['to', 'rotate: -360deg'],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-spin-z-4',
-          'animation: -spin-z 4s linear infinite'
-        )
+          'animation: -spin-z 4s linear infinite',
+        ),
       )
     })
 
@@ -185,17 +194,20 @@ describe('css-animations', () => {
               `transform: ${transformValuesTo}`,
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-spin-x', 'animation: spin-x 1s linear infinite')
+        cssClassRegExp(
+          'animate-spin-x',
+          'animation: spin-x 1s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssClassRegExp(
           'animate-spin-x-2',
-          'animation: spin-x 2s linear infinite'
-        )
+          'animation: spin-x 2s linear infinite',
+        ),
       )
 
       transformValuesTo = legacyTransform3DValue({ rotateX: '-360deg' })
@@ -215,13 +227,13 @@ describe('css-animations', () => {
               `transform: ${transformValuesTo}`,
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-spin-x-4',
-          'animation: -spin-x 4s linear infinite'
-        )
+          'animation: -spin-x 4s linear infinite',
+        ),
       )
 
       transformValuesFrom = legacyTransform3DValue({ rotateY: '0deg' })
@@ -242,17 +254,20 @@ describe('css-animations', () => {
               `transform: ${transformValuesTo}`,
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-spin-y', 'animation: spin-y 1s linear infinite')
+        cssClassRegExp(
+          'animate-spin-y',
+          'animation: spin-y 1s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssClassRegExp(
           'animate-spin-y-2',
-          'animation: spin-y 2s linear infinite'
-        )
+          'animation: spin-y 2s linear infinite',
+        ),
       )
 
       transformValuesTo = legacyTransform3DValue({ rotateY: '-360deg' })
@@ -272,13 +287,13 @@ describe('css-animations', () => {
               `transform: ${transformValuesTo}`,
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-spin-y-4',
-          'animation: -spin-y 4s linear infinite'
-        )
+          'animation: -spin-y 4s linear infinite',
+        ),
       )
 
       transformValuesFrom = legacyTransform3DValue({ rotateZ: '0deg' })
@@ -299,17 +314,20 @@ describe('css-animations', () => {
               `transform: ${transformValuesTo}`,
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
-        cssClassRegExp('animate-spin-z', 'animation: spin-z 1s linear infinite')
+        cssClassRegExp(
+          'animate-spin-z',
+          'animation: spin-z 1s linear infinite',
+        ),
       )
 
       expect(css).toMatch(
         cssClassRegExp(
           'animate-spin-z-2',
-          'animation: spin-z 2s linear infinite'
-        )
+          'animation: spin-z 2s linear infinite',
+        ),
       )
 
       transformValuesTo = legacyTransform3DValue({ rotateZ: '-360deg' })
@@ -329,13 +347,13 @@ describe('css-animations', () => {
               `transform: ${transformValuesTo}`,
             ],
           ],
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp(
           '-animate-spin-z-4',
-          'animation: -spin-z 4s linear infinite'
-        )
+          'animation: -spin-z 4s linear infinite',
+        ),
       )
     })
   })

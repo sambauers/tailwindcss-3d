@@ -10,7 +10,7 @@ export class TransformStyle extends Base implements CSSUtility {
   public utilities = () => {
     this.api.matchUtilities(
       { 'transform-style': (value) => ({ 'transform-style': value }) },
-      { values: this.api.theme('transformStyle') }
+      { values: this.api.theme('transformStyle') },
     )
   }
 }

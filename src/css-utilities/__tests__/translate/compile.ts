@@ -39,93 +39,93 @@ describe('css-utilities', () => {
         cssClassRegExp('translate-x-0', [
           '--tw-translate-x: 0px',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-x-px', [
           '--tw-translate-x: 1px',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-x-5', [
           '--tw-translate-x: 1.25rem',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('-translate-x-12', [
           '--tw-translate-x: -3rem',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-x-\\[4rem\\]', [
           '--tw-translate-x: 4rem',
           translateDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
         cssClassRegExp('translate-y-0', [
           '--tw-translate-y: 0px',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-y-px', [
           '--tw-translate-y: 1px',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-y-5', [
           '--tw-translate-y: 1.25rem',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('-translate-y-12', [
           '--tw-translate-y: -3rem',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-y-\\[4rem\\]', [
           '--tw-translate-y: 4rem',
           translateDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
         cssClassRegExp('translate-z-0', [
           '--tw-translate-z: 0px',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-z-px', [
           '--tw-translate-z: 1px',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-z-5', [
           '--tw-translate-z: 1.25rem',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('-translate-z-12', [
           '--tw-translate-z: -3rem',
           translateDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-z-\\[4rem\\]', [
           '--tw-translate-z: 4rem',
           translateDeclaration,
-        ])
+        ]),
       )
     })
 
@@ -137,35 +137,35 @@ describe('css-utilities', () => {
           '--tw-translate-x: 0px',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-x-px', [
           '--tw-translate-x: 1px',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-x-5', [
           '--tw-translate-x: 1.25rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('-translate-x-12', [
           '--tw-translate-x: -3rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-x-\\[4rem\\]', [
           '--tw-translate-x: 4rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -173,35 +173,35 @@ describe('css-utilities', () => {
           '--tw-translate-y: 0px',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-y-px', [
           '--tw-translate-y: 1px',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-y-5', [
           '--tw-translate-y: 1.25rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('-translate-y-12', [
           '--tw-translate-y: -3rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-y-\\[4rem\\]', [
           '--tw-translate-y: 4rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -209,35 +209,35 @@ describe('css-utilities', () => {
           '--tw-translate-z: 0px',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-z-px', [
           '--tw-translate-z: 1px',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-z-5', [
           '--tw-translate-z: 1.25rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('-translate-z-12', [
           '--tw-translate-z: -3rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('translate-z-\\[4rem\\]', [
           '--tw-translate-z: 4rem',
           webkitTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
     })
   })

@@ -11,7 +11,7 @@ type Theme = Config['theme']
 export const compileCSS = async (
   html: string,
   legacy = false,
-  theme?: Theme
+  theme?: Theme,
 ) => {
   const { currentTestName } = expect.getState()
 
@@ -24,7 +24,7 @@ export const compileCSS = async (
       ],
       plugins: [tailwindcss3d({ legacy })],
       theme,
-    })
+    }),
   )
     .process('@tailwind utilities;', {
       from: `${resolve(__filename)}?test=${currentTestName}`,

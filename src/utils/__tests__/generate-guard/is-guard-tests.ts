@@ -8,7 +8,7 @@ describe('utilities', () => {
           isGuardTests([
             (maybe) => typeof maybe === 'string',
             (maybe) => typeof maybe === 'number',
-          ])
+          ]),
         ).toBe(true)
       })
 
@@ -17,7 +17,7 @@ describe('utilities', () => {
           isGuardTests([
             (maybe) => typeof maybe === 'string',
             (maybe) => `call me ${maybe}`,
-          ])
+          ]),
         ).toBe(false)
       })
 

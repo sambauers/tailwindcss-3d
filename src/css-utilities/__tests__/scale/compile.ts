@@ -40,21 +40,21 @@ describe('css-utilities', () => {
           '--tw-scale-x: 0',
           '--tw-scale-y: 0',
           scaleDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-50', [
           '--tw-scale-x: 0.5',
           '--tw-scale-y: 0.5',
           scaleDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-\\[1\\.8\\]', [
           '--tw-scale-x: 1.8',
           '--tw-scale-y: 1.8',
           scaleDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -63,7 +63,7 @@ describe('css-utilities', () => {
           '--tw-scale-y: 0',
           '--tw-scale-z: 0',
           scaleDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale3d-50', [
@@ -71,7 +71,7 @@ describe('css-utilities', () => {
           '--tw-scale-y: 0.5',
           '--tw-scale-z: 0.5',
           scaleDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale3d-\\[1\\.8\\]', [
@@ -79,46 +79,46 @@ describe('css-utilities', () => {
           '--tw-scale-y: 1.8',
           '--tw-scale-z: 1.8',
           scaleDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
-        cssClassRegExp('scale-x-0', ['--tw-scale-x: 0', scaleDeclaration])
+        cssClassRegExp('scale-x-0', ['--tw-scale-x: 0', scaleDeclaration]),
       )
       expect(css).toMatch(
-        cssClassRegExp('scale-x-50', ['--tw-scale-x: 0.5', scaleDeclaration])
+        cssClassRegExp('scale-x-50', ['--tw-scale-x: 0.5', scaleDeclaration]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-x-\\[1\\.8\\]', [
           '--tw-scale-x: 1.8',
           scaleDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
-        cssClassRegExp('scale-y-0', ['--tw-scale-y: 0', scaleDeclaration])
+        cssClassRegExp('scale-y-0', ['--tw-scale-y: 0', scaleDeclaration]),
       )
       expect(css).toMatch(
-        cssClassRegExp('scale-y-50', ['--tw-scale-y: 0.5', scaleDeclaration])
+        cssClassRegExp('scale-y-50', ['--tw-scale-y: 0.5', scaleDeclaration]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-y-\\[1\\.8\\]', [
           '--tw-scale-y: 1.8',
           scaleDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
-        cssClassRegExp('scale-z-0', ['--tw-scale-z: 0', scaleDeclaration])
+        cssClassRegExp('scale-z-0', ['--tw-scale-z: 0', scaleDeclaration]),
       )
       expect(css).toMatch(
-        cssClassRegExp('scale-z-50', ['--tw-scale-z: 0.5', scaleDeclaration])
+        cssClassRegExp('scale-z-50', ['--tw-scale-z: 0.5', scaleDeclaration]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-z-\\[1\\.8\\]', [
           '--tw-scale-z: 1.8',
           scaleDeclaration,
-        ])
+        ]),
       )
     })
 
@@ -131,7 +131,7 @@ describe('css-utilities', () => {
           '--tw-scale-y: 0',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-50', [
@@ -139,7 +139,7 @@ describe('css-utilities', () => {
           '--tw-scale-y: 0.5',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-\\[1\\.8\\]', [
@@ -147,7 +147,7 @@ describe('css-utilities', () => {
           '--tw-scale-y: 1.8',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -157,7 +157,7 @@ describe('css-utilities', () => {
           '--tw-scale-z: 0',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale3d-50', [
@@ -166,7 +166,7 @@ describe('css-utilities', () => {
           '--tw-scale-z: 0.5',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale3d-\\[1\\.8\\]', [
@@ -175,7 +175,7 @@ describe('css-utilities', () => {
           '--tw-scale-z: 1.8',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -183,21 +183,21 @@ describe('css-utilities', () => {
           '--tw-scale-x: 0',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-x-50', [
           '--tw-scale-x: 0.5',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-x-\\[1\\.8\\]', [
           '--tw-scale-x: 1.8',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -205,21 +205,21 @@ describe('css-utilities', () => {
           '--tw-scale-y: 0',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-y-50', [
           '--tw-scale-y: 0.5',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-y-\\[1\\.8\\]', [
           '--tw-scale-y: 1.8',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
 
       expect(css).toMatch(
@@ -227,21 +227,21 @@ describe('css-utilities', () => {
           '--tw-scale-z: 0',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-z-50', [
           '--tw-scale-z: 0.5',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('scale-z-\\[1\\.8\\]', [
           '--tw-scale-z: 1.8',
           legacyTransformDeclaration,
           transformDeclaration,
-        ])
+        ]),
       )
     })
   })

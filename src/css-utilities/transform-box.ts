@@ -13,7 +13,7 @@ export class TransformBox extends Base implements CSSUtility {
   public utilities = () => {
     this.api.matchUtilities(
       { 'transform-box': (value) => ({ 'transform-box': value }) },
-      { values: this.api.theme('transformBox') }
+      { values: this.api.theme('transformBox') },
     )
   }
 }

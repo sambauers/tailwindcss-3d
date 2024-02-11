@@ -19,7 +19,7 @@ describe('css-utilities', () => {
         cssClassRegExp('transform', [
           '--webkit-transform: skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
           'transform: skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('transform-cpu', [
@@ -27,7 +27,7 @@ describe('css-utilities', () => {
           'scale: var(--tw-scale-x) var(--tw-scale-y)',
           '--webkit-transform: skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
           'transform: skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('transform-gpu', [
@@ -35,7 +35,7 @@ describe('css-utilities', () => {
           'scale: var(--tw-scale-x) var(--tw-scale-y) var(--tw-scale-z)',
           '--webkit-transform: rotateX(var(--tw-rotate-x)) rotateY(var(--tw-rotate-y)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
           'transform: rotateX(var(--tw-rotate-x)) rotateY(var(--tw-rotate-y)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))',
-        ])
+        ]),
       )
       expect(css).toMatch(
         cssClassRegExp('transform-none', [
@@ -43,7 +43,7 @@ describe('css-utilities', () => {
           'scale: none',
           '--webkit-transform: none',
           'transform: none',
-        ])
+        ]),
       )
     })
   })

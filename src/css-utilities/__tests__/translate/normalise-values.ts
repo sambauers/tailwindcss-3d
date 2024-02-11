@@ -10,7 +10,7 @@ describe('css-utilities', () => {
           {
             // @ts-expect-error test
             translate: { '0': 0 },
-          }
+          },
         )
 
         expect(css).toBe('')

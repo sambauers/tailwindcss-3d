@@ -29,7 +29,7 @@ describe('utilities', () => {
         expect(
           normaliseAnglePercentageValue('150foo', undefined, {
             validUnits: ['foo'],
-          })
+          }),
         ).toBe('150foo')
       })
     })
