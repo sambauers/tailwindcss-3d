@@ -1,7 +1,7 @@
 // @ts-check
 
 /**
- * @type {import('@swc/core/types').Options}
+ * @type {import('@swc/core').Options}
  */
 const swcConfig = {
   module: {
