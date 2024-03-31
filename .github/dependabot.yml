@@ -8,9 +8,15 @@ updates:
       swc:
         patterns:
           - "@swc/*"
-      typescript-eslint:
+      eslint:
         patterns:
           - "@typescript-eslint/*"
+          - "eslint"
+      prettier:
+        patterns:
+          - "eslint-config-prettier"
+          - "eslint-plugin-prettier"
+          - "prettier"
     open-pull-requests-limit: 20
   - package-ecosystem: "github-actions"
     directory: "/"
