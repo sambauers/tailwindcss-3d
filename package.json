@@ -35,12 +35,12 @@
     "tailwindcss": ">=3.2.0"
   },
   "dependencies": {
-    "@swc/helpers": "0.5.8",
+    "@swc/helpers": "0.5.11",
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "@swc/cli": "0.3.10",
-    "@swc/core": "1.4.11",
+    "@swc/cli": "0.3.12",
+    "@swc/core": "1.5.25",
     "@swc/jest": "0.2.36",
     "@types/jest": "29.5.12",
     "@types/lodash": "4.17.0",
