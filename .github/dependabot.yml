@@ -4,6 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      - dependency-name: "eslint"
+        versions:
+          - ">= 9"
+      - dependency-name: "@types/node"
+        versions:
+          - ">= 21"
     groups:
       swc:
         patterns:
