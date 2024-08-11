@@ -8,10 +8,9 @@ updates:
       swc:
         patterns:
           - "@swc/*"
-      eslint:
+      typescript-eslint:
         patterns:
           - "@typescript-eslint/*"
-          - "eslint"
       prettier:
         patterns:
           - "eslint-config-prettier"
