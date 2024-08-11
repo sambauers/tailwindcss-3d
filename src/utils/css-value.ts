@@ -281,7 +281,7 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   if (safeValue.startsWith('var(')) {
     return safeAllowVar && isVar(safeValue)
       ? safeValue
-      : safeDefaultValue ?? safeDefaultNil
+      : (safeDefaultValue ?? safeDefaultNil)
   }
 
   const safeAllowCalc = isBoolean(allowCalc) ? allowCalc : false
@@ -290,7 +290,7 @@ export const normaliseUnitValue: NormaliseUnitValueFunction = (
   if (safeValue.startsWith('calc(')) {
     return safeAllowCalc && isCalc(safeValue)
       ? safeValue
-      : safeDefaultValue ?? safeDefaultNil
+      : (safeDefaultValue ?? safeDefaultNil)
   }
 
   const safeDefaultUnit = toStringValue(defaultUnit) ?? ''
