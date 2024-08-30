@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@swc/cli": "0.4.0",
-    "@swc/core": "1.7.18",
+    "@swc/core": "1.7.22",
     "@swc/jest": "0.2.36",
     "@types/jest": "29.5.12",
     "@types/lodash": "4.17.7",
