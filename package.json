@@ -39,9 +39,9 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "@swc/cli": "0.4.0",
-    "@swc/core": "1.7.26",
-    "@swc/jest": "0.2.36",
+    "@swc/cli": "0.5.0",
+    "@swc/core": "1.7.40",
+    "@swc/jest": "0.2.37",
     "@types/jest": "29.5.13",
     "@types/lodash": "4.17.9",
     "@types/node": "22.7.4",
