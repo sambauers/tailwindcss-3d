@@ -43,7 +43,7 @@
     "@swc/core": "1.7.42",
     "@swc/jest": "0.2.37",
     "@types/jest": "29.5.14",
-    "@types/lodash": "4.17.13",
+    "@types/lodash": "4.17.14",
     "@types/node": "22.8.6",
     "@typescript-eslint/eslint-plugin": "8.12.2",
     "@typescript-eslint/parser": "8.12.2",
