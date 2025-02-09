@@ -7,6 +7,13 @@
 
 Add 3D transforms to your TailwindCSS project.
 
+## TailwindCSS v4 compatibility
+
+TailwindCSS v4 has been released with native 3D transform utilities. This
+plugin will not be redeveloped to work with v4.
+
+Maintenance of this plugin will continue for a while for v3 users.
+
 ## Description
 
 3D Plugin for Tailwind CSS adds additional transform utilities and animations
@@ -32,7 +39,7 @@ animations.
 
 ## Browser compatibility
 
-Since this pluign uses newer CSS properties, it will produce CSS which is not
+Since this plugin uses newer CSS properties, it will produce CSS which is not
 compatible with some older browsers.
 
 Refer to [this list of CSS features on CanIUse.com](https://caniuse.com/?feats=mdn-css_properties_rotate,mdn-css_properties_scale,mdn-css_properties_translate,mdn-css_properties_perspective,mdn-css_properties_perspective-origin,mdn-css_properties_backface-visibility,mdn-css_properties_transform-box,mdn-css_properties_transform-style,transforms2d,transforms3d)
