@@ -8,6 +8,9 @@ updates:
       - dependency-name: "eslint"
         versions:
           - ">= 9"
+      - dependency-name: "tailwindcss"
+        versions:
+          - ">= 4"
     groups:
       swc:
         patterns:
