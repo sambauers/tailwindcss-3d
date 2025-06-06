@@ -1,5 +1,8 @@
 name: Lint (ESLInt)
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [ main ]
