@@ -44,7 +44,7 @@
     "@swc/jest": "0.2.38",
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.19",
-    "@types/node": "22.15.30",
+    "@types/node": "24.0.10",
     "@typescript-eslint/eslint-plugin": "8.34.0",
     "@typescript-eslint/parser": "8.34.0",
     "concurrently": "9.2.0",
