@@ -35,7 +35,7 @@ jobs:
       run: pnpm add semver
     - name: Retrieve the latest release and current package versions
       id: get-releases
-      uses: actions/github-script@v7
+      uses: actions/github-script@v8
       with:
         script: |
           const semver = require('semver')
@@ -102,7 +102,7 @@ jobs:
     # tag release in github
     - name: Tag release in GitHub
       if: ${{ fromJSON(steps.get-releases.outputs.result).latestIsNew }}
-      uses: actions/github-script@v7
+      uses: actions/github-script@v8
       env:
         RELEASE_TAG_NAME: ${{ fromJSON(steps.get-releases.outputs.result).package }}
       with:
